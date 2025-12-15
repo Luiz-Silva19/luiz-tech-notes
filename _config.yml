@@ -3,8 +3,8 @@ description: Repositório de Estudos em Tecnologias Modernas
 baseurl: /luiz-tech-notes
 url: https://luiz-silva19.github.io
 
-# Theme
-theme: just-the-docs
+# Theme - Use remote_theme for GitHub Pages compatibility
+remote_theme: pmarsceill/just-the-docs
 
 # Logo e Favicon
 logo: "/assets/images/logo.png"
