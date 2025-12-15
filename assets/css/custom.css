@@ -1,0 +1,124 @@
+/* 🎨 Customização de Layout - Just the Docs
+   ============================================ */
+
+/* ========== AJUSTE DE LARGURA DO MENU ========== */
+
+/* Largura do menu lateral - PRINCIPAL */
+.side-bar {
+  width: 260px; /* Padrão ~300px, ajustado para 260px */
+}
+
+/* Ajuste do conteúdo principal para acompanhar o menu */
+.main {
+  margin-left: 260px;
+}
+
+/* ========== AJUSTE FINO (Tipografia) ========== */
+
+/* Reduz tamanho do título do site para não ficar apertado */
+.side-bar .site-title {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Melhora espaçamento dos links no menu */
+.side-bar a {
+  line-height: 1.4;
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+/* ========== RESPONSIVO (Mobile) ========== */
+
+/* Em telas menores, mantém proporção adequada */
+@media (min-width: 1200px) {
+  .side-bar {
+    width: 260px;
+  }
+
+  .main {
+    margin-left: 260px;
+  }
+}
+
+/* Em tablets e mobile, Just the Docs já cuida disso */
+@media (max-width: 768px) {
+  .side-bar {
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
+
+/* ========== MELHORIAS VISUAIS EXTRAS ========== */
+
+/* Melhor legibilidade dos títulos */
+.side-bar h1,
+.side-bar h2,
+.side-bar h3 {
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* Espaçamento melhor entre itens do menu */
+.side-bar .nav-list-item {
+  margin-bottom: 0.25rem;
+}
+
+/* Melhora visual do hover nos links */
+.side-bar a:hover {
+  opacity: 0.9;
+  text-decoration: underline;
+}
+
+/* ========== MELHORIAS NO CONTEÚDO PRINCIPAL ========== */
+
+/* Melhora legibilidade do conteúdo */
+.main-content {
+  line-height: 1.6;
+}
+
+/* Melhora espaçamento de parágrafos */
+.main-content p {
+  margin-bottom: 1rem;
+}
+
+/* Melhora visual de tabelas */
+.main-content table {
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+
+/* ========== BREADCRUMBS ========== */
+
+/* Melhora visual do breadcrumb */
+.breadcrumb-nav {
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+/* ========== BUSCA ========== */
+
+/* Melhora visual da barra de busca */
+.search-input-wrap {
+  margin-bottom: 1rem;
+}
+
+.search-input-wrap input {
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* ========== FOOTER ========== */
+
+/* Melhora visual do footer */
+.footer {
+  padding: 1rem;
+  border-top: 1px solid #e0e0e0;
+  font-size: 0.875rem;
+  color: #666;
+}

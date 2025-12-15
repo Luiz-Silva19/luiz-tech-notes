@@ -6,9 +6,13 @@ url: https://luiz-silva19.github.io
 # Theme - Use remote_theme for GitHub Pages compatibility
 remote_theme: pmarsceill/just-the-docs
 
-# Logo e Favicon
-logo: "/assets/images/logo.png"
-favicon_ico: "/assets/favicon.ico"
+# ============ CUSTOMIZAÇÃO DE CSS ============
+# Carrega o CSS customizado para ajustar layout
+just_the_docs:
+  custom_css:
+    - /assets/css/custom.css
+
+# ============ CONFIGURAÇÕES DO TEMA ============
 
 # Esquema de cores
 color_scheme: light
@@ -36,9 +40,7 @@ aux_links_new_tab: true
 footer_content: "Copyright &copy; 2025 Luiz Silva. Licensed under MIT License."
 
 # Plugins
-plugins:
-  - search
-  - jekyll-seo-tag
+plugins: []
 
 # Configurações SEO
 title_separator: "|"
