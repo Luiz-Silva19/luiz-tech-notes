@@ -8,10 +8,8 @@ const config: Config = {
   favicon: 'img/favicon.ico',
   url: 'https://luiz-silva19.github.io',
   baseUrl: '/luiz-tech-notes/',
-  organizationName: 'Luiz-Silva19',
+  organizationName: 'luiz-silva19',
   projectName: 'luiz-tech-notes',
-  deploymentBranch: 'gh-pages',
-  onBrokenLinks: 'warn',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
