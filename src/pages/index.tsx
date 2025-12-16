@@ -16,7 +16,7 @@ export default function Home(): JSX.Element {
               Documentação técnica sobre AWS, Backend, Infraestrutura e DevOps
             </p>
             <div className={styles.buttons}>
-              <Link className={styles.button} href="/docs/index">
+              <Link className={styles.button} href="/docs">
                 Ver Documentação
               </Link>
               <Link className={styles.buttonSecondary} href="/blog">
