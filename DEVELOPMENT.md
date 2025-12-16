@@ -46,7 +46,7 @@ O site abrirá em `http://localhost:3000/luiz-tech-notes/`
 ```
 luiz-tech-notes/
 ├── docs/                          # Documentação principal
-│   ├── intro.md                   # Página de introdução
+│   ├── index.md                   # Página de introdução
 │   ├── aws/                       # Tópicos AWS
 │   │   ├── index.md              # Visão geral AWS
 │   │   ├── ec2.md                # EC2 documentation
@@ -123,7 +123,7 @@ Edite `sidebars.ts` para adicionar a nova página:
 // Em docs/sidebars.ts
 const sidebars = {
   docs: [
-    'intro',
+    'index',
     {
       label: 'AWS',
       items: [
@@ -345,7 +345,7 @@ Visão geral sobre DevOps...
 ```typescript
 const sidebars = {
   docs: [
-    'intro',
+    'index',
     // ... categorias existentes
     {
       label: 'DevOps',
