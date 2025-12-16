@@ -1,36 +1,40 @@
-# Jekyll
-_site/
-.jekyll-cache/
-.jekyll-metadata
-Gemfile.lock
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Production
+/build
+
+# Docusaurus
+/docusaurus.config.js
+.docusaurus
+.cache-loader
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # IDE
-.vscode/
-.idea/
+.vscode
+.idea
 *.swp
 *.swo
 *~
-.DS_Store
 
 # OS
 Thumbs.db
-.AppleDouble
-.LSOverride
-
-# Ruby
-*.gem
-*.rbc
-/.bundle/
-Gemfile.lock
-
-# Node (se usar npm)
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Build
-build/
-dist/
-
-# Logs
-*.log
