@@ -16,9 +16,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./website
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,9 +29,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: ./website
 
       - name: Build site
         run: npm run build
+        working-directory: ./website
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
