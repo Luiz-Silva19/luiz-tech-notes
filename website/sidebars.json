@@ -1,0 +1,55 @@
+{
+  "docs": {
+    "Introdução": [
+      "intro/welcome"
+    ],
+    "☁️ Cloud Computing": [
+      "cloud/cloud-intro",
+      {
+        "type": "category",
+        "label": "Provedores",
+        "items": [
+          "cloud/aws/aws-intro",
+          "cloud/azure/azure-intro",
+          "cloud/gcp/gcp-intro"
+        ]
+      }
+    ],
+    "🏗️ Arquitetura de Software": [
+      "architecture/architecture-intro",
+      {
+        "type": "category",
+        "label": "Estilos Arquiteturais",
+        "items": [
+          "architecture/microservices/microservices-intro",
+          "architecture/monolith/monolith-intro",
+          "architecture/event-driven/event-driven-intro"
+        ]
+      }
+    ],
+    "⚙️ DevOps & Infraestrutura": [
+      "devops/devops-intro",
+      {
+        "type": "category",
+        "label": "Ferramentas",
+        "items": [
+          "devops/docker/docker-intro",
+          "devops/kubernetes/k8s-intro",
+          "devops/ci-cd/cicd-intro"
+        ]
+      }
+    ],
+    "💻 Backend & Integrações": [
+      "backend/backend-intro",
+      {
+        "type": "category",
+        "label": "Tópicos",
+        "items": [
+          "backend/rest/rest-intro",
+          "backend/messaging/messaging-intro",
+          "backend/databases/databases-intro"
+        ]
+      }
+    ]
+  }
+}
