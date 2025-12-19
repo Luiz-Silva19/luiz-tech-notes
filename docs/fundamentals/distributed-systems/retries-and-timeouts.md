@@ -740,6 +740,26 @@ except requests.exceptions.RequestException as e:
 - Esquecer de timeouts
 - Retry sem idempotência
 
+## 📚 Referências e Recursos
+
+### Papers e Artigos
+
+- **<a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/" target="_blank" rel="noopener noreferrer">Exponential Backoff And Jitter</a>** - AWS Architecture Blog
+- **<a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/" target="_blank" rel="noopener noreferrer">Timeouts, Retries and Backoff with Jitter</a>** - AWS Builders Library
+- **<a href="https://brooker.co.za/blog/2022/02/28/retries.html" target="_blank" rel="noopener noreferrer">The Problem with Retries</a>** - Marc Brooker (AWS)
+
+### Bibliotecas
+
+- **<a href="https://tenacity.readthedocs.io/" target="_blank" rel="noopener noreferrer">Tenacity (Python)</a>** - Retry library com múltiplas estratégias
+- **<a href="https://github.com/App-vNext/Polly" target="_blank" rel="noopener noreferrer">Polly (.NET)</a>** - Resilience and transient-fault-handling
+- **<a href="https://resilience4j.readme.io/" target="_blank" rel="noopener noreferrer">resilience4j (Java)</a>** - Fault tolerance library
+- **<a href="https://github.com/softonic/axios-retry" target="_blank" rel="noopener noreferrer">axios-retry (JavaScript)</a>** - HTTP client retry plugin
+
+### Guias Práticos
+
+- **<a href="https://cloud.google.com/apis/design/errors#error_retries" target="_blank" rel="noopener noreferrer">Google Cloud Retry Strategy</a>** - API Design Guide
+- **<a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific" target="_blank" rel="noopener noreferrer">Microsoft Azure Retry Guidance</a>** - Service-specific guidance
+
 ---
 
 **Próximo**: [Eleição de Líder](leader-election.md)

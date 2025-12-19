@@ -573,6 +573,25 @@ for attempt in range(3):
 
 **Key Takeaway**: Sempre que projetar operações mutáveis em sistemas distribuídos, pergunte: "O que acontece se esta operação for executada duas vezes?"
 
+## 📚 Referências e Recursos
+
+### Documentação de APIs
+
+- **<a href="https://stripe.com/docs/api/idempotent_requests" target="_blank" rel="noopener noreferrer">Stripe API - Idempotent Requests</a>** - Implementação de referência
+- **<a href="https://developer.paypal.com/api/rest/reference/idempotency/" target="_blank" rel="noopener noreferrer">PayPal API - Idempotency</a>** - Best practices
+- **<a href="https://www.twilio.com/docs/usage/api/idempotency" target="_blank" rel="noopener noreferrer">Twilio API - Idempotency</a>** - Exemplos práticos
+
+### Artigos e Guias
+
+- **<a href="https://www.restapitutorial.com/lessons/idempotency.html" target="_blank" rel="noopener noreferrer">Idempotence Is Not a Medical Condition</a>** - REST API Tutorial
+- **<a href="https://brandur.org/idempotency-keys" target="_blank" rel="noopener noreferrer">Implementing Stripe-like Idempotency Keys</a>** - Brandur Leach
+- **<a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/" target="_blank" rel="noopener noreferrer">Idempotent Operations in Distributed Systems</a>** - AWS Builders Library
+
+### Padrões
+
+- **<a href="https://martinfowler.com/eaaDev/EventSourcing.html" target="_blank" rel="noopener noreferrer">Event Sourcing Pattern</a>** - Martin Fowler
+- **<a href="https://microservices.io/patterns/data/saga.html" target="_blank" rel="noopener noreferrer">Saga Pattern</a>** - Microservices.io
+
 ---
 
 **Próximo**: [Retries e Timeouts](retries-and-timeouts.md)

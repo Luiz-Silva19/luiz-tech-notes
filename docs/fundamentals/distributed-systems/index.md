@@ -30,6 +30,29 @@ Sistemas distribuídos são a base da computação moderna:
 
 Use o menu lateral para explorar cada tópico em profundidade. Recomendamos seguir a ordem apresentada, pois os conceitos são construídos progressivamente.
 
+## 📚 Recursos Recomendados
+
+### Livros
+
+- **<a href="https://dataintensive.net/" target="_blank" rel="noopener noreferrer">Designing Data-Intensive Applications</a>** - Martin Kleppmann
+- **<a href="https://www.distributed-systems.net/" target="_blank" rel="noopener noreferrer">Distributed Systems</a>** - Maarten van Steen & Andrew Tanenbaum
+
+### Cursos Online
+
+- **<a href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noopener noreferrer">MIT 6.824: Distributed Systems</a>** - Curso do MIT (gratuito)
+- **<a href="https://www.youtube.com/playlist?list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB" target="_blank" rel="noopener noreferrer">Distributed Systems Course</a>** - Martin Kleppmann
+
+### Blogs e Artigos
+
+- **<a href="https://www.the-paper-trail.org/" target="_blank" rel="noopener noreferrer">The Paper Trail</a>** - Blog sobre sistemas distribuídos
+- **<a href="https://www.allthingsdistributed.com/" target="_blank" rel="noopener noreferrer">All Things Distributed</a>** - Werner Vogels (CTO Amazon)
+- **<a href="http://highscalability.com/" target="_blank" rel="noopener noreferrer">High Scalability</a>** - Arquiteturas de sistemas em escala
+
+### Papers Fundamentais
+
+- **<a href="https://lamport.azurewebsites.net/pubs/time-clocks.pdf" target="_blank" rel="noopener noreferrer">Time, Clocks, and the Ordering of Events</a>** - Leslie Lamport (1978)
+- **<a href="https://lamport.azurewebsites.net/pubs/byz.pdf" target="_blank" rel="noopener noreferrer">The Byzantine Generals Problem</a>** - Lamport, Shostak, Pease (1982)
+
 ---
 
 **Próximo**: [O que são Sistemas Distribuídos?](what-is.md)

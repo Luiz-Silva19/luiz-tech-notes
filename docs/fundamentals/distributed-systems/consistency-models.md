@@ -319,6 +319,25 @@ Não existe "melhor" modelo de consistência - existe o modelo **mais apropriado
 - **Latência** vs **Correção**
 - **Simplicidade** vs **Escalabilidade**
 
+## 📚 Referências e Recursos
+
+### Papers Acadêmicos
+
+- **<a href="https://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf" target="_blank" rel="noopener noreferrer">Linearizability: A Correctness Condition</a>** - Herlihy & Wing (1990)
+- **<a href="https://www.cs.utexas.edu/~lorenzo/corsi/cs380d/papers/SessionGuaranteesPDIS.pdf" target="_blank" rel="noopener noreferrer">Session Guarantees for Weakly Consistent Replicated Data</a>** - Terry et al. (1994)
+- **<a href="https://www.allthingsdistributed.com/2008/12/eventually_consistent.html" target="_blank" rel="noopener noreferrer">Eventually Consistent</a>** - Werner Vogels (Amazon)
+
+### Implementações Práticas
+
+- **<a href="https://jepsen.io/consistency" target="_blank" rel="noopener noreferrer">Jepsen: Consistency Models</a>** - Visualização interativa de modelos
+- **<a href="https://research.google/pubs/pub39966/" target="_blank" rel="noopener noreferrer">Spanner: Google's Globally-Distributed Database</a>** - Linearizability em escala
+- **<a href="https://hal.inria.fr/inria-00609399v1/document" target="_blank" rel="noopener noreferrer">CRDTs: Consistency without concurrency control</a>** - Shapiro et al.
+
+### Guias e Tutoriais
+
+- **<a href="https://aphyr.com/posts/313-strong-consistency-models" target="_blank" rel="noopener noreferrer">Strong consistency models</a>** - Kyle Kingsbury (Jepsen)
+- **<a href="https://www.microsoft.com/en-us/research/publication/replicated-data-consistency-explained-through-baseball/" target="_blank" rel="noopener noreferrer">Consistency Models in Distributed Systems</a>** - Doug Terry (Microsoft)
+
 ---
 
 **Próximo**: [Latência e Falhas](latency-and-failures.md)

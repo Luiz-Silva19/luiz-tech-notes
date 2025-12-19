@@ -161,6 +161,24 @@ Qual evento ocorreu primeiro: Evento 2 ou Evento 3?
 
 Sistemas distribuídos são complexos mas necessários para construir aplicações modernas escaláveis e resilientes. Entender seus desafios fundamentais é o primeiro passo para projetá-los corretamente.
 
+## 📚 Referências e Recursos
+
+### Artigos e Papers
+
+- **<a href="https://scholar.harvard.edu/files/waldo/files/waldo-94.pdf" target="_blank" rel="noopener noreferrer">A Note on Distributed Computing</a>** - Jim Waldo et al. (1994)
+- **<a href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing" target="_blank" rel="noopener noreferrer">Fallacies of Distributed Computing</a>** - Peter Deutsch
+
+### Documentação de Sistemas
+
+- **<a href="https://aws.amazon.com/architecture/" target="_blank" rel="noopener noreferrer">AWS Architecture Center</a>** - Padrões de arquitetura distribuída
+- **<a href="https://cloud.google.com/architecture" target="_blank" rel="noopener noreferrer">Google Cloud Architecture</a>** - Guias de arquitetura
+- **<a href="https://learn.microsoft.com/en-us/azure/architecture/" target="_blank" rel="noopener noreferrer">Microsoft Azure Architecture</a>** - Padrões e práticas
+
+### Tutoriais Práticos
+
+- **<a href="https://www.oreilly.com/library/view/distributed-services-with/9781680507607/" target="_blank" rel="noopener noreferrer">Distributed Systems in Go</a>** - Travis Jeffery
+- **<a href="https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/" target="_blank" rel="noopener noreferrer">Building Microservices</a>** - Sam Newman
+
 ---
 
 **Próximo**: [Teorema CAP](cap-theorem.md)

@@ -701,6 +701,30 @@ Leader Election é fundamental para coordenação em sistemas distribuídos, mas
 
 **Recomendação**: Use ferramentas maduras (ZooKeeper, etcd, Consul) em vez de implementar do zero.
 
+## 📚 Referências e Recursos
+
+### Documentação Oficial
+
+- **<a href="https://zookeeper.apache.org/doc/current/recipes.html#sc_leaderElection" target="_blank" rel="noopener noreferrer">ZooKeeper Leader Election</a>** - Apache ZooKeeper
+- **<a href="https://etcd.io/docs/v3.5/tutorials/how-to-leader-election/" target="_blank" rel="noopener noreferrer">etcd Leader Election</a>** - Tutorial oficial
+- **<a href="https://www.consul.io/docs/dynamic-app-config/sessions" target="_blank" rel="noopener noreferrer">Consul Sessions</a>** - Leader election com Consul
+
+### Papers Acadêmicos
+
+- **<a href="https://en.wikipedia.org/wiki/Bully_algorithm" target="_blank" rel="noopener noreferrer">The Bully Algorithm</a>** - Garcia-Molina (1982)
+- **<a href="https://lamport.azurewebsites.net/pubs/paxos-simple.pdf" target="_blank" rel="noopener noreferrer">Paxos Made Simple</a>** - Leslie Lamport (2001)
+
+### Implementações Práticas
+
+- **<a href="https://kazoo.readthedocs.io/en/latest/api/recipe/election.html" target="_blank" rel="noopener noreferrer">Kazoo Python Library</a>** - ZooKeeper recipes
+- **<a href="https://python-etcd3.readthedocs.io/" target="_blank" rel="noopener noreferrer">etcd3 Python Client</a>** - Leader election examples
+- **<a href="https://pkg.go.dev/k8s.io/client-go/tools/leaderelection" target="_blank" rel="noopener noreferrer">Kubernetes Leader Election</a>** - Go library
+
+### Artigos e Tutoriais
+
+- **<a href="https://www.the-paper-trail.org/post/2014-12-17-leader-election/" target="_blank" rel="noopener noreferrer">Leader Election in Distributed Systems</a>** - The Paper Trail
+- **<a href="https://redis.io/docs/manual/patterns/distributed-locks/" target="_blank" rel="noopener noreferrer">Distributed Locks with Redis</a>** - Redlock algorithm
+
 ---
 
 **Próximo**: [Consenso](consensus.md)

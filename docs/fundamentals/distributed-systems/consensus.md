@@ -723,6 +723,40 @@ new_value = counter.increment()  # Linearizable!
 
 **Key Takeaway**: Não implemente consenso do zero. Use sistemas maduros (etcd, Consul, ZooKeeper) que já resolveram esses problemas complexos.
 
+## 📚 Referências e Recursos
+
+### Papers Fundamentais
+
+- **<a href="https://lamport.azurewebsites.net/pubs/paxos-simple.pdf" target="_blank" rel="noopener noreferrer">Paxos Made Simple</a>** - Leslie Lamport (2001)
+- **<a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener noreferrer">In Search of an Understandable Consensus Algorithm (Raft)</a>** - Ongaro & Ousterhout (2014)
+- **<a href="https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf" target="_blank" rel="noopener noreferrer">Impossibility of Distributed Consensus with One Faulty Process (FLP)</a>** - Fischer, Lynch, Paterson (1985)
+- **<a href="https://pmg.csail.mit.edu/papers/vr.pdf" target="_blank" rel="noopener noreferrer">Viewstamped Replication</a>** - Oki & Liskov (1988)
+
+### Implementações
+
+- **<a href="https://etcd.io/docs/" target="_blank" rel="noopener noreferrer">etcd Documentation</a>** - Raft-based distributed key-value store
+- **<a href="https://www.consul.io/docs" target="_blank" rel="noopener noreferrer">Consul by HashiCorp</a>** - Service mesh com consenso
+- **<a href="https://zookeeper.apache.org/doc/current/" target="_blank" rel="noopener noreferrer">Apache ZooKeeper</a>** - Coordination service (Zab protocol)
+- **<a href="https://www.cockroachlabs.com/docs/" target="_blank" rel="noopener noreferrer">CockroachDB</a>** - Distributed SQL com Raft
+
+### Visualizações e Tutoriais
+
+- **<a href="https://raft.github.io/" target="_blank" rel="noopener noreferrer">Raft Visualization</a>** - Visualização interativa do Raft
+- **<a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener noreferrer">The Secret Lives of Data</a>** - Animação do Raft
+- **<a href="https://research.google/pubs/pub33002/" target="_blank" rel="noopener noreferrer">Paxos Made Live</a>** - Google Chubby experience
+
+### Artigos Técnicos
+
+- **<a href="https://www.the-paper-trail.org/post/2008-11-27-consensus-protocols-two-phase-commit/" target="_blank" rel="noopener noreferrer">Consensus Protocols: Two-Phase Commit</a>** - The Paper Trail
+- **<a href="https://www.the-paper-trail.org/post/2008-11-29-consensus-protocols-three-phase-commit/" target="_blank" rel="noopener noreferrer">Consensus Protocols: Three-phase Commit</a>** - The Paper Trail
+- **<a href="https://www.the-paper-trail.org/post/2009-02-03-consensus-protocols-paxos/" target="_blank" rel="noopener noreferrer">Consensus Protocols: Paxos</a>** - The Paper Trail
+- **<a href="https://understandingpaxos.wordpress.com/" target="_blank" rel="noopener noreferrer">Understanding Paxos</a>** - Tutorial completo
+
+### Cursos e Palestras
+
+- **<a href="https://pdos.csail.mit.edu/6.824/" target="_blank" rel="noopener noreferrer">MIT 6.824 Distributed Systems</a>** - Labs implementando Raft
+- **<a href="https://www.youtube.com/watch?v=YbZ3zDzDnrw" target="_blank" rel="noopener noreferrer">Raft Lecture by Diego Ongaro</a>** - Criador do Raft
+
 ---
 
 🎉 **Parabéns!** Você completou a seção de **Sistemas Distribuídos**!

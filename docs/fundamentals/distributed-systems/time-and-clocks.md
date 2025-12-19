@@ -438,6 +438,25 @@ Como tirar snapshot de sistema distribuído em execução?
 - **Vector clocks**: Detecta concorrência, mas cresce com número de nós
 - **HLC**: Melhor dos dois mundos (tempo real + causalidade)
 
+## 📚 Referências e Recursos
+
+### Papers Fundamentais
+
+- **<a href="https://lamport.azurewebsites.net/pubs/time-clocks.pdf" target="_blank" rel="noopener noreferrer">Time, Clocks, and the Ordering of Events in a Distributed System</a>** - Leslie Lamport (1978)
+- **<a href="https://www.vs.inf.ethz.ch/publ/papers/VirtTimeGlobStates.pdf" target="_blank" rel="noopener noreferrer">Virtual Time and Global States</a>** - Mattern (1989)
+- **<a href="https://cse.buffalo.edu/tech-reports/2014-04.pdf" target="_blank" rel="noopener noreferrer">Logical Physical Clocks</a>** - Kulkarni et al. (2014)
+
+### Implementações
+
+- **<a href="https://cloud.google.com/spanner/docs/true-time-external-consistency" target="_blank" rel="noopener noreferrer">Spanner's TrueTime</a>** - Google Cloud
+- **<a href="https://www.cockroachlabs.com/blog/living-without-atomic-clocks/" target="_blank" rel="noopener noreferrer">CockroachDB HLC</a>** - Hybrid Logical Clocks
+- **<a href="https://www.ntp.org/" target="_blank" rel="noopener noreferrer">NTP Project</a>** - Network Time Protocol
+
+### Artigos Técnicos
+
+- **<a href="https://queue.acm.org/detail.cfm?id=2745385" target="_blank" rel="noopener noreferrer">There is No Now</a>** - ACM Queue
+- **<a href="https://writings.quilt.org/2014/05/12/distributed-systems-and-the-end-of-the-api/" target="_blank" rel="noopener noreferrer">Distributed Systems and the End of the API</a>** - Chas Emerick
+
 ---
 
 **Próximo**: [Idempotência](idempotency.md)

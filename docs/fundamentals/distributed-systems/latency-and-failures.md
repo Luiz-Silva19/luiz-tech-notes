@@ -414,6 +414,26 @@ Em sistemas distribuídos:
 - **Falhas** vão acontecer → Projete para resiliência desde o início
 - **Não há solução perfeita** → Entenda trade-offs e escolha apropriadamente
 
+## 📚 Referências e Recursos
+
+### Livros e Artigos
+
+- **<a href="https://pragprog.com/titles/mnee2/release-it-second-edition/" target="_blank" rel="noopener noreferrer">Release It!</a>** - Michael Nygard (Stability patterns)
+- **<a href="https://research.google/pubs/pub40801/" target="_blank" rel="noopener noreferrer">The Tail at Scale</a>** - Jeffrey Dean & Luiz André Barroso (Google)
+- **<a href="https://netflixtechblog.com/fit-failure-injection-testing-35d8e2a9bb2" target="_blank" rel="noopener noreferrer">Fault Injection in Production</a>** - Netflix Chaos Engineering
+
+### Padrões de Resiliência
+
+- **<a href="https://martinfowler.com/bliki/CircuitBreaker.html" target="_blank" rel="noopener noreferrer">Circuit Breaker Pattern</a>** - Martin Fowler
+- **<a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead" target="_blank" rel="noopener noreferrer">Bulkhead Pattern</a>** - Microsoft Azure Patterns
+- **<a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/retry" target="_blank" rel="noopener noreferrer">Retry Pattern</a>** - Best practices
+
+### Ferramentas
+
+- **<a href="https://netflix.github.io/chaosmonkey/" target="_blank" rel="noopener noreferrer">Chaos Monkey</a>** - Netflix (failure injection)
+- **<a href="https://github.com/Shopify/toxiproxy" target="_blank" rel="noopener noreferrer">Toxiproxy</a>** - Simular latência e falhas de rede
+- **<a href="https://github.com/alexei-led/pumba" target="_blank" rel="noopener noreferrer">Pumba</a>** - Chaos testing para Docker
+
 ---
 
 **Próximo**: [Tempo e Relógios](time-and-clocks.md)

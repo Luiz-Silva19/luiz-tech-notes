@@ -240,6 +240,25 @@ Na prática:
 - ⚖️ **Escolha** entre Consistency (C) e Availability (A) durante partições
 - 🔧 Muitos sistemas modernos permitem **configurar** esse trade-off por operação
 
+## 📚 Referências e Recursos
+
+### Paper Original
+
+- **<a href="https://users.ece.cmu.edu/~adrian/731-sp04/readings/GL-cap.pdf" target="_blank" rel="noopener noreferrer">Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services</a>** - Gilbert & Lynch (2002)
+- **<a href="https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/" target="_blank" rel="noopener noreferrer">CAP Twelve Years Later: How the "Rules" Have Changed</a>** - Eric Brewer (2012)
+
+### Artigos Explicativos
+
+- **<a href="https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html" target="_blank" rel="noopener noreferrer">Please stop calling databases CP or AP</a>** - Martin Kleppmann
+- **<a href="https://codahale.com/you-cant-sacrifice-partition-tolerance/" target="_blank" rel="noopener noreferrer">You Can't Sacrifice Partition Tolerance</a>** - Coda Hale
+- **<a href="http://robertgreiner.com/cap-theorem-revisited/" target="_blank" rel="noopener noreferrer">CAP Theorem Revisited</a>** - Robert Greiner
+
+### Documentação de Sistemas
+
+- **<a href="https://cassandra.apache.org/doc/latest/cassandra/architecture/overview.html" target="_blank" rel="noopener noreferrer">Cassandra Architecture</a>** - AP system
+- **<a href="https://www.mongodb.com/docs/manual/core/read-preference/" target="_blank" rel="noopener noreferrer">MongoDB Consistency</a>** - CP system
+- **<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html" target="_blank" rel="noopener noreferrer">DynamoDB Consistency</a>** - Configurable
+
 ---
 
 **Próximo**: [Modelos de Consistência](consistency-models.md)
