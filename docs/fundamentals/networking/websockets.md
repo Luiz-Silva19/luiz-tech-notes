@@ -6,6 +6,8 @@ sidebar_label: WebSockets
 
 **WebSockets** é um protocolo de comunicação que fornece canais de comunicação full-duplex (bidirecional) sobre uma única conexão TCP, permitindo comunicação em tempo real entre cliente e servidor.
 
+**Analogia**: HTTP é como correio (envia carta, aguarda resposta), WebSocket é ligação telefônica (linha aberta, ambos falam a qualquer momento, servidor pode avisar cliente proativamente). Chat via HTTP = enviar carta por mensagem; via WebSocket = ligação aberta.
+
 ## WebSockets vs HTTP
 
 ### HTTP (Request-Response)
@@ -764,6 +766,37 @@ ws.onopen = () => {
 ❌ **Stateful** - Servidor precisa manter conexões  
 ❌ **Scaling complexo** - Precisa sticky sessions ou Redis pub/sub  
 ❌ **Firewall/proxy** podem bloquear
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **WebSocket = HTTP Upgrade**: Começa como HTTP, depois "upgrade" para WebSocket
+- **Protocolo**: `ws://` (inseguro) ou `wss://` (seguro - obrigatório se site é HTTPS)
+- **Porta**: Mesmas do HTTP - 80 (ws) ou 443 (wss)
+- **Full-Duplex**: Comunicação bidirecional simultânea
+- **Handshake**: Cliente envia `Upgrade: websocket`, servidor responde `101 Switching Protocols`
+- **Estados**: CONNECTING → OPEN → CLOSING → CLOSED
+- **Frames**: Após handshake, usa frames WebSocket (não mais HTTP)
+
+⚠️ **Pegadinhas Comuns:**
+
+- **WebSocket ≠ Socket.IO**: Socket.IO é biblioteca sobre WebSocket com fallbacks
+- **Stateful**: Servidor precisa manter conexões abertas (escalabilidade complexa)
+- **Load Balancer**: Precisa sticky sessions (mesma conexão = mesmo servidor)
+- **Proxy/Firewall**: Podem bloquear ou timeout conexões longas
+  - Nginx: aumentar `proxy_read_timeout` e `proxy_send_timeout`
+- **Heartbeat obrigatório**: Implementar ping/pong para detectar conexões mortas
+- **Reconexão**: Implementar retry com backoff exponencial
+- **HTTPS → WSS obrigatório**: Página HTTPS não aceita ws:// (mixed content)
+- **Alternativas**: SSE (Server-Sent Events) = apenas servidor→cliente, mais simples
+
+**Quando usar WebSocket**:
+
+- ✅ Chat, gaming, dashboards real-time, trading
+- ✅ Dados que mudam frequentemente
+- ❌ Request-response simples (use HTTP)
+- ❌ Apenas servidor→cliente (use SSE)
 
 ## Recursos
 

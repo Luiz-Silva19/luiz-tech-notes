@@ -8,7 +8,7 @@ sidebar_label: REST APIs
 
 REST (Representational State Transfer) é um estilo arquitetural para criar APIs web usando HTTP. Define um conjunto de princípios para comunicação entre cliente e servidor.
 
-**Analogia**: REST é como um cardápio de restaurante padronizado - você sempre sabe como pedir (GET), fazer pedido (POST), modificar (PUT) ou cancelar (DELETE). Formato consistente facilita comunicação.
+**Analogia**: Como um cardápio de restaurante padronizado - você sempre sabe como pedir (GET), fazer pedido (POST), modificar (PUT) ou cancelar (DELETE). Formato consistente facilita comunicação.
 
 ## Princípios REST
 
@@ -574,6 +574,93 @@ app.listen(3000, () => {
 - **Insomnia**: Cliente REST
 - **Swagger UI**: Documentação interativa
 - **curl**: CLI para requests HTTP
+
+## Analogia
+
+**API REST** é como um menu de restaurante padronizado:
+
+- **GET** = Ver o cardápio (só olha, não modifica)
+- **POST** = Fazer um pedido novo (criar algo)
+- **PUT** = Trocar o pedido inteiro (substituir completamente)
+- **PATCH** = Adicionar/remover item do pedido (modificar parcialmente)
+- **DELETE** = Cancelar o pedido (remover)
+
+Cada prato tem um código no menu (URI como `/api/v1/users/123`), e você sempre usa os mesmos verbos para se comunicar. O garçom (servidor) entende exatamente o que você quer porque segue padrão.
+
+**Status Codes** são como avisos do garçom:
+
+- 2xx = "Tudo certo!" (sucesso)
+- 3xx = "Mudou de mesa" (redirecionamento)
+- 4xx = "Você pediu errado" (erro do cliente)
+- 5xx = "Problema na cozinha" (erro do servidor)
+
+## Pontos de Atenção
+
+💡 **Em provas e entrevistas:**
+
+**Pegadinhas comuns:**
+
+- ❌ "PUT é para update parcial" - FALSO! PUT é substituição completa, PATCH é parcial
+- ❌ "POST é idempotente" - FALSO! POST não é idempotente, PUT/DELETE são
+- ❌ "Status 200 sempre" - FALSO! Use status correto (201 para criação, 204 para delete)
+- ❌ "REST requer stateless" - VERDADEIRO! Muito importante
+- ❌ "HATEOAS é obrigatório" - FALSO! É opcional (nível 3 Richardson)
+
+**Diferenças críticas:**
+
+- **GET vs POST**: GET é idempotente e seguro, POST não
+- **PUT vs PATCH**: PUT substitui tudo, PATCH apenas campos enviados
+- **201 vs 200**: 201 quando cria recurso, 200 para outras operações bem-sucedidas
+- **401 vs 403**: 401 = não autenticado (faça login), 403 = não autorizado (sem permissão)
+- **404 vs 410**: 404 = não existe, 410 = existia mas foi removido permanentemente
+
+**Design de URLs - Boas práticas:**
+
+- ✅ `/users` (substantivo plural)
+- ❌ `/getUsers` (sem verbos)
+- ✅ `/users/123/posts` (hierarquia clara)
+- ❌ `/users-posts?userId=123` (evite quando possível)
+
+**Versionamento:**
+
+- Melhor prática: `/api/v1/users` (no path)
+- Alternativa: Header `Accept: application/vnd.myapi.v1+json`
+- ⚠️ Versione desde o início!
+
+**Idempotência (muito cobrado!):**
+
+```
+GET    /users/123  ✓ Idempotente (sempre mesmo resultado)
+POST   /users      ✗ NÃO idempotente (cria novo a cada vez)
+PUT    /users/123  ✓ Idempotente (mesmo resultado sempre)
+DELETE /users/123  ✓ Idempotente (segunda vez já está deletado)
+PATCH  /users/123  ? Depende da implementação
+```
+
+**Erros comuns:**
+
+- ❌ Usar GET para operações que modificam dados
+- ❌ Retornar 200 para erros
+- ❌ Colocar dados sensíveis na URL (use body em POST)
+- ❌ Não validar input
+- ❌ Não implementar rate limiting
+- ❌ Ignorar CORS
+
+**Segurança essencial:**
+
+- ✅ Sempre HTTPS
+- ✅ Validar e sanitizar input
+- ✅ Rate limiting
+- ✅ Autenticação (JWT comum)
+- ✅ CORS configurado corretamente
+
+**Red flags em entrevistas:**
+
+- Não saber diferença entre PUT e PATCH
+- Não entender idempotência
+- Usar verbos nas URLs
+- Não saber principais status codes
+- Confundir REST com HTTP
 
 ## Recursos
 

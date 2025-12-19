@@ -6,6 +6,8 @@ sidebar_label: TLS
 
 **TLS** (Transport Layer Security) e seu predecessor **SSL** (Secure Sockets Layer) são protocolos criptográficos que fornecem comunicação segura sobre redes.
 
+**Analogia**: Como reunião secreta com autenticação - certificado é carteira de identidade, CA é órgão que emite (todos confiam), handshake é aperto de mão secreto, criptografia assimétrica é cofre com 2 chaves, simétrica é senha compartilhada.
+
 ## TLS vs SSL
 
 | Protocolo | Versão | Status               | Ano  |
@@ -538,6 +540,33 @@ Grade A+ = configuração ideal
 ```bash
 nmap --script ssl-enum-ciphers -p 443 example.com
 ```
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **TLS vs SSL**: SSL está deprecated (POODLE attack), use TLS 1.2+ apenas
+- **Versões**: SSL 2.0/3.0 ❌, TLS 1.0/1.1 ❌, TLS 1.2 ✅, TLS 1.3 ✅
+- **TLS fornece 3 coisas**: Criptografia (confidencialidade), Integridade (MAC), Autenticação (certificado)
+- **Handshake**: TLS 1.2 = 2 RTT, TLS 1.3 = 1 RTT (mais rápido)
+- **Cipher Suite estrutura**: `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`
+  - ECDHE = Key Exchange
+  - RSA = Autenticação
+  - AES_128_GCM = Criptografia simétrica
+  - SHA256 = Hash
+- **Perfect Forward Secrecy (PFS)**: Usa ECDHE ou DHE (ephemeral keys)
+
+⚠️ **Pegadinhas Comuns:**
+
+- **TLS opera entre camadas OSI**: Camada 5-6 (entre Transporte e Aplicação)
+- **SNI (Server Name Indication)**: Permite múltiplos certificados em 1 IP
+  - Obrigatório para hosts virtuais HTTPS
+- **OCSP Stapling**: Servidor anexa resposta de validação (mais rápido, mais privado)
+- **Session Resumption**: TLS 1.2 usa Session ID/Tickets, TLS 1.3 usa PSK
+- **0-RTT em TLS 1.3**: Muito rápido mas não idempotente (replay attacks)
+- **Certificado expirado**: Browsers bloqueiam - monitorar expiração
+- **Self-signed**: Tecnicamente seguro mas browsers mostram warning
+- **Ataques históricos**: POODLE (SSL 3.0), BEAST (TLS 1.0), Heartbleed (OpenSSL bug)
 
 ## Recursos
 

@@ -8,7 +8,7 @@ sidebar_label: Mensageria
 
 Sistema de comunicação assíncrona entre aplicações usando mensagens. Mensagens são colocadas em filas e processadas independentemente, desacoplando produtor e consumidor.
 
-**Analogia**: É como o sistema de correios - você posta uma carta (mensagem) e não precisa esperar o carteiro entregar. O destinatário processa quando puder. Sistema de filas garante entrega.
+**Analogia**: Como o sistema de correios - você posta uma carta (mensagem) e não precisa esperar o carteiro entregar. O destinatário processa quando puder, e o sistema de filas garante entrega.
 
 ## Por que usar Mensageria?
 
@@ -561,6 +561,70 @@ class PaymentService {
   }
 }
 ```
+
+## Analogia
+
+**Message Queue (RabbitMQ/SQS)** é como o sistema de correspondência tradicional:
+
+- Você posta uma carta na agência dos correios (producer envia para fila)
+- A carta fica guardada até ser entregue (mensagem persistida)
+- Só o destinatário correto recebe (consumer específico)
+- Carteiro entrega quando destinatário está em casa (processamento quando consumer está disponível)
+- Se falhar, tenta de novo depois (retry automático)
+
+**Event Streaming (Kafka)** é como um jornal que fica arquivado:
+
+- Notícias são publicadas cronologicamente (eventos no log)
+- Qualquer pessoa pode ler o jornal, até edições antigas (múltiplos consumers, retenção longa)
+- Você pode começar a ler de qualquer página (replay de eventos)
+- O jornal não desaparece depois de lido (persistência)
+
+## Pontos de Atenção
+
+💡 **Em provas e entrevistas:**
+
+**Pegadinhas comuns:**
+
+- ❌ "Mensageria garante exactly-once" - FALSO! Maioria é at-least-once, consumidor deve ser idempotente
+- ❌ "Kafka é message queue" - FALSO! É event streaming platform
+- ❌ "RabbitMQ não persiste mensagens" - FALSO! Pode persistir
+- ❌ "SQS garante ordem" - FALSO! SQS padrão não garante, apenas FIFO queues
+
+**Quando usar cada tecnologia:**
+
+- **RabbitMQ**: Routing complexo, múltiplos padrões de mensageria, priorização
+- **Kafka**: Event streaming, big data pipelines, event sourcing, alto throughput
+- **AWS SQS**: Serverless, integração AWS, simplicidade, pay-per-use
+- **Redis Pub/Sub**: Real-time, in-memory, sem necessidade de persistência
+
+**Dicas de certificação AWS:**
+
+- SQS Standard = alta throughput, ordem não garantida, at-least-once
+- SQS FIFO = ordem garantida, exactly-once, max 3000 msg/s
+- SNS = Pub/Sub, fanout para múltiplos destinos
+- Kinesis = Event streaming similar ao Kafka
+- EventBridge = Event bus gerenciado, integração com serviços AWS
+
+**Padrões de garantia de entrega:**
+
+- **At-most-once**: Pode perder (métricas, logs não-críticos)
+- **At-least-once**: Pode duplicar - REQUER IDEMPOTÊNCIA (maioria dos casos)
+- **Exactly-once**: Caro e complexo (transações financeiras)
+
+**Erros comuns:**
+
+- ❌ Consumidor não-idempotente (duplicatas causam problemas)
+- ❌ Mensagens muito grandes (use referências para S3)
+- ❌ Não configurar Dead Letter Queue
+- ❌ Não monitorar tamanho da fila
+- ❌ Processamento síncrono disfarçado de assíncrono
+
+**Red flags em entrevistas:**
+
+- Não entender diferença entre fila e pub/sub
+- Não saber o que é idempotência
+- Não conhecer conceito de DLQ
+- Confundir RabbitMQ com Kafka
 
 ## Recursos
 

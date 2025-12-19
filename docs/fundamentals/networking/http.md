@@ -6,6 +6,8 @@ sidebar_label: HTTP
 
 **HTTP** (Hypertext Transfer Protocol) é o protocolo de aplicação fundamental da World Wide Web, usado para transferir documentos hipermídia.
 
+**Analogia**: Como enviar cartas pelo correio - GET pede informação ("me envie o cardápio"), POST envia formulário, PUT substitui documento completo, DELETE cancela pedido. Status codes são como "Entregue" (200) ou "Endereço não encontrado" (404).
+
 ## Características Principais
 
 ✅ **Stateless**: Cada requisição é independente  
@@ -666,6 +668,26 @@ Stream 3: GET /script.js
 Stream 5: GET /image.png
 (todas simultaneamente)
 ```
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **Idempotência**: GET, PUT, DELETE são idempotentes; POST não é
+  - Idempotente = executar N vezes = mesmo resultado de executar 1 vez
+- **Safe Methods**: GET, HEAD, OPTIONS não modificam dados
+- **Status Codes**:
+  - 2xx = sucesso, 3xx = redirect, 4xx = erro cliente, 5xx = erro servidor
+  - 401 = não autenticado, 403 = autenticado mas sem permissão
+  - 301 = redirect permanente, 302 = redirect temporário
+
+⚠️ **Pegadinhas Comuns:**
+
+- **HTTP/1.1 vs HTTP/2**: HTTP/2 multiplexa streams (várias requisições em 1 conexão), HTTP/1.1 não
+- **PUT vs PATCH**: PUT substitui tudo, PATCH atualiza parcialmente
+- **Cookies**: HttpOnly protege contra XSS, Secure força HTTPS, SameSite protege contra CSRF
+- **CORS**: Preflight (OPTIONS) acontece antes de POST/PUT/DELETE com headers custom
+- **Cache**: no-cache não significa "não cachear", significa "revalidar antes de usar"
 
 ## Boas Práticas
 

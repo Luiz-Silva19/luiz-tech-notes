@@ -8,6 +8,8 @@ sidebar_label: NLB
 
 O **Network Load Balancer (NLB)** é um balanceador de carga de **Camada 4 (TCP/UDP)** da AWS que opera no nível de transporte do modelo OSI.
 
+**Analogia**: Como um distribuidor de pacotes express ultra-rápido - não abre os pacotes para ver conteúdo (Layer 4), apenas lê endereço e porta e distribui instantaneamente. Latência mínima, milhões de pacotes/segundo.
+
 ## Características Principais
 
 ### Performance Extrema
@@ -209,6 +211,95 @@ aws cloudwatch get-metric-statistics \
     --period 3600 \
     --statistics Average
 ```
+
+## Analogia
+
+**NLB como portão automático de pedágio eletrônico (Sem Parar/Via Fácil):**
+
+Imagine uma rodovia com múltiplas cabines de pedágio:
+
+- **ALB seria o pedágio tradicional** onde o funcionário analisa seu veículo, lê documentos, verifica destino e decide qual guichê você vai. Mais lento, mas pode fazer decisões complexas.
+
+- **NLB é o pedágio eletrônico** - você passa em alta velocidade, o sistema só verifica se sua tag está ativa (health check TCP) e te direciona para uma pista livre. Não lê placa, não verifica destino, não abre janela. **Ultra-rápido, mínima latência.**
+
+Além disso, o NLB te dá um **endereço fixo** (IP estático) - é como se seu GPS sempre mostrasse a mesma coordenada do pedágio, mesmo que eles reconstruam a pista internamente.
+
+**Por que isso importa?**
+
+- Gaming servers precisam de IP fixo para jogadores adicionarem aos favoritos
+- Firewalls corporativos fazem whitelist de IPs - não dá pra usar DNS que muda
+- Aplicações legadas que só aceitam IP, não DNS
+
+## Pontos de Atenção
+
+### 🎯 Dicas para Certificação AWS
+
+💡 **Quando a prova menciona NLB, procure por estas palavras-chave:**
+
+- **"Static IP"** ou **"Elastic IP"** → NLB é a única opção
+- **"Extreme performance"** ou **"millions of requests per second"** → NLB
+- **"Ultra-low latency"** ou **"microsecond latency"** → NLB
+- **"Preserve source IP"** → NLB (ALB modifica para o IP do balanceador)
+- **"PrivateLink"** ou **"VPC Endpoint Service"** → NLB apenas
+- **"WhitelistIP em firewall"** → NLB (IP não muda)
+
+💡 **NLB vs ALB - Decision Tree para Prova:**
+
+```
+Requisito menciona HTTP/HTTPS?
+├─ Sim → Path-based routing ou host-based?
+│         ├─ Sim → ALB
+│         └─ Não → Precisa IP fixo?
+│                  ├─ Sim → NLB com TLS listener
+│                  └─ Não → ALB (mais barato e mais features)
+│
+└─ Não → É TCP/UDP?
+          ├─ Sim → NLB
+          └─ Não → Revisar requisitos
+```
+
+💡 **Protocolos suportados:**
+
+- **TCP**: Qualquer aplicação TCP (HTTP, MySQL, PostgreSQL, Redis, etc.)
+- **UDP**: Gaming, IoT, DNS, streaming
+- **TLS**: SSL/TLS termination com certificados ACM
+- ⚠️ **Não suporta**: HTTP/2, gRPC, WebSockets nativamente (precisa TCP mode)
+
+💡 **Cross-Zone Load Balancing (pegadinha de custo):**
+
+- **Desabilitado por padrão** no NLB (no ALB vem habilitado)
+- Quando habilitado, **cobra por dados transferidos entre AZs**
+- Sem cross-zone + distribuição desigual de targets = carga desbalanceada
+
+**Exemplo:** Se AZ-A tem 2 targets e AZ-B tem 8 targets:
+
+- Sem cross-zone: cada AZ recebe 50% → targets em AZ-A recebem 4x mais carga
+- Com cross-zone: distribuição uniforme → custo extra de rede
+
+### ⚠️ Pegadinhas Comuns
+
+❌ **NLB não suporta Security Groups** - ele opera em Layer 4, não entende aplicação. Configure SG nos targets  
+❌ **Health check TCP vs HTTP** - TCP apenas verifica se porta está aberta, não se aplicação está saudável. Use HTTP health check quando possível  
+❌ **Sticky sessions são por source IP** - se cliente trocar de rede (mobile 4G→WiFi), vai para target diferente  
+❌ **TLS termination tem custo de LCU maior** - use só se necessário  
+❌ **Connection draining não existe no NLB** - é chamado "deregistration delay" e funciona diferente do ALB  
+❌ **Target pode ser ALB** - sim, você pode colocar NLB na frente de ALB (IP estático + path routing)  
+❌ **Preserve source IP é automático** - no ALB precisa de X-Forwarded-For header, no NLB vem nativo  
+❌ **Não suporta Lambda como target** - apenas ALB suporta Lambda  
+❌ **Custo de LCU varia** - TCP connections, bytes processed, new connections/s afetam custo
+
+💡 **Comparação rápida ALB vs NLB para prova:**
+
+| Característica     | ALB    | NLB    |
+| ------------------ | ------ | ------ |
+| Camada OSI         | 7      | 4      |
+| Latência           | ~ms    | ~100μs |
+| IP Estático        | ❌     | ✅     |
+| Path-based routing | ✅     | ❌     |
+| Lambda target      | ✅     | ❌     |
+| Preserve source IP | Header | Nativo |
+| Security Groups    | ✅     | ❌     |
+| PrivateLink        | ❌     | ✅     |
 
 ## Referências
 

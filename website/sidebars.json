@@ -7,9 +7,9 @@
     ],
     "Arquitetura": [
       "architecture/architecture-intro",
-      "architecture/microservices/microservices-intro",
-      "architecture/monolith/monolith-intro",
-      "architecture/event-driven/event-driven-intro"
+      "architecture/microservices-intro",
+      "architecture/monolith-intro",
+      "architecture/event-driven-intro"
     ],
     "DevOps": [
       "devops/devops-intro",

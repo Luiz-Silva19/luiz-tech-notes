@@ -6,6 +6,8 @@ sidebar_label: TCP
 
 **TCP** (Transmission Control Protocol) é um protocolo de transporte orientado a conexão que garante entrega confiável e ordenada de dados entre aplicações.
 
+**Analogia**: Como uma ligação telefônica - "Alô?" (SYN), "Alô! Estou ouvindo" (SYN-ACK), "Ótimo, vamos conversar" (ACK). Confirma cada frase (ACK), repete se não ouviu (retransmissão), e ambos dizem "tchau" antes de desligar.
+
 ## Características Principais
 
 ✅ **Confiável**: Garante entrega sem perdas  
@@ -380,6 +382,29 @@ ss -ti
 # Latência (RTT)
 ping servidor.com
 ```
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **Three-Way Handshake**: SYN → SYN-ACK → ACK (3 passos para abrir)
+- **Four-Way Handshake**: FIN → ACK → FIN → ACK (4 passos para fechar)
+- **Flags TCP importantes**: SYN, ACK, FIN, RST, PSH
+- **TCP vs UDP**: TCP = confiável, ordenado, orientado a conexão; UDP = rápido, sem garantias
+- **MSS (Maximum Segment Size)**: Tipicamente 1460 bytes (1500 MTU - 40 headers)
+- **Sliding Window**: Controle de fluxo - receptor diz quanto pode receber
+- **Congestion Control**: Slow Start → Congestion Avoidance
+
+⚠️ **Pegadinhas Comuns:**
+
+- **ACK número**: É o PRÓXIMO byte esperado, não o último recebido
+- **Handshake assimétrico**: 3-way para abrir, 4-way para fechar
+- **RST vs FIN**: RST = abortar imediatamente, FIN = fechar gracefully
+- **TIME_WAIT**: Após FIN, socket fica em TIME_WAIT por 2MSL (~2 minutos)
+  - Previne que pacotes antigos afetem nova conexão na mesma porta
+- **TCP não garante tempo**: Garante entrega, mas pode demorar (retransmissões)
+- **Retransmissão**: Após timeout OU 3 ACKs duplicados (Fast Retransmit)
+- **Keep-alive**: Não faz parte do TCP padrão, é extensão opcional
 
 ## Boas Práticas
 

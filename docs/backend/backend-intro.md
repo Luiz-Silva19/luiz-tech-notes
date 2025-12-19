@@ -318,6 +318,83 @@ describe("UserService", () => {
 });
 ```
 
+## Pontos de Atenção
+
+💡 **Em provas e entrevistas:**
+
+**Conceitos fundamentais que você DEVE dominar:**
+
+- **Stateless vs Stateful**: Stateless escala horizontalmente fácil, Stateful precisa sticky sessions
+- **Idempotência**: Operação pode ser executada múltiplas vezes com mesmo resultado
+- **Transações ACID**: Atomicidade, Consistência, Isolamento, Durabilidade
+- **CAP Theorem**: Impossível ter Consistency + Availability + Partition Tolerance simultaneamente
+
+**Padrões arquiteturais - Quando usar:**
+
+- **Monolito**: Início de projeto, time pequeno, domínio simples
+- **Microservices**: Escala independente, times autônomos, domínios bem definidos
+- **Serverless**: Workloads intermitentes, pay-per-use, sem gestão de infra
+
+**Comunicação entre sistemas:**
+
+- **Síncrona (REST/gRPC)**: Quando precisa resposta imediata, operações críticas
+- **Assíncrona (Filas/Kafka)**: Quando pode processar depois, desacoplamento, alta escala
+
+**Pegadinhas comuns:**
+
+- ❌ "Microservices sempre melhor" - FALSO! Monolito é ótimo para começar
+- ❌ "REST é stateful" - FALSO! REST deve ser stateless
+- ❌ "Cache resolve tudo" - FALSO! Cache adiciona complexidade (invalidação é difícil)
+- ❌ "Mais servidores = mais performance" - FALSO! Pode ser gargalo no banco de dados
+
+**Segurança - Essencial:**
+
+- ✅ HTTPS sempre (TLS/SSL)
+- ✅ Autenticação (JWT, OAuth 2.0)
+- ✅ Autorização (RBAC/ABAC)
+- ✅ Input validation
+- ✅ SQL injection prevention (prepared statements)
+- ✅ Rate limiting
+- ✅ Secrets em variáveis de ambiente/vault
+
+**Performance - Pontos críticos:**
+
+- **N+1 queries**: Problema clássico com ORMs
+- **Falta de índices**: Queries lentas
+- **SELECT \***: Desperdício de recursos
+- **Sem connection pooling**: Overhead de conexões
+- **Cache invalidation**: Um dos problemas mais difíceis em computação
+
+**Observabilidade - Três pilares:**
+
+1. **Logs**: Eventos discretos ("User 123 logged in")
+2. **Métricas**: Valores numéricos agregados (request/s, latency, CPU)
+3. **Traces**: Jornada de requisição através de serviços
+
+**Erros comuns em entrevistas:**
+
+- ❌ Não entender diferença entre autenticação e autorização
+- ❌ Não saber explicar idempotência
+- ❌ Confundir síncrono com assíncrono
+- ❌ Não conhecer ACID
+- ❌ Ignorar aspectos de segurança
+
+**Dicas para system design:**
+
+- Sempre pergunte requisitos (escala, latência, consistência)
+- Comece simples, depois otimize
+- Considere trade-offs (CAP theorem)
+- Pense em pontos de falha
+- Não esqueça monitoramento
+
+**Red flags técnicos:**
+
+- Credenciais hardcoded no código
+- Sem tratamento de erros
+- Sem validação de input
+- Logs com informações sensíveis
+- Endpoints sem autenticação
+
 ## Próximos Passos
 
 Explore cada área em detalhes:

@@ -6,6 +6,8 @@ sidebar_label: HTTPS
 
 **HTTPS** (HTTP Secure) é HTTP sobre TLS/SSL, fornecendo comunicação criptografada e verificação de identidade do servidor.
 
+**Analogia**: Como enviar carta em envelope lacrado com selo de autenticidade - HTTP é cartão postal (todos podem ler), HTTPS é envelope selado (só destinatário abre). Certificado SSL é o selo que prova autenticidade.
+
 ## HTTPS = HTTP + TLS
 
 ```
@@ -546,6 +548,28 @@ Mixed Content: The page was loaded over HTTPS, but requested an insecure resourc
 ```
 
 **Solução**: Usar HTTPS para todos recursos
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **HTTPS = HTTP + TLS/SSL**: Não é protocolo separado, é HTTP sobre camada de segurança
+- **Porta**: HTTP = 80, HTTPS = 443
+- **TLS vs SSL**: SSL está deprecated, use apenas TLS 1.2+ em produção
+- **Tipos de certificado**:
+  - DV (Domain Validation) = valida domínio apenas (rápido, grátis)
+  - OV (Organization) = valida empresa
+  - EV (Extended) = validação estendida (mais lento, mais caro)
+- **Let's Encrypt**: CA gratuita e automatizada (certificados DV)
+
+⚠️ **Pegadinhas Comuns:**
+
+- **Mixed Content**: Página HTTPS não pode carregar recursos HTTP - browsers bloqueiam
+- **HSTS**: Força HTTPS mesmo que usuário digite http:// - máximo 1 ano
+- **Certificado expirado**: Renovar ANTES de expirar - Let's Encrypt dura 90 dias
+- **SNI (Server Name Indication)**: Permite múltiplos certificados em 1 IP
+- **Self-signed**: Funciona mas browsers mostram warning - só para dev/teste
+- **TLS Handshake**: TLS 1.2 = 2 RTT, TLS 1.3 = 1 RTT (mais rápido)
 
 ## Boas Práticas
 

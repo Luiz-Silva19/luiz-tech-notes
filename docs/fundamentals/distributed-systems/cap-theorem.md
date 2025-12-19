@@ -14,6 +14,8 @@ O **Teorema CAP** (também conhecido como Teorema de Brewer) afirma que é **imp
 
 Em caso de **partição de rede**, você deve escolher entre **Consistência** ou **Disponibilidade**.
 
+**Analogia**: Como ambulâncias durante tempestade que bloqueia estradas (partição) - Consistency = todas ambulâncias sabem mesmos endereços urgentes em tempo real (mas sistema para se bloqueado), Availability = todas podem receber chamados sempre (mas listas podem estar diferentes). Durante partição, escolhe 2 de 3.
+
 ## As Três Propriedades
 
 ### 🔄 Consistency (Consistência)
@@ -239,6 +241,58 @@ Na prática:
 - ✅ **Sempre** tenha Partition Tolerance (P) em sistemas distribuídos
 - ⚖️ **Escolha** entre Consistency (C) e Availability (A) durante partições
 - 🔧 Muitos sistemas modernos permitem **configurar** esse trade-off por operação
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Explique o teorema CAP"
+
+✅ **Resposta certa**:
+
+- "Durante partição de rede, precisa escolher entre Consistency ou Availability"
+- "Quando não há partição, pode ter CA"
+- "Na prática, sempre há partições, então escolhe CP ou AP"
+
+❌ **Erros comuns**:
+
+- "Só pode escolher 2 de 3 sempre" (errado - só durante partição)
+- "NoSQL é AP, SQL é CP" (oversimplification)
+
+### ⚠️ Pegadinhas Comuns
+
+**1. CAP não significa "escolha 2 para sempre"**
+
+Sistemas podem ser CA quando não há partições e escolher CP ou AP quando partições ocorrem.
+
+**2. "Availability" do CAP ≠ "Uptime"**
+
+- CAP Availability = Todo nó não-falhado deve responder
+- Uptime = Sistema está rodando (pode ser um único nó)
+
+**3. Bancos de dados não são puramente CP ou AP**
+
+Maioria permite configurar nível de consistência:
+
+- DynamoDB: Configurável (eventual ou strong)
+- Cassandra: Tunável (R + W > N = strong)
+
+### 🎯 Para Provas/Certificações
+
+**Palavras-chave que indicam CP:**
+
+- "Transações bancárias"
+- "Estoque de produtos"
+- "Strong consistency"
+- "Dados críticos"
+
+**Palavras-chave que indicam AP:**
+
+- "Alta disponibilidade"
+- "Redes sociais"
+- "Feeds de notícias"
+- "Carrinho de compras"
+- "Eventual consistency OK"
 
 ## 📚 Referências e Recursos
 

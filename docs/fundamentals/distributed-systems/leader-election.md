@@ -8,6 +8,8 @@ sidebar_label: Eleição de Líder
 
 **Leader Election** é o processo de escolher um nó em um sistema distribuído para coordenar atividades ou tomar decisões centralizadas, garantindo que apenas **um líder** exista por vez.
 
+**Analogia**: Como eleição de representante de turma - candidatos se apresentam, turma vota (ou usa critério como maior matrícula), quem ganhou vira representante, precisa mostrar que está ativo (heartbeat), se falta aula (falha) há nova eleição. Se turma divide em 2 salas (partição), apenas grupo com maioria pode eleger.
+
 ## Por que precisamos de um Líder?
 
 ### Casos de Uso
@@ -726,5 +728,130 @@ Leader Election é fundamental para coordenação em sistemas distribuídos, mas
 - **<a href="https://redis.io/docs/manual/patterns/distributed-locks/" target="_blank" rel="noopener noreferrer">Distributed Locks with Redis</a>** - Redlock algorithm
 
 ---
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Como implementar leader election?"
+
+✅ **Resposta certa**:
+
+- "Use ZooKeeper, etcd ou Consul - não implemente do zero"
+- "Baseado em leases/locks com TTL"
+- "Líder renova lease periodicamente (heartbeat)"
+- "Se lease expira, nova eleição acontece"
+
+**Pergunta**: "O que é split brain?"
+
+✅ **Resposta**:
+
+- "Múltiplos líderes ao mesmo tempo"
+- "Causado por partição de rede"
+- "Solução: Usar quorum (maioria)"
+- "Apenas partição com maioria pode ter líder"
+
+### ⚠️ Pegadinhas Comuns
+
+**1. Split Brain é o problema #1**
+
+Sem quorum:
+
+```
+Rede se divide: [A, B] e [C]
+A pensa: sou líder
+C pensa: sou líder
+→ 2 líderes! ❌
+```
+
+Com quorum:
+
+```
+[A, B] = 2 nós (maioria) ✅ Pode ter líder
+[C] = 1 nó ❌ Não pode ter líder
+```
+
+**2. Líder antigo pode causar problemas**
+
+Use **fencing tokens**:
+
+```python
+Leader 1 eleito: token = 1
+Leader 2 eleito: token = 2
+
+Leader 1 tenta escrever: Rejeitado (token antigo)
+```
+
+**3. Lease TTL vs Renewal**
+
+- TTL muito curto: Eleições frequentes desnecessárias
+- TTL muito longo: Demora detectar falha de líder
+- **Best practice**: TTL = 10-30s, renovar a cada TTL/2
+
+**4. Não use apenas timestamps**
+
+Clock skew pode causar múltiplos líderes!
+
+Use leases com versão/token incrementado.
+
+### 🎯 Algoritmos Principais
+
+**Bully Algorithm:**
+
+- Simples mas pouco usado
+- ID maior vira líder
+- Muito chatty (muitas mensagens)
+
+**Raft:**
+
+- Mais usado atualmente
+- etcd, Consul
+- Eleição baseada em termos e votos
+
+**ZooKeeper (Zab):**
+
+- Similar ao Raft
+- Ephemeral nodes + watches
+
+### 🔧 Ferramentas por Caso de Uso
+
+**ZooKeeper:**
+
+- ✅ Coordination service maduro
+- ✅ Bem testado (usado em Kafka, Hadoop)
+- ❌ Mais complexo de operar
+
+**etcd:**
+
+- ✅ Moderno, API simples
+- ✅ Usado em Kubernetes
+- ✅ Raft fácil de entender
+
+**Consul:**
+
+- ✅ Service discovery integrado
+- ✅ Health checks built-in
+- ✅ Multi-datacenter
+
+**Redis:**
+
+- ✅ Simples para casos básicos
+- ❌ Não é coordination service dedicado
+- ⚠️ Redlock tem controvérsias
+
+### 📊 Quando Usar Leader Election
+
+**✅ Use quando:**
+
+- Scheduled jobs que devem rodar UMA vez
+- Processamento de fila única
+- Escrever em recurso singleton
+- Coordenação de workers
+
+**❌ Evite quando:**
+
+- Pode distribuir trabalho (sem necessidade de líder)
+- Latência adicional é problema
+- Sistema é simples (overkill)
 
 **Próximo**: [Consenso](consensus.md)

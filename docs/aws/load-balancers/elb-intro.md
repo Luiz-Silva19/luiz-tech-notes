@@ -8,6 +8,8 @@ sidebar_label: Visão Geral
 
 **Elastic Load Balancing (ELB)** é o serviço gerenciado da AWS que distribui automaticamente o tráfego de entrada de aplicações entre múltiplos destinos, como instâncias EC2, containers, endereços IP e funções Lambda.
 
+**Analogia**: Como um guarda de trânsito inteligente - direciona carros (requisições) para diferentes pistas (servidores), desvia de pistas bloqueadas (servidores com problema) e garante que nenhuma pista fique sobrecarregada. Tudo automaticamente.
+
 ## Por que usar Load Balancers?
 
 ### Benefícios Principais
@@ -298,6 +300,78 @@ Total estimado: $25-70/mês
 - Consolide múltiplos listeners em um load balancer
 - Delete load balancers não utilizados
 - Use internal load balancers quando não precisa de acesso público
+
+## Analogia
+
+**Load Balancer como recepcionista de prédio comercial inteligente:**
+
+Imagine um prédio empresarial com várias empresas. Em vez de cada visitante escolher aleatoriamente qual empresa visitar, há uma recepcionista na entrada que:
+
+1. **Verifica se a empresa está aberta** (health check) - não adianta mandar visitante para escritório fechado
+2. **Distribui visitantes uniformemente** - se uma empresa tem 3 atendentes e outra tem 1, ela equilibra a carga
+3. **Direciona baseado no tipo de visita** - vendedores vão para o comercial (path /sales), suporte técnico vai para TI (path /tech)
+4. **Lembra de clientes antigos** (sticky sessions) - se você veio ontem, ela te manda pro mesmo atendente que te conhece
+
+**Tipos de recepcionistas:**
+
+- **ALB**: Recepcionista que lê todo o formulário do visitante e decide a sala exata baseado no que ele precisa
+- **NLB**: Porteiro de boate que só olha o bilhete de entrada e manda pra dentro super rápido, sem fazer perguntas
+- **GLB**: Segurança que revista todo mundo antes de deixar entrar no prédio
+
+## Pontos de Atenção
+
+### 🎯 Dicas para Certificação AWS
+
+💡 **Decision tree para provas - qual ELB escolher:**
+
+```
+1. Questão menciona "firewall" ou "IDS/IPS"? → GLB
+2. Questão menciona "HTTP" ou "path-based routing"? → ALB
+3. Questão menciona "IP estático" ou "Elastic IP"? → NLB
+4. Questão menciona "latência ultra-baixa" ou "milhões req/s"? → NLB
+5. Questão menciona "WebSockets" → ALB ou NLB (ambos suportam)
+6. Questão menciona "Lambda function" como target? → ALB apenas
+7. Questão menciona "gRPC"? → ALB
+```
+
+💡 **Palavras-chave que indicam tipo:**
+
+- **ALB**: microservices, containers, host-based routing, path-based routing, HTTP headers, query parameters
+- **NLB**: static IP, extreme performance, PrivateLink, low latency, preserve source IP
+- **GLB**: third-party appliances, transparent inspection, GENEVE protocol
+
+💡 **Diferenças críticas:**
+
+| Pergunta                        | ALB      | NLB    | GLB |
+| ------------------------------- | -------- | ------ | --- |
+| Suporta Security Groups?        | ✅ Sim   | ❌ Não | ❌  |
+| Preserva IP do cliente?         | ❌ Não\* | ✅ Sim | ✅  |
+| Suporta Lambda como target?     | ✅ Sim   | ❌ Não | ❌  |
+| Tem IP estático?                | ❌ Não   | ✅ Sim | N/A |
+| Pode fazer SSL/TLS termination? | ✅ Sim   | ✅ Sim | ❌  |
+
+\*ALB adiciona header `X-Forwarded-For` com IP do cliente
+
+💡 **Cross-Zone Load Balancing (pegadinha frequente):**
+
+- **ALB**: Habilitado por padrão (sem custo extra)
+- **NLB**: Desabilitado por padrão (cobra por cross-AZ data transfer)
+- **GLB**: Habilitado por padrão (sem custo extra)
+
+Sem cross-zone, se você tem 2 AZs com targets diferentes (AZ-A: 2 targets, AZ-B: 4 targets), cada AZ recebe 50% do tráfego, resultando em carga desigual nos targets.
+
+### ⚠️ Pegadinhas Comuns
+
+❌ **CLB (Classic) ainda aparece em provas** - mas sempre há opção melhor (ALB ou NLB)  
+❌ **"Layer 7" não significa automaticamente ALB** - CLB também opera na Layer 7, mas ALB é superior  
+❌ **NLB não suporta Security Groups** - use NACLs ou Security Groups nos targets  
+❌ **Health check diferente entre tipos** - ALB faz HTTP/HTTPS com path específico; NLB pode fazer apenas TCP connection  
+❌ **Sticky sessions no NLB são por source IP** - se cliente muda de rede, vai para target diferente  
+❌ **Deregistration delay padrão é 300s** - durante deploy, pode causar delay de 5 minutos se não ajustado  
+❌ **Targets em unhealthy state** - LB continua tentando até threshold; tráfego só vai para healthy targets  
+❌ **DNS do ELB muda se você deletar e recriar** - use Route 53 alias record, não hardcode o DNS
+
+💡 **Custo:** Todos cobram por hora + LCU (Load Balancer Capacity Units). Deletar LB não utilizado economiza dinheiro!
 
 ## Próximos Passos
 

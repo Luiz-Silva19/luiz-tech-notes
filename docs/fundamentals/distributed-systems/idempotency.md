@@ -12,6 +12,8 @@ sidebar_label: Idempotência
 f(x) = f(f(x)) = f(f(f(x))) = ...
 ```
 
+**Analogia**: Como caixa eletrônico que não debita duas vezes - você saca R$100, rede cai, sistema tenta novamente. Sem idempotência debita R$200 (erro), com idempotência detecta que já processou operação #12345 e retorna resultado original sem debitar novamente.
+
 ## Por que Idempotência é Importante?
 
 Em sistemas distribuídos, mensagens podem ser:
@@ -593,5 +595,139 @@ for attempt in range(3):
 - **<a href="https://microservices.io/patterns/data/saga.html" target="_blank" rel="noopener noreferrer">Saga Pattern</a>** - Microservices.io
 
 ---
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "O que é idempotência?"
+
+✅ **Resposta certa**:
+
+- "Operação que pode ser executada múltiplas vezes sem efeitos adicionais"
+- "Executar 1x ou N vezes = mesmo resultado"
+- "Essencial para retries seguros em sistemas distribuídos"
+
+**Pergunta**: "Quais métodos HTTP são idempotentes?"
+
+✅ **Resposta**:
+
+```
+GET, PUT, DELETE, HEAD, OPTIONS, TRACE → Idempotentes
+POST, PATCH → NãO idempotentes (por padrão)
+```
+
+### ⚠️ Pegadinhas Comuns
+
+**1. DELETE é idempotente mesmo retornando 404**
+
+```
+DELETE /users/123
+1ª vez: 200 OK (deletou)
+2ª vez: 404 Not Found (já deletado)
+
+Ainda é idempotente! Estado final é o mesmo.
+```
+
+**2. PUT vs POST**
+
+**PUT (idempotente)**:
+
+```
+PUT /users/123 {"name": "João"}
+1x ou 10x = mesmo resultado
+```
+
+**POST (não-idempotente)**:
+
+```
+POST /users {"name": "João"}
+10x = 10 usuários criados!
+```
+
+**3. Idempotência ≠ Sem efeitos colaterais**
+
+Pode ter efeitos (deletar arquivo), mas múltiplas execuções não mudam o resultado final.
+
+**4. Idempotency Key vs Request ID**
+
+- **Idempotency Key**: Cliente gera (controla retries)
+- **Request ID**: Servidor gera (tracing/logging)
+
+Use Idempotency Key para garantir idempotência!
+
+### 🎯 Implementação - Estratégias
+
+**1. Natural Idempotence (melhor)**
+
+```python
+# SET é naturalmente idempotente
+redis.set('user:123:name', 'João')  # Sempre mesmo resultado
+```
+
+**2. Deduplication Table**
+
+```python
+# Gravar IDs processados
+if not db.exists('processed_ops', operation_id):
+    execute_operation()
+    db.insert('processed_ops', operation_id)
+```
+
+**3. Compare-And-Swap**
+
+```python
+# Atualizar apenas se versão bate
+db.update(
+    'users',
+    {'id': 123},
+    {'name': 'João', 'version': 2},
+    where={'version': 1}
+)
+```
+
+**4. Distributed Lock**
+
+```python
+with redis_lock(f"lock:op:{operation_id}"):
+    if not processed(operation_id):
+        execute()
+```
+
+### 🔧 Por Tecnologia
+
+**HTTP APIs:**
+
+- Use header `Idempotency-Key`
+- Armazene resultado por 24h
+- Retorne mesmo status code + body
+
+**Mensageria (Kafka, SQS):**
+
+- Grava offset/message ID processado
+- Verifica antes de processar novamente
+- At-least-once delivery exige idempotência
+
+**Bancos de Dados:**
+
+- UPSERT (INSERT ON CONFLICT UPDATE)
+- Unique constraints
+- Optimistic locking (version field)
+
+### 💡 Best Practices
+
+✅ **Sempre**:
+
+1. Gerar idempotency key no cliente
+2. Usar UUID v4 (criptograficamente seguro)
+3. Armazenar resultado por tempo razoável (24h-7d)
+4. Retornar mesmo response para mesma key
+
+❌ **Nunca**:
+
+1. Confiar apenas em timestamps (clock skew!)
+2. Usar contador sequencial como key
+3. Ignorar idempotência em operações financeiras
+4. Esquecer de limpar keys antigas
 
 **Próximo**: [Retries e Timeouts](retries-and-timeouts.md)

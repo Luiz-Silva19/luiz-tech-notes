@@ -8,6 +8,8 @@ sidebar_label: Modelos de Consistência
 
 **Modelos de consistência** definem as regras sobre quando e como as atualizações feitas em um sistema distribuído se tornam visíveis para todos os participantes. Eles representam o **contrato** entre o sistema e o desenvolvedor sobre o comportamento esperado das leituras e escritas.
 
+**Analogia**: Como rede de bibliotecas sincroniza catálogos - Linearizability é todas verem EXATAMENTE o mesmo catálogo em tempo real (1 catálogo centralizado), Eventual Consistency é sincronizar eventualmente (à noite, pode ver diferenças temporariamente).
+
 ## Espectro de Consistência
 
 ```
@@ -339,5 +341,125 @@ Não existe "melhor" modelo de consistência - existe o modelo **mais apropriado
 - **<a href="https://www.microsoft.com/en-us/research/publication/replicated-data-consistency-explained-through-baseball/" target="_blank" rel="noopener noreferrer">Consistency Models in Distributed Systems</a>** - Doug Terry (Microsoft)
 
 ---
+
+- Se bibliotecário A avisa bibliotecário B que livro foi emprestado, B vê isso
+- Mas bibliotecário C (que não foi avisado) pode ainda ver como disponível
+- Preserva ordem de eventos relacionados
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Diferença entre consistência forte e eventual?"
+
+✅ **Resposta certa**:
+
+- **Forte (Linearizability)**: Todas as leituras veem última escrita, sempre
+- **Eventual**: Leituras podem ver dados antigos, mas eventualmente convergem
+- **Tradeoff**: Forte = latência alta, Eventual = disponível sempre
+
+**Pergunta**: "DynamoDB usa qual consistência?"
+
+✅ **Resposta**:
+
+- **Padrão**: Eventual consistency
+- **Opcional**: Strong consistency (via `ConsistentRead=True`)
+- **Tradeoff**: Eventual é 2x mais rápido e metade do custo
+
+### ⚠️ Pegadinhas Comuns
+
+**1. Linearizability ≠ Serializable**
+
+- **Linearizability**: Ordem global em OPERAÇÕES INDIVIDUAIS
+- **Serializability**: Ordem global em TRANSAÇÕES (múltiplas operações)
+
+Banco pode ter serializability sem linearizability!
+
+**2. Read-Your-Writes ≠ Strong Consistency**
+
+```
+Usuário A escreve X=1
+Usuário A lê X → vê 1 ✅ (read-your-writes)
+
+Usuário B lê X → pode ver 0 ainda ❌
+
+Não é strong consistency!
+```
+
+**3. Eventual Consistency tem limites**
+
+"Eventual" pode ser:
+
+- Milissegundos (Redis)
+- Segundos (DynamoDB)
+- Minutos (DNS)
+
+Pergunte: "Eventual em quanto tempo?"
+
+**4. Cassandra Tunable Consistency**
+
+```
+W + R > N → Strong consistency
+
+N=3, W=2, R=2 → 2+2=4 > 3 ✅ Strong
+N=3, W=1, R=1 → 1+1=2 < 3 ❌ Eventual
+```
+
+### 🎯 Por Sistema
+
+**Strong Consistency:**
+
+- Spanner (Google)
+- CockroachDB
+- etcd, ZooKeeper
+- PostgreSQL, MySQL
+
+**Eventual Consistency:**
+
+- DynamoDB (padrão)
+- Cassandra (padrão)
+- Riak
+- DNS
+
+**Configurável:**
+
+- DynamoDB: eventual vs strong
+- Cassandra: quorum tunável
+- Cosmos DB: 5 níveis de consistência
+
+### 📊 Escolhendo Modelo
+
+**Use Strong quando:**
+
+- ✅ Finanças (transferências)
+- ✅ Estoque de produtos
+- ✅ Reservas (assentos, quartos)
+- ✅ Dados críticos
+
+**Use Eventual quando:**
+
+- ✅ Feeds de redes sociais
+- ✅ Likes/visualizações
+- ✅ Recomendações
+- ✅ Analytics
+- ✅ Cache
+
+### 🛠️ CRDTs (Conflict-free Replicated Data Types)
+
+**Estruturas que convergem automaticamente**:
+
+```python
+# Counter CRDT
+Node A: increment() → {A: 1}
+Node B: increment() → {B: 1}
+
+Merge: {A: 1, B: 1} → Total = 2 ✅ Sem conflito!
+```
+
+Usado em:
+
+- Redis (tipos CRDT)
+- Riak
+- Conflict resolution automático
 
 **Próximo**: [Latência e Falhas](latency-and-failures.md)

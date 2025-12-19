@@ -6,6 +6,8 @@ sidebar_label: UDP
 
 **UDP** (User Datagram Protocol) é um protocolo de transporte sem conexão que prioriza velocidade e baixo overhead sobre confiabilidade.
 
+**Analogia**: Como gritar em uma multidão - você grita sem verificar se alguém está ouvindo, sem confirmação, podem ouvir fora de ordem, muito rápido. TCP é conversa telefônica ("Alô? Está me ouvindo?").
+
 ## Características Principais
 
 ✅ **Rápido**: Sem overhead de confiabilidade  
@@ -487,6 +489,33 @@ netstat -su | grep -i udp
 - 🔐 Transferência de arquivos
 - 🌐 APIs e serviços web
 - 💼 Transações financeiras
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **UDP características**: Sem conexão, não confiável, não ordenado, baixa latência
+- **Header UDP**: Apenas 8 bytes (vs 20+ bytes do TCP)
+- **Campos**: Source Port, Dest Port, Length, Checksum - só isso!
+- **Checksum**: Opcional em IPv4, obrigatório em IPv6
+- **UDP vs TCP**:
+  - UDP = streaming, gaming, DNS, VoIP
+  - TCP = web, email, transferência de arquivos
+- **Broadcast/Multicast**: UDP suporta, TCP não
+
+⚠️ **Pegadinhas Comuns:**
+
+- **UDP não é "quebrado"**: É design intencional - velocidade > confiabilidade
+- **DNS usa UDP**: Mas pode usar TCP se resposta > 512 bytes
+- **DHCP usa UDP**: Cliente ainda não tem IP, precisa broadcast
+- **QUIC (HTTP/3)**: Usa UDP como base mas adiciona confiabilidade na aplicação
+  - Google/Cloudflare/Facebook usam QUIC
+- **Fragmentação IP**: UDP com payload > MTU pode causar fragmentação (evitar)
+- **Firewall**: Stateless firewalls podem bloquear UDP response (sem tracking de "conexão")
+- **NTP (Network Time Protocol)**: Usa UDP porta 123 - precisa baixa latência
+- **Perda aceitável**: < 1% para rede saudável, 5-10% pode ser OK para VoIP
+
+**Dica de prova**: Se questão menciona "tempo real", "streaming", "baixa latência", "broadcasting" → provavelmente UDP
 
 ## Recursos
 

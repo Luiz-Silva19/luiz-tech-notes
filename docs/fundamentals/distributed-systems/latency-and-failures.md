@@ -8,6 +8,8 @@ sidebar_label: Latência e Falhas
 
 **Latência** é o tempo que leva para uma mensagem viajar de um ponto a outro na rede. Em sistemas distribuídos, latência é **inevitável** e tem impacto direto na performance.
 
+**Analogia**: Como entregar encomendas entre cidades - latência é a distância física (SP-Rio 50ms, SP-EUA 150ms, não dá pra quebrar física), falhas são acidentes na estrada (caminhão quebra, ponte fecha). Resiliência é ter plano B: retry tenta novamente, circuit breaker para se estrada sempre bloqueada, fallback usa rota alternativa.
+
 ### Componentes da Latência
 
 ```
@@ -435,5 +437,194 @@ Em sistemas distribuídos:
 - **<a href="https://github.com/alexei-led/pumba" target="_blank" rel="noopener noreferrer">Pumba</a>** - Chaos testing para Docker
 
 ---
+
+## Analogia
+
+**Como entregar encomendas entre cidades distantes**:
+
+**Latência é a distância física**:
+
+- São Paulo → Rio: 400km ≈ 50ms de latência de rede
+- São Paulo → EUA: 10.000km ≈ 150ms
+- **Não dá para quebrar a física!** Luz viaja a velocidade finita
+- Solução: CDN = armázem local (cache perto do usuário)
+
+**Falhas são acidentes na estrada**:
+
+- Caminhão quebra (servidor cai)
+- Ponte fecha (partição de rede)
+- Encomenda se perde (pacote dropado)
+
+**Resiliência é ter plano B**:
+
+- **Circuit Breaker**: Se estrada está sempre bloqueada, para de tentar por um tempo
+- **Retry**: Tenta entregar novamente, mas com intervalo (backoff)
+- **Bulkhead**: Separa frotas - se frota A quebra, frota B continua operando
+- **Fallback**: Se entrega rápida falha, usa entrega normal
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Como lidar com latência em sistemas distribuídos?"
+
+✅ **Resposta certa**:
+
+1. **Reduzir latência**:
+
+   - Cache (Redis, CDN)
+   - Replicação geográfica (servidores perto do usuário)
+   - Compressão de dados
+   - Keep-alive de conexões
+
+2. **Paralelizar operações**:
+
+   - Fan-out (chamar múltiplos serviços em paralelo)
+   - Usar P99 em vez de esperar o mais lento
+
+3. **Async quando possível**:
+   - Retornar antes de completar (eventual consistency)
+
+**Pergunta**: "O que é Circuit Breaker?"
+
+✅ **Resposta**:
+
+- "Padrão que previne chamadas repetidas a serviço falhando"
+- "Estados: Closed (normal), Open (bloqueado), Half-Open (testando)"
+- "Abre após X falhas consecutivas"
+- "Fecha após timeout se teste em Half-Open funcionar"
+
+### ⚠️ Pegadinhas Comuns
+
+**1. P99 ≠ Média**
+
+```
+Média: 100ms
+P99: 5000ms (5s!)
+
+1% dos usuários tem experiência HORRÍVEL
+Em 1M usuários = 10.000 afetados!
+```
+
+**Otimize P99, não média!**
+
+**2. Adicionar mais servidores nem sempre reduz latência**
+
+- Mais servidores → Mais throughput ✅
+- Mas latência de 1 requisição = mesma ❌
+
+Para reduzir latência:
+
+- Cache
+- Menos hops de rede
+- Algoritmos mais rápidos
+
+**3. Timeout muito curto = mais falhas**
+
+```
+Timeout: 100ms
+Serviço normalmente responde em 95ms
+
+P99 = 120ms → 1% das requisições falham!
+```
+
+**Timeout deve ser P99 + margem**
+
+**4. Cascata de Timeouts**
+
+```
+API Gateway: timeout 30s
+│
+└─ Service A: timeout 30s
+    │
+    └─ Service B: timeout 30s
+
+Total: 30s + 30s + 30s = 90s! ❌
+```
+
+**Timeouts devem DIMINUIR na cadeia**:
+
+```
+API Gateway: 10s
+Service A: 5s
+Service B: 2s
+```
+
+**5. Circuit Breaker sem Backoff = Thundering Herd**
+
+```
+Circuit abre às 10:00:00
+Timeout: 60s
+Às 10:01:00, TODOS os clientes tentam ao mesmo tempo!
+→ Sobrecarga
+```
+
+**Solução: Jitter no timeout**
+
+```python
+timeout = 60 + random.uniform(0, 10)  # 60-70s
+```
+
+### 🎯 Valores Típicos de Latência
+
+**Referencia para decorar:**
+
+```
+L1 cache:          0.5 ns
+RAM:               100 ns
+SSD:               16 µs
+HDD:               2 ms
+Rede (mesma AZ):   0.5 ms
+Rede (AZs dif):    2-5 ms
+Rede (regiões):    50-100 ms
+Rede (continente): 150-300 ms
+```
+
+### 🛠️ Padrões de Resiliência
+
+**1. Timeout:**
+
+- ✅ Sempre configure
+- ✅ Use valores realistas (P99 + margem)
+- ❌ Não use timeout infinito
+
+**2. Retry:**
+
+- ✅ Exponential backoff
+- ✅ Jitter para evitar thundering herd
+- ❌ Não retry em 4xx (erro de cliente)
+
+**3. Circuit Breaker:**
+
+- ✅ Fail fast quando serviço está down
+- ✅ Teste periodicamente (half-open)
+- ❌ Não abra após 1 erro (pode ser transitório)
+
+**4. Bulkhead:**
+
+- ✅ Isole recursos (thread pools)
+- ✅ Limite blast radius
+- ❌ Não compartilhe pool entre serviços críticos
+
+**5. Fallback:**
+
+- ✅ Retorne resultado degradado
+- ✅ Cache stale OK em emergência
+- ❌ Não esconda todos os erros (alerte!)
+
+### 📊 Monitoramento Essencial
+
+**Métricas:**
+
+- Latência: P50, P95, P99, P99.9
+- Taxa de erro: 4xx, 5xx
+- Circuit breaker: open/closed state
+- Retry rate
+
+**Alertas:**
+
+- P99 > threshold
+- Error rate > 1%
+- Circuit breaker open > 5min
 
 **Próximo**: [Tempo e Relógios](time-and-clocks.md)

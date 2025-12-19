@@ -6,6 +6,8 @@ sidebar_label: Portas e Sockets
 
 **Portas** e **Sockets** são conceitos fundamentais para comunicação em rede, permitindo que múltiplas aplicações compartilhem uma única interface de rede.
 
+**Analogia**: IP é o endereço do prédio, porta é o número do apartamento, socket é o endereço completo. Portas 0-1023 são apartamentos comerciais (requer autorização especial), efemeras são visitantes temporários.
+
 ## Portas
 
 ### O que são Portas?
@@ -617,6 +619,32 @@ nmap localhost
 # Capturar tráfego em porta
 tcpdump -i any port 80
 ```
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **Faixas de portas**:
+  - 0-1023 = Well-Known (requer root/admin)
+  - 1024-49151 = Registered (aplicações conhecidas)
+  - 49152-65535 = Dynamic/Ephemeral (clientes)
+- **Portas decorar**:
+  - 20/21 FTP, 22 SSH, 23 Telnet, 25 SMTP
+  - 53 DNS, 80 HTTP, 110 POP3, 143 IMAP, 443 HTTPS
+  - 3306 MySQL, 5432 PostgreSQL, 6379 Redis, 27017 MongoDB
+  - 3389 RDP (Windows Remote Desktop)
+- **TCP vs UDP porta**: Mesma porta pode ser usada por ambos (ex: DNS 53)
+- **Socket = IP + Porta + Protocolo**: Identifica conexão única
+
+⚠️ **Pegadinhas Comuns:**
+
+- **SMTP portas**: 25 (MTA↔MTA), 587 (cliente→servidor), 465 (SMTPS deprecated)
+- **DNS**: Usa UDP 53 normalmente, TCP 53 se resposta > 512 bytes
+- **FTP**: Porta 21 = controle, porta 20 = dados (active mode)
+- **Port Already in Use**: Erro comum - usar SO_REUSEADDR ou matar processo
+- **Porta 8080/8443**: Alternativas comuns para HTTP/HTTPS em dev (não requer root)
+- **TIME_WAIT**: Sockets ficam em TIME_WAIT por 2MSL após fechar (pode esgotar portas)
+- **0.0.0.0 vs 127.0.0.1**: 0.0.0.0 = todas interfaces, 127.0.0.1 = apenas localhost
 
 ## Recursos
 

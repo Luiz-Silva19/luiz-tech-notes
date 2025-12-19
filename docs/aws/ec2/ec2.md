@@ -10,6 +10,8 @@ O **Amazon EC2** (Elastic Compute Cloud) é o serviço de computação em nuvem 
 
 EC2 permite criar e gerenciar máquinas virtuais na nuvem AWS, oferecendo controle total sobre o sistema operacional, configurações de rede e armazenamento. É a base para a maioria das workloads na AWS.
 
+**Analogia**: Como alugar apartamentos flexíveis - On-Demand é Airbnb (paga por uso), Reserved é contrato anual (desconto de 75%), e Spot é leilão de última hora (90% off mas podem pedir de volta). Você escolhe o tamanho conforme necessidade.
+
 ## Principais Conceitos
 
 ### Instâncias
@@ -146,6 +148,38 @@ Configurações:
 - **High Performance Computing**: Simulações científicas
 - **Gaming**: Servidores de jogos
 - **Machine Learning**: Training e inferência de modelos
+
+## Pontos de Atenção
+
+### 🎯 Dicas para Certificação AWS
+
+💡 **Em provas de Solutions Architect:**
+
+- **Questão menciona "workload imprevisível" ou "tráfego variável"** → Resposta envolve Auto Scaling
+- **Menciona "custo otimizado" + "workload estável"** → Reserved Instances ou Savings Plans
+- **Menciona "tolerante a interrupções" + "custo mínimo"** → Spot Instances
+- **Menciona "processamento batch que pode parar e continuar"** → Spot Instances com checkpointing
+
+💡 **Diferenças críticas entre tipos:**
+
+- **T3/T4g (Burstable)**: Tem "créditos de CPU" - ideal para cargas que ficam baixas mas têm picos ocasionais
+- **Família C**: "C" de Compute - processamento intensivo (encoding de vídeo, análise científica)
+- **Família R**: "R" de RAM - bancos de dados em memória (Redis, SAP HANA)
+- **Família I**: "I" de IOPS - bancos que exigem muita leitura/escrita em disco
+
+💡 **Placement Groups:**
+
+- **Cluster**: Todos na mesma AZ, baixa latência - HPC, big data que precisa de rede rápida
+- **Spread**: Cada instância em hardware diferente - máxima disponibilidade
+- **Partition**: Grupos isolados - Hadoop, Cassandra, Kafka
+
+### ⚠️ Pegadinhas Comuns
+
+❌ **Instance Store vs EBS**: Instance Store perde dados ao **PARAR** a instância (não só terminar). Use apenas para cache/temporários  
+❌ **Reserved Instance não é reserva física**: Você compra desconto, não garante que terá capacidade disponível  
+❌ **Spot pode ser interrompido com 2 minutos de aviso**: Configure bem seu tratamento de interrupção  
+❌ **Mudar tipo de instância**: Precisa parar a instância primeiro (exceto Nitro com elastic resize)  
+❌ **Elastic IP parado custa dinheiro**: IP elástico não associado a instância running gera cobrança
 
 ## Recursos
 

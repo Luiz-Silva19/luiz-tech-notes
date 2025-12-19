@@ -8,7 +8,7 @@ sidebar_label: Kubernetes
 
 Sistema open-source para automatizar deploy, escala e gerenciamento de aplicações containerizadas. Orquestra containers em múltiplas máquinas.
 
-**Analogia**: Se Docker é como um container de navio, Kubernetes é o porto automatizado que decide onde colocar cada container, quantos precisa, e garante que tudo funcione 24/7.
+**Analogia**: Se Docker é o container de navio, Kubernetes é o porto automatizado que decide onde colocar cada container, quantos precisa, e garante que tudo funcione 24/7.
 
 ## Por que Kubernetes?
 
@@ -419,11 +419,195 @@ kubectl config view
 3. **Avançado**: HPA, StatefulSets, Operators
 4. **Expert**: Service Mesh, GitOps, Multi-cluster
 
+## Analogia
+
+**Kubernetes** é como um porto automatizado inteligente:
+
+- **Containers** = Contêineres de navio chegam
+- **Pods** = Grupos de contêineres que precisam ficar juntos na mesma área
+- **Nodes** = Áreas de armazenamento do porto (Worker Nodes)
+- **Scheduler** = Sistema automático que decide onde colocar cada contêiner
+- **Control Plane** = Torre de controle que gerencia tudo
+- **Deployment** = Ordem de serviço: "Preciso de 3 contêineres do tipo X, sempre disponíveis"
+- **Service** = Placa indicativa fixa - mesmo que os contêineres mudem de lugar, a placa aponta para eles
+- **Load Balancer** = Portão de entrada que distribui caminhões entre diferentes áreas
+
+Se um contêiner "quebra" (Pod falha), o porto automaticamente traz outro para substituir. Se o movimento aumenta (mais tráfego), o sistema automaticamente expande a área de armazenamento (auto-scaling).
+
+**Docker vs Kubernetes:**
+
+- **Docker** = Fabrica o contêiner
+- **Kubernetes** = Gerencia porto inteiro com milhares de contêineres
+
+## Pontos de Atenção
+
+💡 **Em provas e entrevistas:**
+
+**Conceitos fundamentais (muito cobrados!):**
+
+- **Pod**: Menor unidade deployável, grupo de 1+ containers
+- **Deployment**: Gerencia réplicas de Pods, rollout, rollback
+- **Service**: Expõe Pods na rede, load balancing, IP estável
+- **Namespace**: Isolamento virtual dentro do cluster
+- **ConfigMap**: Configurações separadas do código
+- **Secret**: Dados sensíveis (senhas, tokens)
+
+**Diferenças críticas:**
+
+- **Pod vs Container**: Pod pode ter múltiplos containers, compartilham rede/storage
+- **Deployment vs ReplicaSet**: Deployment gerencia ReplicaSets (abstração superior)
+- **Service vs Ingress**: Service expõe dentro do cluster, Ingress expõe externamente (HTTP/HTTPS)
+- **ConfigMap vs Secret**: ConfigMap = configs normais, Secret = dados sensíveis (base64)
+
+**Tipos de Service (muito importante!):**
+
+- **ClusterIP** (padrão): Interno ao cluster apenas
+- **NodePort**: Expõe em porta de cada Node
+- **LoadBalancer**: Provisiona cloud load balancer (AWS ELB, etc)
+- **ExternalName**: CNAME para serviço externo
+
+**Pegadinhas comuns:**
+
+- ❌ "Pod = Container" - FALSO! Pod pode ter múltiplos containers
+- ❌ "Kubernetes substitui Docker" - FALSO! K8s usa Docker (ou containerd/CRI-O)
+- ❌ "Service é load balancer" - PARCIAL! Service tipo LoadBalancer é
+- ❌ "Todos os recursos ficam em todos os Nodes" - FALSO! Scheduler distribui
+- ❌ "Dados em Pod são permanentes" - FALSO! Use PersistentVolumes
+
+**Quando usar Kubernetes:**
+
+- ✅ Microservices em produção
+- ✅ Necessidade de auto-scaling
+- ✅ High availability crítica
+- ✅ Múltiplos ambientes/regiões
+- ❌ Aplicação simples (Docker Compose suficiente)
+- ❌ Time sem expertise (curva de aprendizado íngreme)
+- ❌ Overhead não justificado
+
+**Arquitetura - Componentes (cobrado em certificações!):**
+
+**Control Plane (Master):**
+
+- **API Server**: Ponto de entrada (kubectl fala com ele)
+- **Scheduler**: Decide onde rodar Pods
+- **Controller Manager**: Mantém estado desejado
+- **etcd**: Banco de dados chave-valor (estado do cluster)
+
+**Worker Nodes:**
+
+- **Kubelet**: Agente que gerencia Pods no Node
+- **Kube-proxy**: Gerencia networking (regras iptables)
+- **Container Runtime**: Docker, containerd, CRI-O
+
+**Comandos essenciais:**
+
+```bash
+kubectl get pods              # Listar Pods
+kubectl get deployments       # Listar Deployments
+kubectl get services          # Listar Services
+kubectl describe pod <name>   # Detalhes do Pod
+kubectl logs <pod>            # Logs
+kubectl exec -it <pod> bash   # Entrar no Pod
+kubectl apply -f file.yaml    # Aplicar config
+kubectl delete -f file.yaml   # Deletar recursos
+kubectl scale deployment <name> --replicas=5  # Escalar
+kubectl rollout status deployment/<name>      # Status do deploy
+kubectl rollout undo deployment/<name>        # Rollback
+```
+
+**YAML - Estrutura básica:**
+
+```yaml
+apiVersion: apps/v1 # Versão da API
+kind: Deployment # Tipo de recurso
+metadata: # Metadados
+  name: nginx
+spec: # Especificação
+  replicas: 3
+  selector: # Como encontrar Pods
+    matchLabels:
+      app: nginx
+  template: # Template do Pod
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.21
+          ports:
+            - containerPort: 80
+```
+
+**Labels e Selectors (conceito-chave!):**
+
+- Labels: Tags nos recursos (app=nginx, env=prod)
+- Selectors: Como Services encontram Pods
+- Deployment usa selector para gerenciar Pods
+
+**Auto-scaling:**
+
+- **HPA** (Horizontal Pod Autoscaler): Aumenta/diminui Pods
+- **VPA** (Vertical Pod Autoscaler): Aumenta/diminui recursos do Pod
+- **Cluster Autoscaler**: Adiciona/remove Nodes
+
+**Health Checks (muito importante!):**
+
+- **Liveness Probe**: Pod está vivo? Se não, reinicia
+- **Readiness Probe**: Pod pronto para tráfego? Se não, remove do Service
+- **Startup Probe**: Para apps com inicialização lenta
+
+**Estratégias de deployment:**
+
+- **RollingUpdate** (padrão): Gradual, zero downtime
+- **Recreate**: Para tudo, depois sobe novo (downtime)
+
+**Erros comuns:**
+
+- ❌ ImagePullBackOff: Imagem não encontrada/sem permissão
+- ❌ CrashLoopBackOff: Pod crashando repetidamente
+- ❌ Pending: Não há recursos suficientes no cluster
+- ❌ Evicted: Node sem recursos (memória/disco)
+
+**Boas práticas:**
+
+- ✅ Sempre use namespaces para organizar
+- ✅ Defina resource limits (CPU/memory)
+- ✅ Use health checks (liveness/readiness)
+- ✅ Não use :latest em produção
+- ✅ ConfigMaps e Secrets para configs
+- ✅ Labels consistentes e significativos
+- ✅ Use Helm para gerenciar manifests complexos
+
+**Certificações Kubernetes:**
+
+- **CKA** (Certified Kubernetes Administrator): Admin de clusters
+- **CKAD** (Certified Kubernetes Application Developer): Deploy de apps
+- **CKS** (Certified Kubernetes Security): Segurança
+- ⚠️ Todas são HANDS-ON (prática no terminal)
+
+**Red flags em entrevistas:**
+
+- Não saber diferença entre Pod e Deployment
+- Não entender Service
+- Confundir K8s com Docker
+- Não conhecer comandos kubectl básicos
+- Não saber o que é namespace
+- Não entender labels e selectors
+
+**Cloud Kubernetes (certificações cloud):**
+
+- **AWS**: EKS (Elastic Kubernetes Service)
+- **Azure**: AKS (Azure Kubernetes Service)
+- **Google Cloud**: GKE (Google Kubernetes Engine)
+- Todos são managed Kubernetes (Control Plane gerenciado)
+
 ## Recursos
 
-- [Kubernetes Docs](https://kubernetes.io/docs/)
+- [Kubernetes Official Docs](https://kubernetes.io/docs/)
+- [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
 - [Play with Kubernetes](https://labs.play-with-k8s.com/)
-- [Kubernetes Patterns (livro)](https://www.oreilly.com/library/view/kubernetes-patterns/9781492050278/)
+- [Kubernetes Patterns (livro)](https://www.redhat.com/en/resources/oreilly-kubernetes-patterns-ebook)
 
 ## Próximos Passos
 

@@ -6,6 +6,8 @@ sidebar_label: Visão Geral
 
 Compreender os fundamentos de redes é essencial para qualquer profissional de tecnologia, especialmente em áreas como DevOps, Arquitetura de Software e Cloud Computing.
 
+**Analogia**: Networking é como o sistema de correios global - IP é o CEP, porta é o número do apartamento, DNS é o catálogo telefônico, TCP é carta registrada (garante entrega) e UDP é panfleto comum (rápido mas pode se perder).
+
 ## O que você vai aprender
 
 Esta seção cobre os conceitos fundamentais de networking que todo desenvolvedor e engenheiro de software deve conhecer:
@@ -113,6 +115,22 @@ speedtest-cli
 # Teste de largura de banda
 iperf3 -c servidor.com
 ```
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **OSI vs TCP/IP**: Saiba que OSI tem 7 camadas (conceitual), TCP/IP tem 4 (prático)
+- **Portas conhecidas**: 80 (HTTP), 443 (HTTPS), 22 (SSH), 53 (DNS) - decorar as principais
+- **TCP vs UDP**: TCP = confiável/lento, UDP = rápido/não-confiável
+- **Latência vs Throughput**: Latência = tempo de viagem, Throughput = quantidade
+- **IPv4 vs IPv6**: IPv4 = 32 bits (~4 bilhões), IPv6 = 128 bits (praticamente infinito)
+
+⚠️ **Pegadinhas Comuns:**
+
+- Confundir proxy (protege cliente) com reverse proxy (protege servidor)
+- Esquecer que DNS pode usar TCP E UDP (porta 53)
+- Achar que HTTPS é um protocolo separado (é HTTP + TLS)
 
 ## Próximos Passos
 

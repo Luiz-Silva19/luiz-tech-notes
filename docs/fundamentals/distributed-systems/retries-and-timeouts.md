@@ -24,6 +24,8 @@ Cliente → Request → [Rede] → Servidor
 - **Timeouts**: Decidir quando desistir de esperar
 - **Retries**: Tentar novamente em caso de falha
 
+**Analogia**: Como ligar pro telefone - timeout é "quantos toques antes de desistir" (30s sem atender = desiste), retry é "tentar ligar novamente" (1min, 2min, exponential backoff), jitter é não ligar exatamente mesmo horário (distribui carga), idempotência é pizzaria detectar que é mesmo pedido (senão virão 3 pizzas).
+
 ## Timeouts
 
 ### O que é Timeout?
@@ -761,5 +763,212 @@ except requests.exceptions.RequestException as e:
 - **<a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific" target="_blank" rel="noopener noreferrer">Microsoft Azure Retry Guidance</a>** - Service-specific guidance
 
 ---
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Como implementar retry com exponential backoff?"
+
+✅ **Resposta certa**:
+
+```python
+for attempt in range(max_attempts):
+    try:
+        return func()
+    except RetryableError:
+        if attempt == max_attempts - 1:
+            raise
+        delay = min(base_delay * (2 ** attempt), max_delay)
+        delay += random.uniform(0, delay * 0.1)  # Jitter
+        time.sleep(delay)
+```
+
+**Explicar**:
+
+- Exponential: 1s, 2s, 4s, 8s...
+- Cap no max_delay (evita delays absurdos)
+- Jitter: ±10% randomness para evitar thundering herd
+
+**Pergunta**: "Quando NÃO fazer retry?"
+
+✅ **Resposta**:
+
+- Erros 4xx (Bad Request, Unauthorized) → Cliente errou
+- Operações não-idempotentes sem idempotency key
+- Timeout já estourado no cliente (não adianta retry)
+
+### ⚠️ Pegadinhas Comuns
+
+**1. Fixed Delay = Thundering Herd**
+
+```python
+# ❌ RUIM: Fixed delay
+for attempt in range(5):
+    try:
+        return func()
+    except:
+        time.sleep(1)  # Todos tentam ao mesmo tempo!
+
+# ✅ BOM: Exponential backoff + jitter
+delay = random.uniform(0, min(2 ** attempt, 60))
+```
+
+**2. Timeout > Request Budget**
+
+```
+Usuário espera resposta em 3s
+Timeout configurado: 10s ❌
+
+Usuário já desistiu quando timeout bate!
+```
+
+**Timeout deve ser < tempo que usuário espera**
+
+**3. Retry Storm**
+
+```
+100 clientes fazem request
+Servidor retorna 503 (overload)
+100 clientes fazem retry
+    → 200 requests (original + retry)
+Servidor mais sobrecarregado
+    → 400 requests
+    → 800 requests
+CASCATA!
+```
+
+**Soluções**:
+
+- Circuit breaker
+- Rate limiting
+- Adaptive retry (reduzir attempts se error rate alto)
+
+**4. Retry sem Idempotência**
+
+```python
+# ❌ PERIGO
+def transfer_money(from_account, to_account, amount):
+    debit(from_account, amount)
+    credit(to_account, amount)
+
+retry(transfer_money)  # Pode transferir 2x!
+
+# ✅ SEGURO
+def transfer_money(transfer_id, from_account, to_account, amount):
+    if db.transfer_exists(transfer_id):
+        return  # Já processado
+
+    debit(from_account, amount)
+    credit(to_account, amount)
+    db.save_transfer(transfer_id)
+```
+
+**5. Timeout Cascade**
+
+```
+Cliente: timeout 30s
+  │
+  └─ Service A: timeout 30s
+      │
+      └─ Service B: timeout 30s
+
+Total: 90s potencialmente!
+```
+
+**Timeouts devem DIMINUIR**:
+
+```
+Cliente: 10s
+Service A: 5s
+Service B: 2s
+```
+
+### 🎯 Quando Usar Cada Estratégia
+
+**Exponential Backoff:**
+
+- ✅ Erros transitórios (503, network)
+- ✅ Rate limiting (429)
+- ❌ Erros permanentes (404, 401)
+
+**Linear Backoff:**
+
+- ✅ Quando sabe tempo de recovery (ex: 10s)
+- ❌ Maioria dos casos (use exponential)
+
+**Immediate Retry:**
+
+- ✅ Apenas para erros muito raros
+- ❌ Geralmente ruim (causa sobrecarga)
+
+**No Retry:**
+
+- ✅ Erros 4xx
+- ✅ Operações não-idempotentes
+- ✅ Deadline já passou
+
+### 🛠️ Timeouts por Camada
+
+**HTTP Client:**
+
+```python
+requests.get(url, timeout=(connect_timeout=3, read_timeout=10))
+```
+
+**Database:**
+
+```python
+connection = psycopg2.connect(
+    connect_timeout=5,
+    options='-c statement_timeout=30000'  # 30s
+)
+```
+
+**gRPC:**
+
+```python
+stub.GetUser(request, timeout=5)
+```
+
+**Message Queue:**
+
+```python
+message = queue.get(timeout=10)
+```
+
+### 📊 Valores Recomendados
+
+**Timeouts:**
+
+- Intra-datacenter: 1-5s
+- Inter-region: 10-30s
+- Background jobs: 60-300s
+
+**Retries:**
+
+- Max attempts: 3-5
+- Base delay: 1s
+- Max delay: 60s
+- Jitter: ±10-20%
+
+### 💡 Best Practices
+
+✅ **SEMPRE**:
+
+1. Configure timeout (nunca deixe infinito)
+2. Use exponential backoff com jitter
+3. Limite número de retries (max 5)
+4. Classifique erros (retryable vs não)
+5. Implemente idempotência
+6. Logue retries (monitoramento)
+
+❌ **NUNCA**:
+
+1. Retry infinito
+2. Fixed delay sem jitter
+3. Retry em 4xx
+4. Esquecer de timeout
+5. Retry sem idempotência em operações críticas
 
 **Próximo**: [Eleição de Líder](leader-election.md)

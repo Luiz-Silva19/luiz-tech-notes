@@ -8,6 +8,8 @@ sidebar_label: Tempo e Relógios
 
 Em sistemas distribuídos, **não existe um relógio global perfeito**. Esta é uma das diferenças fundamentais entre sistemas centralizados e distribuídos.
 
+**Analogia**: Como sincronizar relógios em diferentes cidades - Physical Clocks tentam sincronizar com hora oficial (NTP) mas sempre há diferença (não confiável para "qual aconteceu primeiro"), Logical Clocks dão número sequencial aos eventos (como protocolo de reunião - menor número = falou antes), Vector Clocks mantêm contador de TODAS as cidades e detectam concorrência.
+
 ### Por que isso importa?
 
 ```
@@ -458,5 +460,137 @@ Como tirar snapshot de sistema distribuído em execução?
 - **<a href="https://writings.quilt.org/2014/05/12/distributed-systems-and-the-end-of-the-api/" target="_blank" rel="noopener noreferrer">Distributed Systems and the End of the API</a>** - Chas Emerick
 
 ---
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Por que não usar timestamps para ordenar eventos?"
+
+✅ **Resposta certa**:
+
+- "Clock skew: relógios de servidores diferentes estão dessincronizados"
+- "Servidor A pode ter relógio 10ms atrasado"
+- "Evento em A com timestamp 10:00:00.100 pode ter acontecido DEPOIS de evento em B com timestamp 10:00:00.095"
+- "Solução: Usar relógios lógicos (Lamport, Vector)"
+
+**Pergunta**: "O que é happens-before?"
+
+✅ **Resposta**:
+
+- "Relação de causalidade entre eventos"
+- "A → B significa: A causou B (ou influenciou)"
+- "Se A enviar mensagem para B, então A → recebimento de B"
+
+### ⚠️ Pegadinhas Comuns
+
+**1. NTP não resolve clock skew completamente**
+
+```
+Precisão NTP: ~1-50ms na internet
+
+Não é suficiente para:
+❌ Ordenar eventos em microsegundos
+❌ Garantir ordem causal
+
+Bom para:
+✅ Timestamps de logging
+✅ Expiração de cache (segundos)
+```
+
+**2. Lamport Clocks não detectam concorrência**
+
+```
+Evento A: clock = 5
+Evento B: clock = 7
+
+Parece que A → B, mas podem ser concorrentes!
+Vector Clocks resolvem isso.
+```
+
+**3. Vector Clocks crescem com número de nós**
+
+```
+10 nós: Vector = [1, 2, 3, ..., 10] (10 inteiros)
+1000 nós: Vector com 1000 inteiros!
+
+Solução: Dotted Version Vectors, HLC
+```
+
+**4. Google Spanner TrueTime é especial**
+
+Usa:
+
+- GPS + relógios atômicos
+- Precisão: < 7ms
+- API: `TT.now()` retorna INTERVALO [earliest, latest]
+- Espera incerteza passar antes de commitar
+
+Não é trivial replicar!
+
+### 🎯 Algoritmos por Caso de Uso
+
+**Lamport Clocks:**
+
+- ✅ Simples, low overhead
+- ✅ Ordenar eventos totalmente
+- ❌ Não detecta concorrência
+- **Uso**: Logs distribuídos, debug
+
+**Vector Clocks:**
+
+- ✅ Detecta causalidade e concorrência
+- ❌ Cresce com número de nós
+- **Uso**: Riak, Dynamo, conflict resolution
+
+**Hybrid Logical Clocks (HLC):**
+
+- ✅ Combina tempo real + lógico
+- ✅ Não cresce com nós
+- ✅ Timestamps humanamente legíveis
+- **Uso**: CockroachDB, MongoDB
+
+**Physical Clocks (NTP):**
+
+- ✅ Hora do mundo real
+- ❌ Clock skew
+- **Uso**: Logging, TTLs, UI timestamps
+
+### 🛠️ Implementação Prática
+
+**Quando usar cada um:**
+
+```
+Precisa timestamp para usuário ver?
+→ Physical Clock (datetime.now())
+
+Precisa ordenar eventos distribuídos?
+→ Lamport Clock
+
+Precisa detectar conflitos?
+→ Vector Clock
+
+Precisa ordering + timestamps reais?
+→ Hybrid Logical Clock
+
+Precisa consistência externa?
+→ TrueTime (se for Google) ou Spanner
+```
+
+**Biblioteca recomendada:**
+
+- Python: `hlc` package
+- Go: `github.com/cockroachdb/cockroach/pkg/util/hlc`
+- Java: Implementações Cassandra
+
+### 📊 Comparação Rápida
+
+| Tipo     | Overhead   | Detecta Concorrência | Timestamp Real |
+| -------- | ---------- | -------------------- | -------------- |
+| Physical | Baixo      | ❌                   | ✅             |
+| Lamport  | Baixo      | ❌                   | ❌             |
+| Vector   | Alto       | ✅                   | ❌             |
+| HLC      | Baixo      | ✅                   | ✅             |
+| TrueTime | Muito Alto | ✅                   | ✅             |
 
 **Próximo**: [Idempotência](idempotency.md)

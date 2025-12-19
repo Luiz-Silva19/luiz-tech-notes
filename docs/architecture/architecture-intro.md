@@ -12,15 +12,15 @@ Arquitetura de Software é a organização fundamental de um sistema, seus compo
 
 ## Estilos Arquiteturais Principais
 
-### [Microsserviços](microservices/microservices-intro.md)
+### [Microsserviços](microservices-intro.md)
 
 Aplicação dividida em serviços pequenos e independentes.
 
-### [Monolítica](monolith/monolith-intro.md)
+### [Monolítica](monolith-intro.md)
 
 Aplicação única e coesa, toda deployada em conjunto.
 
-### [Event-Driven](event-driven/event-driven-intro.md)
+### [Event-Driven](event-driven-intro.md)
 
 Comunicação baseada em eventos assíncronos.
 
@@ -76,3 +76,167 @@ Elementos relacionados devem estar juntos.
 - Necessidade de isolar mudanças
 
 **Lembre-se**: Arquitetura prematura é tão perigosa quanto falta de arquitetura.
+
+## Pontos de Atenção
+
+### 💡 Dicas para Certificação
+
+**Palavras-chave em provas:**
+
+- **"Escalabilidade"** → Pense em arquitetura que permite escalar (micro ou modular)
+- **"Times independentes"** → Microsserviços
+- **"Simplicidade inicial"** → Monolito
+- **"Alta disponibilidade"** → Arquitetura distribuída
+- **"Baixo acoplamento"** → Microsserviços ou event-driven
+
+**Comparações comuns:**
+
+| Quando a questão menciona...                 | Provável resposta |
+| -------------------------------------------- | ----------------- |
+| "MVP", "startup", "time pequeno"             | Monolito          |
+| "Escalar independentemente", "times grandes" | Microsserviços    |
+| "Processamento assíncrono", "desacoplamento" | Event-Driven      |
+| "Aplicação web tradicional"                  | Three-Tier        |
+
+### ⚠️ Pegadinhas Comuns
+
+**1. Arquitetura ≠ Padrão de Código**
+
+❌ **Erro**: "MVC é uma arquitetura de software"  
+✅ **Correto**: "MVC é um padrão de design. Arquitetura define a estrutura geral do sistema (monolito, microserviços, etc.)"
+
+**2. Mais complexo ≠ Melhor**
+
+❌ **Erro**: "Sempre usar microsserviços para produção"  
+✅ **Correto**: "Escolher arquitetura baseada em contexto e necessidade real"
+
+**Regra de ouro:**
+
+- Time < 10 pessoas → Monolito (provavelmente)
+- Time > 50 pessoas → Microsserviços (provavelmente)
+- Entre 10-50 → Depende da complexidade do domínio
+
+**3. Confusão: Monolito vs Monolito Distribuído**
+
+**Monolito** (bom):
+
+- Tudo em um processo
+- Deploy atômico
+- Simples de entender
+
+**Monolito Distribuído** (anti-pattern):
+
+- Serviços separados mas fortemente acoplados
+- Precisa deployar tudo junto mesmo estando separado
+- ❌ **Pior dos dois mundos!**
+
+**4. Quando NÃO migrar de Monolito para Microserviços**
+
+❌ **Motivos ruins:**
+
+- "Está na moda"
+- "Grandes empresas usam"
+- "Parece legal no currículo"
+
+✅ **Motivos bons:**
+
+- Times não conseguem trabalhar de forma independente
+- Partes do sistema precisam escalar diferentemente
+- Deploy de tudo junto causa muito risco
+- Domínio é complexo o suficiente para justificar
+
+### 🎯 Decisões Arquiteturais - Framework
+
+Use este checklist ao escolher arquitetura:
+
+**1. Complexidade do Domínio**
+
+- Simples → Monolito
+- Complexo → Considere decomposição
+
+**2. Tamanho do Time**
+
+- Pequeno (< 10) → Monolito
+- Grande (> 30) → Microsserviços
+
+**3. Requisitos de Escala**
+
+- Uniforme → Monolito
+- Diferenciada → Microsserviços
+
+**4. Velocidade de Deploy**
+
+- Pouco frequente → Monolito OK
+- Múltiplos por dia → Microsserviços
+
+**5. Maturidade DevOps**
+
+- Baixa → Monolito
+- Alta → Microsserviços
+
+**6. Budget**
+
+- Limitado → Monolito (menos infraestrutura)
+- Flexível → Considere opções
+
+### 📊 Evolução Típica
+
+```
+Fase 1: MVP/Startup
+└─ Monolito bem estruturado
+
+Fase 2: Crescimento
+├─ Monolito modular
+└─ Identificar bounded contexts
+
+Fase 3: Escala
+├─ Extrair serviços críticos
+└─ Híbrido (monolito + alguns microserviços)
+
+Fase 4: Maturidade
+└─ Microsserviços completos (se necessário)
+```
+
+**Importante**: Muitas empresas de sucesso **nunca** saem da Fase 2 ou 3, e está tudo bem!
+
+### 🔍 Em Prova: Como Identificar a Resposta Certa
+
+**Cenário 1:**
+
+> "Startup com 5 desenvolvedores precisa lançar MVP em 3 meses"
+
+**Análise:**
+
+- Time pequeno ✓
+- Prazo curto ✓
+- MVP (simplicidade) ✓
+
+**Resposta:** Monolito
+
+---
+
+**Cenário 2:**
+
+> "E-commerce com 100 desenvolvedores em 15 times. Checkout precisa escalar 10x mais que catálogo"
+
+**Análise:**
+
+- Time grande ✓
+- Escalabilidade diferenciada ✓
+- Times independentes ✓
+
+**Resposta:** Microsserviços
+
+---
+
+**Cenário 3:**
+
+> "Sistema de notificações precisa processar milhões de eventos sem bloquear"
+
+**Análise:**
+
+- Processamento assíncrono ✓
+- Desacoplamento ✓
+- Alto volume ✓
+
+**Resposta:** Event-Driven Architecture

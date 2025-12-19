@@ -6,6 +6,8 @@ sidebar_label: Modelo OSI
 
 O **Modelo OSI** é um modelo de referência conceitual que padroniza as funções de comunicação em 7 camadas distintas. Embora a internet use o modelo TCP/IP na prática, o OSI é fundamental para entender networking.
 
+**Analogia**: Como enviar encomenda internacional - cada camada adiciona seu "envelope": Aplicação escreve a carta, Apresentação traduz/comprime, Transporte decide se é registrado (TCP) ou comum (UDP), Rede define rota, Enlace etiqueta local, Física é o caminhão. Ao chegar, remove camada por camada.
+
 ## As 7 Camadas
 
 ```
@@ -337,6 +339,29 @@ Ajuda a separar responsabilidades:
 Linguagem comum entre profissionais:
 
 - "Problema na camada 3" → Todos entendem que é roteamento/IP
+
+## Pontos de Atenção
+
+💡 **Certificações e Provas:**
+
+- **OSI vs TCP/IP**: OSI = 7 camadas (modelo teórico), TCP/IP = 4 camadas (modelo prático da Internet)
+- **Mnemônico**: "All People Seem To Need Data Processing" ou "Please Do Not Throw Sausage Pizza Away"
+  - Application, Presentation, Session, Transport, Network, Data Link, Physical
+- **Dispositivos por camada**:
+  - L1: Hub, Repetidor
+  - L2: Switch, Bridge (MAC address)
+  - L3: Roteador (IP address)
+  - L4-7: Firewall, Load Balancer
+- **Encapsulamento**: Dados → Segmento (L4) → Pacote (L3) → Frame (L2) → Bits (L1)
+
+⚠️ **Pegadinhas Comuns:**
+
+- **TCP/UDP estão na camada 4** (Transporte), não camada 3
+- **HTTP está na camada 7** (Aplicação), não camada 4
+- **IP está na camada 3** (Rede), não camada 4
+- **Switch L2 vs Switch L3**: L2 usa MAC, L3 usa IP (roteamento)
+- **Load Balancer L4 vs L7**: L4 = TCP/IP apenas, L7 = HTTP (vê conteúdo)
+- **SSL/TLS opera entre camadas 6 e 7** (híbrido)
 
 ## Recursos
 

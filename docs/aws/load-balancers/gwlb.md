@@ -8,6 +8,8 @@ sidebar_label: GLB
 
 O **Gateway Load Balancer (GLB)** é um balanceador de carga de **Camada 3 (Network Layer)** projetado para deploy, escala e gerenciamento de **appliances virtuais** como firewalls, IDS/IPS, e deep packet inspection.
 
+**Analogia**: Como um posto de inspeção transparente na entrada da cidade - todo tráfego passa por segurança (firewalls) antes de chegar ao destino. O tráfego nem percebe que foi inspecionado, tudo é transparente.
+
 ## Características Principais
 
 ### Para que serve?
@@ -285,6 +287,132 @@ aws cloudwatch get-metric-statistics \
     --period 300 \
     --statistics Average
 ```
+
+## Analogia
+
+**GLB como ponto de fiscalização obrigatório em rodovia:**
+
+Imagine uma rodovia onde **todos os carros** precisam passar obrigatoriamente por uma estação de fiscalização antes de chegar ao destino:
+
+```
+Cidades (Internet)
+      ↓
+┌─────────────────┐
+│   Pedágio/      │  ← GLB: direciona cada carro
+│   Fiscalização  │     para um posto de inspeção
+└─────────────────┘
+      ↓
+┌──────┬──────┬──────┐
+│Posto │Posto │Posto │  ← Appliances (Firewalls, IDS/IPS)
+│  1   │  2   │  3   │     Cada posto inspeciona o carro
+└──────┴──────┴──────┘
+      ↓
+┌─────────────────┐
+│   Destino       │  ← Suas aplicações (EC2, ECS)
+│   (Apps)        │     Só chegam carros aprovados
+└─────────────────┘
+```
+
+**Características importantes:**
+
+- **Transparente**: Os motoristas (clientes) nem sabem que passaram pela inspeção - tudo parece direto
+- **Obrigatório**: Não tem como desviar da fiscalização - 100% do tráfego é inspecionado
+- **Escalável**: Se aumenta o fluxo, abre mais postos de inspeção automaticamente
+- **Centralizado**: Todas as rodovias da região usam a mesma estação (multi-VPC)
+
+**Diferença dos outros balanceadores:**
+
+- **ALB/NLB**: São como guardas que direcionam tráfego entre destinos
+- **GLB**: É inspeção de segurança ANTES de deixar passar
+
+## Pontos de Atenção
+
+### 🎯 Dicas para Certificação AWS
+
+💡 **Palavras-chave que indicam GLB na prova:**
+
+- **"Third-party security appliance"** (Palo Alto, Fortinet, Check Point) → GLB
+- **"IDS/IPS"** (Intrusion Detection/Prevention System) → GLB
+- **"Deep Packet Inspection (DPI)"** → GLB
+- **"Centralized firewall inspection"** → GLB
+- **"Transparent bump-in-the-wire"** → GLB
+- **"GENEVE protocol"** → GLB
+- **"All traffic must pass through security appliance"** → GLB
+
+💡 **GLB vs Security Group vs WAF (confusão comum):**
+
+| Recurso            | Camada | Quando usar                                               |
+| ------------------ | ------ | --------------------------------------------------------- |
+| **Security Group** | 4-5    | Firewall stateful básico (IP/porta)                       |
+| **WAF**            | 7      | Proteção web (SQL injection, XSS) - apenas ALB/CloudFront |
+| **GLB**            | 3      | Inspeção profunda com appliances de terceiros             |
+
+- **SG**: "Bloquear porta 22 de internet" - regras simples
+- **WAF**: "Bloquear requisições com SQL injection" - padrões HTTP
+- **GLB**: "Inspecionar todo pacote com Palo Alto Firewall" - análise profunda
+
+💡 **Arquitetura típica em prova:**
+
+```
+Cenário: "Empresa precisa inspecionar TODO tráfego com firewall Palo Alto
+antes de chegar nas aplicações em múltiplas VPCs"
+
+Solução:
+1. Security VPC com GLB + Palo Alto appliances
+2. Application VPCs com suas apps
+3. VPC Endpoint conectando tudo
+4. Route tables direcionando tráfego para GLB endpoint
+```
+
+💡 **GLB usa GENEVE (porta 6081):**
+
+- Protocolo de encapsulamento de rede
+- Preserva informações originais do pacote (source IP, etc.)
+- Appliances precisam suportar GENEVE - nem todos suportam
+
+### ⚠️ Pegadinhas Comuns
+
+❌ **Não use GLB para balanceamento simples** - ALB/NLB são mais baratos e simples para isso  
+❌ **GLB não faz SSL/TLS termination** - ele passa pacotes transparentemente para appliances  
+❌ **Appliance precisa suportar GENEVE** - não funciona com qualquer firewall legacy  
+❌ **Custo alto comparado a ALB/NLB** - só use se realmente precisar de inspeção profunda  
+❌ **Health check nos appliances é crítico** - se appliance cair e GLB não detectar, todo tráfego cai  
+❌ **Não confundir com NAT Gateway** - NAT é para saída de internet privada, GLB é para inspeção  
+❌ **Multi-VPC setup é complexo** - requer VPC Endpoint Service + VPC Endpoints + route tables corretos  
+❌ **Latência adicional** - cada pacote precisa passar pelo appliance antes de chegar ao destino
+
+💡 **Casos que NÃO precisam de GLB:**
+
+- Firewall básico de porta/IP → Use Security Groups
+- Proteção contra SQL injection/XSS → Use WAF no ALB
+- Balancear tráfego HTTP → Use ALB
+- Balancear tráfego TCP com IP fixo → Use NLB
+
+💡 **Casos que precisam de GLB:**
+
+- ✅ Compliance exige DPI (Deep Packet Inspection)
+- ✅ Já usa Palo Alto/Fortinet on-premises e quer na AWS
+- ✅ IDS/IPS avançado (Suricata, Snort)
+- ✅ Inspeção centralizada para múltiplas VPCs/accounts
+- ✅ Traffic mirroring para análise forense
+
+### 💰 Custo (importante para decisão)
+
+**GLB é mais caro que ALB/NLB porque:**
+
+- Custo do GLB itself (~$0.0125/hora)
+- Custo dos appliances (EC2 instances - pode ser caríssimo)
+- GLCU (Gateway Load Balancer Capacity Units)
+- Data processing charges
+
+**Estimativa:** $500-2000+/mês (incluindo appliances)  
+**Comparação:** ALB ~$25-70/mês, NLB ~$20-30/mês
+
+**Só justifica se:**
+
+- Compliance mandatório
+- Segurança crítica (financeiro, saúde)
+- Já tem contrato enterprise com vendor (Palo Alto, etc.)
 
 ## Referências
 

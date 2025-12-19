@@ -8,6 +8,8 @@ sidebar_label: Consenso
 
 **Consenso** é o processo de fazer múltiplos nós em um sistema distribuído concordarem sobre um único valor ou estado, mesmo na presença de falhas.
 
+**Analogia**: Como um júri toma decisões - advogados apresentam vereditos (propostas), jurados votam, precisa maioria (quorum), todos aceitam veredito que maioria escolheu. Se jurados se separam em salas (partição), apenas grupo com maioria pode decidir.
+
 ## Por que Consenso é Importante?
 
 ### Problemas que Consenso Resolve
@@ -758,6 +760,77 @@ new_value = counter.increment()  # Linearizable!
 - **<a href="https://www.youtube.com/watch?v=YbZ3zDzDnrw" target="_blank" rel="noopener noreferrer">Raft Lecture by Diego Ongaro</a>** - Criador do Raft
 
 ---
+
+## Pontos de Atenção
+
+### 💡 Dicas para Entrevistas
+
+**Pergunta clássica**: "Diferença entre Paxos e Raft?"
+
+✅ **Resposta certa**:
+
+- "Raft foi criado para ser mais fácil de entender que Paxos"
+- "Raft tem líder forte, Paxos não necessariamente"
+- "Ambos garantem consenso com maioria de nós"
+- "Raft divide em: leader election + log replication"
+
+**Pergunta**: "O que é quorum?"
+
+✅ **Resposta**:
+
+- "Maioria dos nós: floor(N/2) + 1"
+- "Com 5 nós, quorum é 3"
+- "Garante que não há dois grupos com maioria simultânea"
+
+### ⚠️ Pegadinhas Comuns
+
+**1. Two-Phase Commit ≠ Consenso**
+
+- 2PC: Coordenador único (single point of failure)
+- Consenso: Sem ponto único de falha, usa quorum
+
+**2. Número par de nós não ajuda**
+
+```
+4 nós: Quorum = 3 (tolera 1 falha)
+5 nós: Quorum = 3 (tolera 2 falhas) ✅ Melhor!
+
+6 nós: Quorum = 4 (tolera 2 falhas)
+7 nós: Quorum = 4 (tolera 3 falhas) ✅ Melhor!
+```
+
+Use sempre número ímpar!
+
+**3. Consenso adiciona latência**
+
+Sem consenso: 1 RTT  
+Com consenso: 2-3 RTTs (prepare + accept)
+
+**4. FLP Impossibility**
+
+"É impossível garantir consenso em sistema distribuído assíncrono com 1 nó falhado"
+
+Na prática: Sistemas relaxam "assíncrono" usando timeouts.
+
+### 🎯 Para Certificações
+
+**etcd/Consul (Raft):**
+
+- Usado em Kubernetes, service discovery
+- Leader election + log replication
+- Strong consistency
+
+**ZooKeeper (Zab):**
+
+- Similar ao Raft
+- Coordination service
+- Configuration management
+
+**Quando NÃO usar consenso:**
+
+- Latência é crítica (adiciona 2-3x latência)
+- Eventual consistency é aceitável
+- Pode usar banco de dados centralizado simples
 
 🎉 **Parabéns!** Você completou a seção de **Sistemas Distribuídos**!
 

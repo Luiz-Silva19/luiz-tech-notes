@@ -10,6 +10,8 @@ O **Amazon EBS** (Elastic Block Store) é o serviço de armazenamento em bloco p
 
 EBS fornece volumes de armazenamento que funcionam como discos rígidos virtuais anexados às instâncias EC2. Os dados persistem independentemente da vida útil da instância.
 
+**Analogia**: Como diferentes HDs/SSDs externos - gp3 é o SSD padrão rápido e confiável, io2 é SSD enterprise super rápido para bancos críticos, st1 é HD grande para big data, e sc1 é HD barato para arquivo. Você pode trocar de tipo sem perder dados.
+
 ## Tipos de Volume EBS
 
 ### SSD de Propósito Geral (gp3, gp2)
@@ -193,6 +195,47 @@ EBS fornece volumes de armazenamento que funcionam como discos rígidos virtuais
 - Storage: $0.08/GB/mês
 - IOPS: $0.005 por IOPS acima de 3.000
 - Throughput: $0.04 por MB/s acima de 125
+
+## Pontos de Atenção
+
+### 🎯 Dicas para Certificação AWS
+
+💡 **Em provas, palavras-chave para identificar tipo de volume:**
+
+- **"Banco de dados de produção crítico"** → io2 ou io2 Block Express
+- **"Boot volume"** ou **"aplicação web típica"** → gp3
+- **"Big data"** ou **"data warehouse"** → st1 (HDD throughput)
+- **"Arquivamento"** ou **"acesso infrequente"** → sc1 (HDD cold)
+- **"IOPS consistente e previsível"** → io2 (não gp3, que tem burst)
+
+💡 **gp2 vs gp3 (pergunta comum):**
+
+- **gp2**: IOPS cresce com o tamanho (3 IOPS/GB). Para ter 10.000 IOPS precisa de volume de ~3.333 GB
+- **gp3**: IOPS e tamanho são **independentes**. Você pode ter volume de 100 GB com 10.000 IOPS configurados
+- **Resultado**: gp3 é quase sempre mais barato e melhor custo-benefício
+
+💡 **Snapshots:**
+
+- São **incrementais** - apenas blocos alterados são salvos
+- Podem ser copiados entre **regiões** (útil para DR)
+- Podem criar AMI diretamente do snapshot do root volume
+- Deletar snapshot intermediário não afeta outros snapshots (AWS reorganiza)
+
+💡 **Multi-Attach (io2 apenas):**
+
+- Permite anexar um volume a múltiplas instâncias **na mesma AZ**
+- ⚠️ Requer file system cluster-aware (GFS2, OCFS2) - não funciona com ext4/xfs normais
+- Questões de prova podem tentar confundir com EFS
+
+### ⚠️ Pegadinhas Comuns
+
+❌ **HDD (st1/sc1) NÃO pode ser boot volume** - apenas SSD (gp2/gp3/io1/io2)  
+❌ **EBS está na mesma AZ da instância** - não pode anexar volume us-east-1a em instância us-east-1b  
+❌ **Modificação de volume tem cooldown** - só pode modificar a cada 6 horas  
+❌ **gp2 pequeno tem burst limitado** - volume de 10 GB tem apenas 100 IOPS base, usa créditos para burst  
+❌ **Snapshot custam** - não esqueça de deletar snapshots antigos de testes  
+❌ **Encryption não pode ser desabilitada** - uma vez encrypted, sempre encrypted (pode copiar para não-encrypted)  
+❌ **Volume desanexado continua cobrando** - se criou volume de 1 TB para teste e esqueceu anexado, paga $80/mês à toa
 
 ## Recursos
 
