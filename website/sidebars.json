@@ -47,7 +47,8 @@
       "fundamentals/networking/networking-http",
       "fundamentals/networking/networking-https",
       "fundamentals/networking/networking-tls",
-      "fundamentals/networking/networking-ports-sockets"
+      "fundamentals/networking/networking-ports-sockets",
+      "fundamentals/networking/networking-websockets"
     ]
   }
 }
