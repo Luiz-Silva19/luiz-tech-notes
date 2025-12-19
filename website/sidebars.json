@@ -37,5 +37,17 @@
       "aws/load-balancers/aws-nlb",
       "aws/load-balancers/aws-glb"
     ]
+  },
+  "fundamentals-sidebar": {
+    "Networking": [
+      "fundamentals/networking/networking-intro",
+      "fundamentals/networking/networking-osi-model",
+      "fundamentals/networking/networking-tcp",
+      "fundamentals/networking/networking-udp",
+      "fundamentals/networking/networking-http",
+      "fundamentals/networking/networking-https",
+      "fundamentals/networking/networking-tls",
+      "fundamentals/networking/networking-ports-sockets"
+    ]
   }
 }
