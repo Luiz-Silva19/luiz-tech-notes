@@ -49,6 +49,18 @@
       "fundamentals/networking/networking-tls",
       "fundamentals/networking/networking-ports-sockets",
       "fundamentals/networking/networking-websockets"
+    ],
+    "Distributed Systems": [
+      "fundamentals/distributed-systems/distributed-systems-intro",
+      "fundamentals/distributed-systems/distributed-systems-what-is",
+      "fundamentals/distributed-systems/distributed-systems-cap",
+      "fundamentals/distributed-systems/distributed-systems-consistency-models",
+      "fundamentals/distributed-systems/distributed-systems-latency-failures",
+      "fundamentals/distributed-systems/distributed-systems-time-clocks",
+      "fundamentals/distributed-systems/distributed-systems-idempotency",
+      "fundamentals/distributed-systems/distributed-systems-retries-timeouts",
+      "fundamentals/distributed-systems/distributed-systems-leader-election",
+      "fundamentals/distributed-systems/distributed-systems-consensus"
     ]
   }
 }
