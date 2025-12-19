@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+const React = require("react");
 
 class Footer extends React.Component {
   docUrl(doc) {
     const baseUrl = this.props.config.baseUrl;
     const docsUrl = this.props.config.docsUrl;
-    const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
+    const docsPart = `${docsUrl ? `${docsUrl}/` : ""}`;
     return `${baseUrl}${docsPart}${doc}`;
   }
 
@@ -30,83 +30,45 @@ class Footer extends React.Component {
             )}
           </a>
           <div>
-            <h5>Docs</h5>
-            <a href={this.docUrl('doc1.html')}>
-              Getting Started (or other categories)
+            <h5>Documentação</h5>
+            <a href={this.docUrl("intro/welcome")}>Introdução</a>
+            <a href={this.docUrl("aws/aws-intro")}>AWS</a>
+            <a href={this.docUrl("architecture/architecture-intro")}>
+              Arquitetura
             </a>
-            <a href={this.docUrl('doc2.html')}>Guides (or other categories)</a>
-            <a href={this.docUrl('doc3.html')}>
-              API Reference (or other categories)
-            </a>
+            <a href={this.docUrl("devops/devops-intro")}>DevOps</a>
+            <a href={this.docUrl("backend/backend-intro")}>Backend</a>
           </div>
           <div>
-            <h5>Community</h5>
-            <a href={`${this.props.config.baseUrl}users`}>User Showcase</a>
-            <a
-              href="https://stackoverflow.com/questions/tagged/"
-              target="_blank"
-              rel="noreferrer noopener">
-              Stack Overflow
-            </a>
-            <a href="https://discordapp.com/">Project Chat</a>
-            <a
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noreferrer noopener">
-              Twitter
-            </a>
+            <h5>AWS</h5>
+            <a href={this.docUrl("aws/ec2/aws-ec2")}>EC2</a>
+            <a href={this.docUrl("aws/ec2/aws-ebs")}>EBS</a>
+            <a href={this.docUrl("aws/load-balancers/aws-alb")}>ALB</a>
+            <a href={this.docUrl("aws/load-balancers/aws-nlb")}>NLB</a>
           </div>
           <div>
-            <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
-            <a href="https://github.com/">GitHub</a>
+            <h5>Sobre</h5>
+            <a
+              href="https://github.com/Luiz-Silva19/luiz-tech-notes"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              GitHub
+            </a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
               data-icon="octicon-star"
-              data-count-href="/facebook/docusaurus/stargazers"
+              data-count-href="/Luiz-Silva19/luiz-tech-notes/stargazers"
               data-show-count="true"
               data-count-aria-label="# stargazers on GitHub"
-              aria-label="Star this project on GitHub">
+              aria-label="Star this project on GitHub"
+            >
               Star
             </a>
-            {this.props.config.twitterUsername && (
-              <div className="social">
-                <a
-                  href={`https://twitter.com/${this.props.config.twitterUsername}`}
-                  className="twitter-follow-button">
-                  Follow @{this.props.config.twitterUsername}
-                </a>
-              </div>
-            )}
-            {this.props.config.facebookAppId && (
-              <div className="social">
-                <div
-                  className="fb-like"
-                  data-href={this.props.config.url}
-                  data-colorscheme="dark"
-                  data-layout="standard"
-                  data-share="true"
-                  data-width="225"
-                  data-show-faces="false"
-                />
-              </div>
-            )}
           </div>
         </section>
 
-        <a
-          href="https://opensource.facebook.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-          className="fbOpenSource">
-          <img
-            src={`${this.props.config.baseUrl}img/oss_logo.png`}
-            alt="Facebook Open Source"
-            width="170"
-            height="45"
-          />
-        </a>
         <section className="copyright">{this.props.config.copyright}</section>
       </footer>
     );

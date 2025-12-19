@@ -1,13 +1,9 @@
 {
   "docs": {
     "Introdução": [
-      "intro/welcome"
-    ],
-    "Cloud": [
-      "cloud/cloud-intro",
-      "cloud/aws/aws-intro",
-      "cloud/azure/azure-intro",
-      "cloud/gcp/gcp-intro"
+      "intro/welcome",
+      "intro/diagramas",
+      "intro/estrutura-docs"
     ],
     "Arquitetura": [
       "architecture/architecture-intro",
@@ -26,6 +22,20 @@
       "backend/rest/rest-intro",
       "backend/messaging/messaging-intro",
       "backend/databases/databases-intro"
+    ]
+  },
+  "aws-sidebar": {
+    "Visão Geral": [
+      "aws/aws-intro"
+    ],
+    "Computação": [
+      "aws/ec2/aws-ec2",
+      "aws/ec2/aws-ebs"
+    ],
+    "Load Balancers": [
+      "aws/load-balancers/aws-alb",
+      "aws/load-balancers/aws-nlb",
+      "aws/load-balancers/aws-glb"
     ]
   }
 }
