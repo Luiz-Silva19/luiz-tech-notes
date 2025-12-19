@@ -4,8 +4,6 @@ title: Arquitetura de Software
 sidebar_label: Visão Geral
 ---
 
-# 🏗️ Arquitetura de Software
-
 ## O que é Arquitetura de Software?
 
 Arquitetura de Software é a organização fundamental de um sistema, seus componentes, relacionamentos e os princípios que guiam seu design e evolução.

@@ -4,8 +4,6 @@ title: Mensageria e Filas
 sidebar_label: Mensageria
 ---
 
-# 📨 Mensageria e Filas
-
 ## O que é Mensageria?
 
 Sistema de comunicação assíncrona entre aplicações usando mensagens. Mensagens são colocadas em filas e processadas independentemente, desacoplando produtor e consumidor.

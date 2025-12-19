@@ -4,8 +4,6 @@ title: CI/CD - Integração e Entrega Contínuas
 sidebar_label: CI/CD
 ---
 
-# 🔄 CI/CD - Continuous Integration / Continuous Delivery
-
 ## O que é CI/CD?
 
 **CI (Continuous Integration)**: Prática de integrar código ao repositório principal frequentemente, com testes automáticos.

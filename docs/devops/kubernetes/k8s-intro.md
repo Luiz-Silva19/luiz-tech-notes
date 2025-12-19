@@ -4,8 +4,6 @@ title: Kubernetes (K8s)
 sidebar_label: Kubernetes
 ---
 
-# ☸️ Kubernetes (K8s)
-
 ## O que é Kubernetes?
 
 Sistema open-source para automatizar deploy, escala e gerenciamento de aplicações containerizadas. Orquestra containers em múltiplas máquinas.

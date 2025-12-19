@@ -4,8 +4,6 @@ title: Cloud Computing
 sidebar_label: Visão Geral
 ---
 
-# ☁️ Cloud Computing
-
 ## O que é Cloud Computing?
 
 Cloud Computing (Computação em Nuvem) é a entrega de recursos de computação pela internet sob demanda. Em vez de comprar e manter servidores físicos, você aluga recursos conforme necessário.

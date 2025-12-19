@@ -4,8 +4,6 @@ title: Backend & Integrações
 sidebar_label: Visão Geral
 ---
 
-# 💻 Backend & Integrações
-
 ## O que é Backend?
 
 Backend é a parte do sistema que roda no servidor, lidando com lógica de negócio, processamento de dados, autenticação, e comunicação com bancos de dados. É o "cérebro" da aplicação.

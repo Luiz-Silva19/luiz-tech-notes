@@ -4,8 +4,6 @@ title: Microsoft Azure
 sidebar_label: Azure
 ---
 
-# Microsoft Azure
-
 ## Visão Geral
 
 Azure é o provedor de nuvem da Microsoft, com forte integração ao ecossistema Windows e ferramentas enterprise. Segunda maior plataforma de nuvem do mundo.

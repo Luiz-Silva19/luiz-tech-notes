@@ -4,8 +4,6 @@ title: Arquitetura de Microsserviços
 sidebar_label: Microsserviços
 ---
 
-# Microsserviços
-
 ## O que são Microsserviços?
 
 Estilo arquitetural onde a aplicação é um conjunto de serviços pequenos, independentes e deployáveis separadamente. Cada serviço roda em seu próprio processo e se comunica via APIs leves (HTTP/gRPC).

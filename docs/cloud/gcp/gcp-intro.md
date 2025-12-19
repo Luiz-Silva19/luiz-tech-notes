@@ -4,8 +4,6 @@ title: Google Cloud Platform (GCP)
 sidebar_label: GCP
 ---
 
-# Google Cloud Platform (GCP)
-
 ## Visão Geral
 
 GCP é o provedor de nuvem do Google, conhecido por serviços de machine learning, big data e infraestrutura de alta performance. Terceiro maior provedor de nuvem.

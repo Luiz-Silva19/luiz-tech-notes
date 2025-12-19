@@ -4,8 +4,6 @@ title: Arquitetura Orientada a Eventos
 sidebar_label: Event-Driven
 ---
 
-# Arquitetura Orientada a Eventos (Event-Driven)
-
 ## O que é Event-Driven Architecture?
 
 Padrão arquitetural onde componentes se comunicam através de eventos. Produtores emitem eventos quando algo acontece, e consumidores reagem a esses eventos de forma assíncrona e desacoplada.

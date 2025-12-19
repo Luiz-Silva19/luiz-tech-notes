@@ -4,8 +4,6 @@ title: APIs REST
 sidebar_label: REST APIs
 ---
 
-# 🌐 APIs REST
-
 ## O que é REST?
 
 REST (Representational State Transfer) é um estilo arquitetural para criar APIs web usando HTTP. Define um conjunto de princípios para comunicação entre cliente e servidor.

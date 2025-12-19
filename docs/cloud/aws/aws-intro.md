@@ -4,8 +4,6 @@ title: Amazon Web Services (AWS)
 sidebar_label: AWS
 ---
 
-# Amazon Web Services (AWS)
-
 ## Visão Geral
 
 AWS é o provedor de nuvem mais maduro e com maior market share. Oferece mais de 200 serviços e está presente em múltiplas regiões globalmente.

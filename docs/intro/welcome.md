@@ -4,8 +4,6 @@ title: Bem-vindo ao Luiz Tech Notes
 sidebar_label: Início
 ---
 
-# 👋 Bem-vindo ao Luiz Tech Notes
-
 Este é meu espaço pessoal de documentação técnica, onde organizo conhecimentos, anotações e referências sobre tecnologia, arquitetura de software e infraestrutura.
 
 ## 🎯 Objetivo

@@ -3,25 +3,25 @@
     "Introdução": [
       "intro/welcome"
     ],
-    "☁️ Cloud Computing": [
+    "Cloud": [
       "cloud/cloud-intro",
       "cloud/aws/aws-intro",
       "cloud/azure/azure-intro",
       "cloud/gcp/gcp-intro"
     ],
-    "🏗️ Arquitetura de Software": [
+    "Arquitetura": [
       "architecture/architecture-intro",
       "architecture/microservices/microservices-intro",
       "architecture/monolith/monolith-intro",
       "architecture/event-driven/event-driven-intro"
     ],
-    "⚙️ DevOps & Infraestrutura": [
+    "DevOps": [
       "devops/devops-intro",
       "devops/docker/docker-intro",
       "devops/kubernetes/k8s-intro",
       "devops/ci-cd/cicd-intro"
     ],
-    "💻 Backend & Integrações": [
+    "Backend": [
       "backend/backend-intro",
       "backend/rest/rest-intro",
       "backend/messaging/messaging-intro",

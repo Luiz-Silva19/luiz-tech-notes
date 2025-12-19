@@ -4,8 +4,6 @@ title: DevOps & Infraestrutura
 sidebar_label: Visão Geral
 ---
 
-# ⚙️ DevOps & Infraestrutura
-
 ## O que é DevOps?
 
 DevOps é a união de práticas, ferramentas e filosofia cultural que aumenta a capacidade de uma organização entregar aplicações e serviços rapidamente. Quebra barreiras entre desenvolvimento (Dev) e operações (Ops).

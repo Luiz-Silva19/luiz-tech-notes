@@ -4,8 +4,6 @@ title: Docker
 sidebar_label: Docker
 ---
 
-# 🐳 Docker
-
 ## O que é Docker?
 
 Plataforma para desenvolver, enviar e executar aplicações em containers. Containers empacotam código e dependências juntos, garantindo que a aplicação rode da mesma forma em qualquer ambiente.

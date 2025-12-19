@@ -4,8 +4,6 @@ title: Arquitetura Monolítica
 sidebar_label: Monolítica
 ---
 
-# Arquitetura Monolítica
-
 ## O que é um Monolito?
 
 Aplicação construída como uma unidade única e coesa. Todo o código é deployado junto, roda no mesmo processo e compartilha os mesmos recursos (banco de dados, memória, etc.).

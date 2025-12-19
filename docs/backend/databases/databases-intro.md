@@ -4,8 +4,6 @@ title: Bancos de Dados
 sidebar_label: Bancos de Dados
 ---
 
-# 🗄️ Bancos de Dados
-
 ## O que são Bancos de Dados?
 
 Sistemas organizados para armazenar, gerenciar e recuperar dados de forma eficiente e confiável. Fundamentais para persistir informação em aplicações.
