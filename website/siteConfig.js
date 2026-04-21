@@ -20,11 +20,14 @@ const users = [
   },
 ];
 
+const baseUrl =
+  process.env.NODE_ENV === "development" ? "/" : "/luiz-tech-notes/";
+
 const siteConfig = {
   title: "Luiz Tech Notes", // Title for your website.
   tagline: "Documentação técnica sobre Cloud, Arquitetura, DevOps e Backend",
   url: "https://Luiz-Silva19.github.io", // Your website URL
-  baseUrl: process.env.NODE_ENV === "development" ? "/" : "/luiz-tech-notes/", // Base URL for your project */
+  baseUrl, // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
@@ -86,9 +89,9 @@ const siteConfig = {
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: [
-    "/js/mathjax-config.js",
+    `${baseUrl}js/mathjax-config.js`,
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js",
-    "/js/mathjax-rerender.js",
+    `${baseUrl}js/mathjax-rerender.js`,
     "https://buttons.github.io/buttons.js",
   ],
 
