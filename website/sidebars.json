@@ -24,6 +24,17 @@
       "backend/databases/databases-intro"
     ]
   },
+  "statistics-sidebar": {
+    "Visão Geral": [
+      "statistics/statistics-intro"
+    ],
+    "Probabilidade": [
+      "statistics/probabilidade/probabilidade-classica"
+    ],
+    "Amostragem": [
+      "statistics/amostragem/amostragem-intro"
+    ]
+  },
   "aws-sidebar": {
     "Visão Geral": [
       "aws/aws-intro"

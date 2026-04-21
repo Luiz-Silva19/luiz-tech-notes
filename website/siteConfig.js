@@ -40,6 +40,11 @@ const siteConfig = {
   headerLinks: [
     { doc: "intro/welcome", label: "Documentação" },
     { doc: "fundamentals/networking/networking-intro", label: "Fundamentals" },
+    {
+      doc: "statistics/statistics-intro",
+      docsPart: "statistics",
+      label: "Estatistica",
+    },
     { doc: "aws/aws-intro", label: "AWS" },
   ],
 
@@ -80,7 +85,11 @@ const siteConfig = {
   },
 
   // Add custom scripts here that would be placed in <script> tags.
-  scripts: ["https://buttons.github.io/buttons.js"],
+  scripts: [
+    "/js/mathjax-config.js",
+    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js",
+    "https://buttons.github.io/buttons.js",
+  ],
 
   // On page navigation for the current documentation page.
   onPageNav: "separate",
