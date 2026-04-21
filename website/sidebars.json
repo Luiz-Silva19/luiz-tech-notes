@@ -29,7 +29,9 @@
       "statistics/statistics-intro"
     ],
     "Probabilidade": [
-      "statistics/probabilidade/probabilidade-classica"
+      "statistics/probabilidade/probabilidade-classica",
+      "statistics/probabilidade/probabilidade-condicional",
+      "statistics/probabilidade/regra-do-produto"
     ],
     "Amostragem": [
       "statistics/amostragem/amostragem-intro"
