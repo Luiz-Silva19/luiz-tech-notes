@@ -48,13 +48,15 @@ Usado quando escolhemos apenas parte dos elementos e a ordem faz diferença.
 Fórmula:
 
 $$
-A_{n,p} = \frac{n!}{(n-p)!}
+A_{p}^{n} = \frac{n!}{(n-p)!}
 $$
+
+Alguns materiais escrevem a mesma ideia como $A_{n,p}$. As duas notações representam o mesmo cálculo: escolher $p$ elementos dentre $n$, considerando a ordem.
 
 Exemplo: quantas maneiras existem de definir ouro, prata e bronze entre 10 atletas?
 
 $$
-A_{10,3} = \frac{10!}{7!} = 10 \cdot 9 \cdot 8 = 720
+A_{3}^{10} = \frac{10!}{7!} = 10 \cdot 9 \cdot 8 = 720
 $$
 
 ### Combinação
@@ -64,13 +66,15 @@ Usada quando escolhemos apenas parte dos elementos e a ordem não faz diferença
 Fórmula:
 
 $$
-C_{n,p} = \frac{n!}{p!(n-p)!}
+C_{p}^{n} = \frac{n!}{p!(n-p)!}
 $$
+
+Alguns materiais escrevem a mesma ideia como $C_{n,p}$. As duas notações representam o mesmo cálculo: escolher $p$ elementos dentre $n$, sem considerar a ordem.
 
 Exemplo: quantas maneiras existem de formar uma equipe de 3 pessoas a partir de 10 candidatos?
 
 $$
-C_{10,3} = \frac{10!}{3!7!} = 120
+C_{3}^{10} = \frac{10!}{3!7!} = 120
 $$
 
 Resumo prático:
@@ -98,7 +102,7 @@ Imagine um processo seletivo com 8 candidatos.
 Aqui a ordem importa, porque cada cargo é diferente.
 
 $$
-A_{8,3} = \frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336
+A_{3}^{8} = \frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336
 $$
 
 ### Caso 2: escolher 3 pessoas para um comitê
@@ -106,7 +110,7 @@ $$
 Aqui a ordem não importa, porque o grupo final é o que interessa.
 
 $$
-C_{8,3} = \frac{8!}{3!5!} = 56
+C_{3}^{8} = \frac{8!}{3!5!} = 56
 $$
 
 Em Python:
@@ -121,8 +125,8 @@ arranjo = math.factorial(n) // math.factorial(n - p)
 combinacao = math.factorial(n) // (math.factorial(p) * math.factorial(n - p))
 permutacao = math.factorial(4)
 
-print(f"Arranjo A(8,3): {arranjo}")
-print(f"Combinação C(8,3): {combinacao}")
+print(f"Arranjo A^8_3: {arranjo}")
+print(f"Combinação C^8_3: {combinacao}")
 print(f"Permutação P(4): {permutacao}")
 ```
 
