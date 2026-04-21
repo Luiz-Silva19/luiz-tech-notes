@@ -44,7 +44,7 @@ $$
 P(\text{cara}) = \frac{1}{2}
 $$
 
-## Analogia Intuitiva (OBRIGATORIA)
+## Analogia Intuitiva
 
 Pense em uma roleta de estacionamento com vagas identicas e sorteadas de forma justa: cada vaga tem o mesmo peso no sorteio. Para saber a chance de pegar uma vaga especifica, basta dividir 1 pelo total de vagas disponiveis.
 
@@ -69,10 +69,15 @@ p = casos_favoraveis / casos_possiveis
 print(f"Probabilidade: {p:.3f} ({p*100:.1f}%)")
 ```
 
-## Ponto de Atencao / Pegadinha de Prova
+## Pontos de Atencao
 
 ⚠️ A formula classica so vale quando os resultados sao equiprovaveis.
 
 - Se os resultados nao tiverem a mesma chance, nao use este modelo diretamente.
-- Em prova, palavras como "justo", "aleatorio uniforme" e "equiprovavel" indicam fortemente esse tipo de calculo.
 - Cuidado para nao confundir "evento" com "espaco amostral" na contagem.
+
+## Referencias para Aprofundamento
+
+- OpenStax, Introductory Statistics, capitulo de probabilidade: <a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener noreferrer">base conceitual com exemplos</a>
+- Khan Academy, Probability basics: <a href="https://www.khanacademy.org/math/statistics-probability/probability-library" target="_blank" rel="noopener noreferrer">explicacoes introdutorias e exercicios</a>
+- MIT OpenCourseWare, Introduction to Probability: <a href="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/" target="_blank" rel="noopener noreferrer">material academico para aprofundar</a>

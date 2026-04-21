@@ -28,9 +28,13 @@ Comparação com situações do mundo real para facilitar memorização.
 
 Código, configuração ou cenário concreto de aplicação.
 
-### 6. Ponto de Atenção / Pegadinha de Prova
+### 6. Pontos de Atenção
 
-Erros comuns, confusões típicas e dicas para certificações.
+Erros comuns, confusões típicas e limites do conceito.
+
+### 7. Referências para Aprofundamento
+
+Fontes confiáveis para estudo adicional, preferencialmente documentação oficial, livros-texto, artigos introdutórios ou materiais acadêmicos reconhecidos.
 
 ---
 
@@ -71,27 +75,22 @@ Erros comuns, confusões típicas e dicas para certificações.
 
 ---
 
-## 🧪 Foco em Certificação
+## 🧪 Foco em Aprendizado e Aprofundamento
 
 Quando aplicável, sempre incluir:
 
-### Dicas de Prova
+### Limites e Trade-offs
 
-- Palavras-chave que aparecem em questões
-- Diferenças sutis entre serviços similares
-- "Pegadinhas" comuns em exames
+- Quando o conceito funciona bem
+- Quando o conceito nao e a melhor escolha
+- Limites praticos, custos e riscos de interpretacao
 
-### Quando Usar vs Quando NÃO Usar
+### Caminhos para Aprofundar
 
-- Cenários ideais de aplicação
-- Situações onde NÃO é a melhor escolha
-- Comparação com alternativas
-
-**Exemplo de observação para prova:**
-
-```
-💡 Em prova: Se o requisito mencionar "IP fixo", a resposta tende a envolver Network Load Balancer.
-```
+- Documentacao oficial
+- Livros-texto reconhecidos
+- Materiais academicos introdutorios
+- Referencias complementares para estudo autonomo
 
 ---
 
@@ -119,7 +118,7 @@ def exemplo_pratico():
 - ⚠️ Avisos e cuidados
 - ✅ Boas práticas
 - ❌ O que evitar
-- 🎯 Foco em prova/certificação
+- 📚 Referências para aprofundamento
 
 ### Links Externos
 
@@ -166,10 +165,11 @@ Checklist de validacao:
 
 Antes de finalizar qualquer documento, verificar:
 
-- [ ] Segue a estrutura obrigatória (6 seções)
+- [ ] Segue a estrutura obrigatória (7 seções)
 - [ ] Contém pelo menos UMA analogia do mundo real
 - [ ] Inclui exemplo prático com código/configuração
-- [ ] Tem seção de "Pontos de Atenção" ou "Pegadinhas"
+- [ ] Tem seção de "Pontos de Atenção"
+- [ ] Tem seção de "Referências para Aprofundamento"
 - [ ] Linguagem técnica mas didática
 - [ ] Links externos abrem em nova aba
 - [ ] Comparações em formato de tabela quando aplicável
@@ -206,13 +206,17 @@ mantendo o fluxo organizado.
 
 [código de configuração AWS ALB]
 
-## Ponto de Atenção
+## Pontos de Atenção
 
-💡 **Em prova**:
+- ALB opera na Camada 7 (HTTP/HTTPS).
+- NLB opera na Camada 4 (TCP) e faz mais sentido quando o requisito e IP fixo.
+- Se a aplicacao depende fortemente de roteamento por conteudo da requisicao, ALB tende a ser a escolha mais natural.
 
-- ALB = Layer 7 (HTTP/HTTPS)
-- NLB = Layer 4 (TCP) + IP fixo
-- Se questão mencionar "WebSockets", considere NLB
+## Referências para Aprofundamento
+
+- Documentacao oficial da AWS sobre Elastic Load Balancing
+- Whitepapers de arquitetura da AWS
+- Guias de boas praticas para distribuicao de trafego HTTP/TCP
 ```
 
 ---

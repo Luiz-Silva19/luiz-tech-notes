@@ -28,7 +28,7 @@ Passos comuns:
 
 Quanto mais representativa for a amostra, menor o vies e melhor a qualidade das conclusoes.
 
-## Analogia Intuitiva (OBRIGATORIA)
+## Analogia Intuitiva
 
 Imagine um fiscal de qualidade em um grande deposito: ele nao abre todas as caixas do estoque para verificar a qualidade, mas seleciona caixas de forma planejada para estimar se o lote inteiro esta bom. Se ele escolher caixas de um unico canto, pode ter uma visao distorcida.
 
@@ -45,9 +45,15 @@ taxa_erro = erros_amostra / requisicoes_amostra
 print(f"Taxa de erro estimada: {taxa_erro:.2%}")
 ```
 
-## Ponto de Atencao / Pegadinha de Prova
+## Pontos de Atencao
 
 - Amostra grande nao garante qualidade se for enviesada.
 - Amostragem aleatoria reduz vies, mas nao elimina erro amostral.
-- Em prova, diferencie populacao, amostra e parametro.
-- Se o enunciado mencionar grupos muito diferentes, a amostragem estratificada costuma ser uma boa resposta.
+- Populacao, amostra e parametro precisam estar claramente definidos antes de interpretar resultados.
+- Quando ha grupos muito diferentes, uma estrategia de amostragem estratificada tende a representar melhor a realidade.
+
+## Referencias para Aprofundamento
+
+- NIST/SEMATECH e-Handbook, Sampling: <a href="https://www.itl.nist.gov/div898/handbook/" target="_blank" rel="noopener noreferrer">referencia tecnica sobre amostragem e inferencia</a>
+- OpenStax, Introductory Statistics, capitulo de amostragem: <a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener noreferrer">explicacao introdutoria organizada</a>
+- Khan Academy, Sampling distributions: <a href="https://www.khanacademy.org/math/statistics-probability/sampling-distributions-library" target="_blank" rel="noopener noreferrer">trilha de aprofundamento gradual</a>

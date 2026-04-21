@@ -45,7 +45,7 @@ $$
 P(\text{azul e azul}) = \frac{3}{5} \cdot \frac{2}{4} = \frac{3}{10}
 $$
 
-## Analogia Intuitiva (OBRIGATORIA)
+## Analogia Intuitiva
 
 Pense em dois postos de fiscalizacao em uma estrada. Para um carro passar pelos dois, ele precisa passar no primeiro posto e, depois disso, passar no segundo. A chance final e o produto dessas etapas.
 
@@ -64,9 +64,14 @@ $$
 
 Ou seja, 72% de chance de sucesso conjunto.
 
-## Ponto de Atencao / Pegadinha de Prova
+## Pontos de Atencao
 
 - Nao multiplique probabilidades "soltas" sem verificar dependencia.
 - Sem reposicao normalmente gera dependencia.
-- Em prova, frases com "e" (evento conjunto) costumam pedir $P(A \cap B)$.
 - Se a questao afirmar independencia, pode usar diretamente $P(A) \cdot P(B)$.
+
+## Referencias para Aprofundamento
+
+- OpenIntro Statistics, secao de eventos conjuntos: <a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener noreferrer">introducao acessivel e progressiva</a>
+- ProbabilityCourse.com: <a href="https://www.probabilitycourse.com/" target="_blank" rel="noopener noreferrer">curso textual com foco em fundamentos</a>
+- MIT OpenCourseWare, Probability: <a href="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/" target="_blank" rel="noopener noreferrer">aprofundamento academico</a>
