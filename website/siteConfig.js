@@ -90,7 +90,7 @@ const siteConfig = {
   // Add custom scripts here that would be placed in <script> tags.
   scripts: [
     `${baseUrl}js/mathjax-config.js`,
-    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js",
+    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js?config=TeX-AMS_CHTML",
     `${baseUrl}js/mathjax-rerender.js`,
     "https://buttons.github.io/buttons.js",
   ],

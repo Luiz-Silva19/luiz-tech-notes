@@ -1,4 +1,7 @@
 window.MathJax = {
+  startup: {
+    typeset: true,
+  },
   tex: {
     inlineMath: [
       ["$", "$"],
