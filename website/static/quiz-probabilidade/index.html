@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teste de Fixação: Probabilidade</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f7f7f9;
+        color: #222;
+      }
+
+      .wrapper {
+        max-width: 900px;
+        margin: 32px auto;
+        padding: 0 16px 32px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #e5e5ea;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .muted {
+        color: #666;
+      }
+
+      .question {
+        border: 1px solid #e5e5ea;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+
+      .question-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .option {
+        display: block;
+        margin: 6px 0;
+      }
+
+      .result {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .btn {
+        border-radius: 6px;
+        padding: 10px 14px;
+        cursor: pointer;
+        border: none;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        background: #a2025a;
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: #fff;
+        color: #a2025a;
+        border: 1px solid #a2025a;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .score {
+        margin-top: 14px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f8f3f6;
+      }
+
+      .warning {
+        margin-top: 12px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #fff3cd;
+        border: 1px solid #ffe69c;
+        color: #664d03;
+        font-size: 14px;
+      }
+
+      .btn[disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      a {
+        color: #a2025a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="card">
+        <h1>Teste de Fixação: Probabilidade</h1>
+        <p class="muted">
+          Responda às perguntas e clique em <strong>Finalizar Teste</strong> para
+          ver o total de acertos.
+        </p>
+        <p>
+          Progresso: <strong id="answeredCount">0</strong> de
+          <strong id="totalCount">0</strong> perguntas respondidas.
+        </p>
+      </div>
+
+      <div id="questionsRoot" class="card"></div>
+
+      <div class="card">
+        <div class="actions">
+          <button id="submitBtn" class="btn btn-primary" type="button">
+            Finalizar Teste
+          </button>
+          <button id="resetBtn" class="btn btn-secondary" type="button">
+            Tentar Novamente
+          </button>
+        </div>
+
+        <div id="scoreBox" class="score" style="display: none"></div>
+        <div id="warningBox" class="warning" style="display: none"></div>
+
+        <p style="margin-top: 18px">
+          Voltar para conteúdo:
+          <a href="../docs/statistics/probabilidade/probabilidade-classica"
+            >Probabilidade Clássica</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const questions = [
+          {
+            id: 1,
+            prompt: "Em probabilidade clássica equiprovável, a fórmula correta é:",
+            options: [
+              "P(A) = casos possíveis / casos favoráveis",
+              "P(A) = casos favoráveis / casos possíveis",
+              "P(A) = 1 / n!",
+              "P(A) = n / p",
+            ],
+            correctIndex: 1,
+            explanation:
+              "Na definição clássica equiprovável, a probabilidade é a razão entre casos favoráveis e casos possíveis. Por isso o numerador é o total favorável e o denominador é o total possível.",
+          },
+          {
+            id: 2,
+            prompt:
+              "Qual técnica usar quando a ordem importa e usamos apenas parte dos elementos?",
+            options: ["Permutação", "Combinação", "Arranjo", "Média aritmética"],
+            correctIndex: 2,
+            explanation:
+              "Quando usamos apenas parte dos elementos e a posição altera o resultado, usamos arranjo. A ordem é critério central dessa técnica.",
+          },
+          {
+            id: 3,
+            prompt:
+              "Qual técnica usar quando a ordem NÃO importa e escolhemos p elementos entre n?",
+            options: ["Combinação", "Arranjo", "Permutação", "Regra de três"],
+            correctIndex: 0,
+            explanation:
+              "Na combinação, selecionamos elementos sem considerar posição. Trocar a ordem não gera novo resultado, então a técnica correta é combinação.",
+          },
+          {
+            id: 4,
+            prompt: "A notação P(A|B) representa:",
+            options: [
+              "Probabilidade de B dado A",
+              "Probabilidade conjunta de A e B",
+              "Probabilidade de A dado B",
+              "Probabilidade total de A e B",
+            ],
+            correctIndex: 2,
+            explanation:
+              "A barra vertical significa 'dado que'. Logo P(A|B) é a probabilidade de A ocorrer sob a condição de B ter ocorrido.",
+          },
+          {
+            id: 5,
+            prompt: "Qual expressão representa a Regra do Produto (forma geral)?",
+            options: [
+              "P(A ∩ B) = P(A) + P(B)",
+              "P(A ∩ B) = P(A) · P(B|A)",
+              "P(A|B) = P(A) · P(B)",
+              "P(A) = P(B) / P(A ∩ B)",
+            ],
+            correctIndex: 1,
+            explanation:
+              "A regra do produto calcula evento conjunto. Primeiro ocorre A, depois B condicionado a A, resultando em P(A ∩ B) = P(A) · P(B|A).",
+          },
+          {
+            id: 6,
+            prompt: "Se A e B são independentes, então:",
+            options: [
+              "P(A ∩ B) = P(A) + P(B)",
+              "P(A|B) = P(B|A)",
+              "P(A ∩ B) = P(A) · P(B)",
+              "P(A) = 1 - P(B)",
+            ],
+            correctIndex: 2,
+            explanation:
+              "Em independência, a ocorrência de um evento não altera a chance do outro. Por isso o conjunto é o produto direto das probabilidades marginais.",
+          },
+          {
+            id: 7,
+            prompt: "Na probabilidade condicional, é obrigatório que:",
+            options: ["P(B) < 0", "P(B) = 0", "P(B) > 0", "P(B) = 1 sempre"],
+            correctIndex: 2,
+            explanation:
+              "A fórmula condicional divide por P(B). Para a divisão existir no modelo, P(B) precisa ser maior que zero.",
+          },
+          {
+            id: 8,
+            prompt: "Qual é um erro comum em análise combinatória?",
+            options: [
+              "Usar combinação quando a ordem importa",
+              "Usar frações em probabilidades",
+              "Contar casos favoráveis",
+              "Separar evento e espaço amostral",
+            ],
+            correctIndex: 0,
+            explanation:
+              "Se a ordem importa, a técnica não é combinação. Esse erro muda a contagem e compromete o resultado da probabilidade.",
+          },
+          {
+            id: 9,
+            prompt:
+              "Se uma urna tem 3 azuis e 2 vermelhas, sem reposição, a chance de azul e depois azul é:",
+            options: ["3/5 · 2/4", "3/5 + 2/4", "2/5 · 1/4", "1/5 · 1/4"],
+            correctIndex: 0,
+            explanation:
+              "Sem reposição, o segundo sorteio depende do primeiro. Após sair uma azul, restam 2 azuis em 4 bolas, então a chance conjunta é 3/5 · 2/4.",
+          },
+          {
+            id: 10,
+            prompt:
+              "Ao escolher 3 pessoas para um comitê entre 10, a técnica adequada é:",
+            options: ["Arranjo", "Permutação", "Combinação", "Condicional"],
+            correctIndex: 2,
+            explanation:
+              "Em comitê, a ordem de escolha não altera o grupo final. Por isso a técnica correta é combinação.",
+          },
+        ];
+
+        const answers = {};
+        let submitted = false;
+
+        const root = document.getElementById("questionsRoot");
+        const answeredCountEl = document.getElementById("answeredCount");
+        const totalCountEl = document.getElementById("totalCount");
+        const scoreBox = document.getElementById("scoreBox");
+        const warningBox = document.getElementById("warningBox");
+        const submitBtn = document.getElementById("submitBtn");
+        const resetBtn = document.getElementById("resetBtn");
+
+        totalCountEl.textContent = String(questions.length);
+
+        function getScore() {
+          let score = 0;
+          questions.forEach((q) => {
+            if (answers[q.id] === q.correctIndex) score += 1;
+          });
+          return score;
+        }
+
+        function updateProgress() {
+          const answeredCount = Object.keys(answers).length;
+          answeredCountEl.textContent = String(answeredCount);
+          submitBtn.disabled = answeredCount < questions.length || submitted;
+        }
+
+        function render() {
+          root.innerHTML = "";
+
+          questions.forEach((q) => {
+            const box = document.createElement("div");
+            box.className = "question";
+
+            const title = document.createElement("p");
+            title.className = "question-title";
+            title.textContent = `${q.id}. ${q.prompt}`;
+            box.appendChild(title);
+
+            q.options.forEach((opt, idx) => {
+              const label = document.createElement("label");
+              label.className = "option";
+
+              const input = document.createElement("input");
+              input.type = "radio";
+              input.name = `question-${q.id}`;
+              input.value = String(idx);
+              input.checked = answers[q.id] === idx;
+              input.disabled = submitted;
+              input.style.marginRight = "8px";
+
+              input.addEventListener("change", function () {
+                answers[q.id] = idx;
+                updateProgress();
+              });
+
+              label.appendChild(input);
+              label.appendChild(document.createTextNode(opt));
+
+              if (submitted && answers[q.id] === idx && idx !== q.correctIndex) {
+                label.style.color = "#b00020";
+              }
+              if (submitted && answers[q.id] === idx && idx === q.correctIndex) {
+                label.style.color = "#0b6b2f";
+              }
+
+              box.appendChild(label);
+            });
+
+            if (submitted) {
+              const result = document.createElement("p");
+              result.className = "result";
+              result.innerHTML = `Resposta correta: <strong>${q.options[q.correctIndex]}</strong><br><strong>Explicação:</strong> ${q.explanation}`;
+              box.appendChild(result);
+            }
+
+            root.appendChild(box);
+          });
+
+          if (submitted) {
+            const score = getScore();
+            const total = questions.length;
+            const percent = Math.round((score / total) * 100);
+            scoreBox.style.display = "block";
+            scoreBox.innerHTML = `Resultado final: <strong>${score}</strong> acertos de <strong>${total}</strong> (${percent}%).`;
+            warningBox.style.display = "none";
+            warningBox.innerHTML = "";
+          } else {
+            scoreBox.style.display = "none";
+            scoreBox.innerHTML = "";
+          }
+        }
+
+        submitBtn.addEventListener("click", function () {
+          const answeredCount = Object.keys(answers).length;
+          if (answeredCount < questions.length) {
+            warningBox.style.display = "block";
+            warningBox.innerHTML = `Responda todas as perguntas antes de finalizar. Faltam <strong>${questions.length - answeredCount}</strong> pergunta(s).`;
+            return;
+          }
+
+          submitted = true;
+          submitBtn.disabled = true;
+          render();
+        });
+
+        resetBtn.addEventListener("click", function () {
+          Object.keys(answers).forEach((k) => delete answers[k]);
+          submitted = false;
+          warningBox.style.display = "none";
+          warningBox.innerHTML = "";
+          updateProgress();
+          render();
+        });
+
+        updateProgress();
+        render();
+      })();
+    </script>
+  </body>
+</html>

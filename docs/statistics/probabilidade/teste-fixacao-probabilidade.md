@@ -27,7 +27,7 @@ Ao finalizar, a página mostra o total de acertos e o percentual.
 
 Acesse o teste aqui:
 
-<a href="../../../../quiz-probabilidade" target="_blank" rel="noopener noreferrer">Abrir Teste de Fixação de Probabilidade</a>
+<a href="../../../../quiz-probabilidade/" target="_blank" rel="noopener noreferrer">Abrir Teste de Fixação de Probabilidade</a>
 
 ## Analogia Intuitiva
 
