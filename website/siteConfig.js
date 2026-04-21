@@ -46,7 +46,7 @@ const siteConfig = {
     {
       doc: "statistics/statistics-intro",
       docsPart: "statistics",
-      label: "Estatistica",
+      label: "Estatística",
     },
     { doc: "aws/aws-intro", label: "AWS" },
   ],

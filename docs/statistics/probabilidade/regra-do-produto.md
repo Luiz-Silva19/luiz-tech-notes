@@ -4,7 +4,7 @@ title: Regra do Produto
 sidebar_label: Regra do Produto
 ---
 
-## O que e
+## O que é
 
 A Regra do Produto calcula a probabilidade de dois eventos acontecerem juntos.
 
@@ -24,20 +24,20 @@ $$
 
 - Calcular chances de eventos conjuntos
 - Resolver problemas em etapas (primeiro acontece A, depois B)
-- Modelar cenarios com dependencia ou independencia
-- Base para arvores de probabilidade e cadeias de eventos
+- Modelar cenários com dependência ou independência
+- Base para árvores de probabilidade e cadeias de eventos
 
 ## Como funciona
 
-Voce multiplica:
+Você multiplica:
 
 1. Probabilidade do primeiro evento.
 2. Probabilidade do segundo considerando o primeiro.
 
-Exemplo com urna sem reposicao (3 bolas azuis, 2 vermelhas):
+Exemplo com urna sem reposição (3 bolas azuis, 2 vermelhas):
 
 - Probabilidade de tirar azul na 1a: $P(A) = 3/5$
-- Probabilidade de tirar azul na 2a, sabendo que ja saiu azul: $P(B \mid A) = 2/4$
+- Probabilidade de tirar azul na 2a, sabendo que já saiu azul: $P(B \mid A) = 2/4$
 
 Entao:
 
@@ -47,9 +47,9 @@ $$
 
 ## Analogia Intuitiva
 
-Pense em dois postos de fiscalizacao em uma estrada. Para um carro passar pelos dois, ele precisa passar no primeiro posto e, depois disso, passar no segundo. A chance final e o produto dessas etapas.
+Pense em dois postos de fiscalização em uma estrada. Para um carro passar pelos dois, ele precisa passar no primeiro posto e, depois disso, passar no segundo. A chance final é o produto dessas etapas.
 
-## Exemplo Pratico Real
+## Exemplo Prático Real
 
 Em um pipeline de deploy:
 
@@ -64,14 +64,14 @@ $$
 
 Ou seja, 72% de chance de sucesso conjunto.
 
-## Pontos de Atencao
+## Pontos de Atenção
 
-- Nao multiplique probabilidades "soltas" sem verificar dependencia.
-- Sem reposicao normalmente gera dependencia.
-- Se a questao afirmar independencia, pode usar diretamente $P(A) \cdot P(B)$.
+- Não multiplique probabilidades "soltas" sem verificar dependência.
+- Sem reposição normalmente gera dependência.
+- Se a questão afirmar independência, pode usar diretamente $P(A) \cdot P(B)$.
 
-## Referencias para Aprofundamento
+## Referências para Aprofundamento
 
-- OpenIntro Statistics, secao de eventos conjuntos: <a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener noreferrer">introducao acessivel e progressiva</a>
+- OpenIntro Statistics, seção de eventos conjuntos: <a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener noreferrer">introdução acessível e progressiva</a>
 - ProbabilityCourse.com: <a href="https://www.probabilitycourse.com/" target="_blank" rel="noopener noreferrer">curso textual com foco em fundamentos</a>
-- MIT OpenCourseWare, Probability: <a href="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/" target="_blank" rel="noopener noreferrer">aprofundamento academico</a>
+- MIT OpenCourseWare, Probability: <a href="https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2014/" target="_blank" rel="noopener noreferrer">aprofundamento acadêmico</a>

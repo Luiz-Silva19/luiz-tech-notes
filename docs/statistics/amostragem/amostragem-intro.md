@@ -1,40 +1,40 @@
 ---
 id: amostragem-intro
-title: Amostragem em Estatistica
-sidebar_label: Introducao a Amostragem
+title: Amostragem em Estatística
+sidebar_label: Introdução à Amostragem
 ---
 
-## O que e
+## O que é
 
-Amostragem e a tecnica de selecionar uma parte representativa de uma populacao para analisar dados sem precisar medir todos os elementos.
+Amostragem é a técnica de selecionar uma parte representativa de uma população para analisar dados sem precisar medir todos os elementos.
 
 ## Para que serve
 
 - Reduzir custo e tempo de coleta de dados
-- Tornar analises viaveis em populacoes grandes
+- Tornar análises viáveis em populações grandes
 - Apoiar pesquisas, experimentos e monitoramento de sistemas
-- Permitir inferencias sobre a populacao com base na amostra
+- Permitir inferências sobre a população com base na amostra
 
 ## Como funciona
 
-A ideia central e escolher uma amostra que represente bem a populacao.
+A ideia central é escolher uma amostra que represente bem a população.
 
 Passos comuns:
 
-1. Definir a populacao-alvo.
-2. Escolher o metodo de amostragem (aleatoria simples, estratificada, sistematica etc.).
+1. Definir a população-alvo.
+2. Escolher o método de amostragem (aleatória simples, estratificada, sistemática etc.).
 3. Coletar os dados da amostra.
-4. Analisar e inferir resultados para a populacao.
+4. Analisar e inferir resultados para a população.
 
-Quanto mais representativa for a amostra, menor o vies e melhor a qualidade das conclusoes.
+Quanto mais representativa for a amostra, menor o viés e melhor a qualidade das conclusões.
 
 ## Analogia Intuitiva
 
-Imagine um fiscal de qualidade em um grande deposito: ele nao abre todas as caixas do estoque para verificar a qualidade, mas seleciona caixas de forma planejada para estimar se o lote inteiro esta bom. Se ele escolher caixas de um unico canto, pode ter uma visao distorcida.
+Imagine um fiscal de qualidade em um grande depósito: ele não abre todas as caixas do estoque para verificar a qualidade, mas seleciona caixas de forma planejada para estimar se o lote inteiro está bom. Se ele escolher caixas de um único canto, pode ter uma visão distorcida.
 
-## Exemplo Pratico Real
+## Exemplo Prático Real
 
-Em um sistema com 1.000.000 de requisicoes por dia, voce pode analisar uma amostra aleatoria de 10.000 requisicoes para estimar latencia media e taxa de erro sem processar tudo de uma vez.
+Em um sistema com 1.000.000 de requisições por dia, você pode analisar uma amostra aleatória de 10.000 requisições para estimar latência média e taxa de erro sem processar tudo de uma vez.
 
 ```python
 # Exemplo simplificado: taxa de erro em uma amostra
@@ -45,15 +45,15 @@ taxa_erro = erros_amostra / requisicoes_amostra
 print(f"Taxa de erro estimada: {taxa_erro:.2%}")
 ```
 
-## Pontos de Atencao
+## Pontos de Atenção
 
-- Amostra grande nao garante qualidade se for enviesada.
-- Amostragem aleatoria reduz vies, mas nao elimina erro amostral.
-- Populacao, amostra e parametro precisam estar claramente definidos antes de interpretar resultados.
-- Quando ha grupos muito diferentes, uma estrategia de amostragem estratificada tende a representar melhor a realidade.
+- Amostra grande não garante qualidade se for enviesada.
+- Amostragem aleatória reduz viés, mas não elimina erro amostral.
+- População, amostra e parâmetro precisam estar claramente definidos antes de interpretar resultados.
+- Quando há grupos muito diferentes, uma estratégia de amostragem estratificada tende a representar melhor a realidade.
 
-## Referencias para Aprofundamento
+## Referências para Aprofundamento
 
-- NIST/SEMATECH e-Handbook, Sampling: <a href="https://www.itl.nist.gov/div898/handbook/" target="_blank" rel="noopener noreferrer">referencia tecnica sobre amostragem e inferencia</a>
-- OpenStax, Introductory Statistics, capitulo de amostragem: <a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener noreferrer">explicacao introdutoria organizada</a>
+- NIST/SEMATECH e-Handbook, Sampling: <a href="https://www.itl.nist.gov/div898/handbook/" target="_blank" rel="noopener noreferrer">referência técnica sobre amostragem e inferência</a>
+- OpenStax, Introductory Statistics, capítulo de amostragem: <a href="https://openstax.org/details/books/introductory-statistics-2e" target="_blank" rel="noopener noreferrer">explicação introdutória organizada</a>
 - Khan Academy, Sampling distributions: <a href="https://www.khanacademy.org/math/statistics-probability/sampling-distributions-library" target="_blank" rel="noopener noreferrer">trilha de aprofundamento gradual</a>

@@ -29,6 +29,7 @@
       "statistics/statistics-intro"
     ],
     "Probabilidade": [
+      "statistics/probabilidade/arranjo-combinacao-permutacao",
       "statistics/probabilidade/probabilidade-classica",
       "statistics/probabilidade/probabilidade-condicional",
       "statistics/probabilidade/regra-do-produto"
