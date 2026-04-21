@@ -137,6 +137,29 @@ Use tabelas para comparar tecnologias/abordagens:
 | -------------- | ------- | ------- |
 | Performance    | Alta    | Média   |
 
+### Formulas Matematicas (Docusaurus v1)
+
+Para evitar inconsistencias entre ambiente local e GitHub Pages, seguir este padrao:
+
+- Inline: usar `$...$` (ex.: `$P(A \mid B)$`)
+- Bloco: usar `$$...$$`
+- Evitar `\(...\)` em texto corrido neste projeto, pois o parser do Docusaurus v1 pode renderizar como texto literal em alguns contextos.
+
+Configuracao obrigatoria no site:
+
+- Em `website/siteConfig.js`, scripts locais devem usar `baseUrl` dinamico:
+  - `${baseUrl}js/mathjax-config.js`
+  - `${baseUrl}js/mathjax-rerender.js`
+- Manter script de re-render para navegacao SPA em `website/static/js/mathjax-rerender.js`.
+- Manter configuracao do MathJax em `website/static/js/mathjax-config.js` com suporte a inline e display.
+
+Checklist de validacao:
+
+- Testar local em pagina de Estatistica com formulas inline dentro de bullets.
+- Testar publicado no GitHub Pages na URL final do repositorio.
+- Fazer hard refresh (Ctrl+F5) apos deploy para evitar cache antigo de scripts.
+- Se inline falhar em um ponto critico, usar formula em bloco como fallback visual.
+
 ---
 
 ## 🎯 Checklist de Qualidade
