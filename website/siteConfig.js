@@ -88,6 +88,7 @@ const siteConfig = {
   scripts: [
     "/js/mathjax-config.js",
     "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js",
+    "/js/mathjax-rerender.js",
     "https://buttons.github.io/buttons.js",
   ],
 
