@@ -1,0 +1,31 @@
+{
+  "title": "Teste de Fixação: Título do Tema",
+  "backLabel": "Nome do Conteúdo de Referência",
+  "backLink": "../docs/categoria/topico/nome-do-arquivo",
+  "questions": [
+    {
+      "id": 1,
+      "prompt": "Texto da pergunta 1?",
+      "options": [
+        "Opção A",
+        "Opção B",
+        "Opção C",
+        "Opção D"
+      ],
+      "correctIndex": 0,
+      "explanation": "Explicação do porquê a opção A (índice 0) é a correta."
+    },
+    {
+      "id": 2,
+      "prompt": "Texto da pergunta 2?",
+      "options": [
+        "Opção A",
+        "Opção B",
+        "Opção C",
+        "Opção D"
+      ],
+      "correctIndex": 1,
+      "explanation": "Explicação do porquê a opção B (índice 1) é a correta."
+    }
+  ]
+}

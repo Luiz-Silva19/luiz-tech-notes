@@ -1,0 +1,102 @@
+{
+  "title": "Teste de Fixação: Probabilidade",
+  "backLabel": "Probabilidade Clássica",
+  "backLink": "/luiz-tech-notes/docs/statistics/probabilidade/probabilidade-classica",
+  "questions": [
+    {
+      "id": 1,
+      "prompt": "Em probabilidade clássica equiprovável, a fórmula correta é:",
+      "options": [
+        "P(A) = casos possíveis / casos favoráveis",
+        "P(A) = casos favoráveis / casos possíveis",
+        "P(A) = 1 / n!",
+        "P(A) = n / p"
+      ],
+      "correctIndex": 1,
+      "explanation": "Na definição clássica equiprovável, a probabilidade é a razão entre casos favoráveis e casos possíveis. Por isso o numerador é o total favorável e o denominador é o total possível."
+    },
+    {
+      "id": 2,
+      "prompt": "Qual técnica usar quando a ordem importa e usamos apenas parte dos elementos?",
+      "options": ["Permutação", "Combinação", "Arranjo", "Média aritmética"],
+      "correctIndex": 2,
+      "explanation": "Quando usamos apenas parte dos elementos e a posição altera o resultado, usamos arranjo. A ordem é critério central dessa técnica."
+    },
+    {
+      "id": 3,
+      "prompt": "Qual técnica usar quando a ordem NÃO importa e escolhemos p elementos entre n?",
+      "options": ["Combinação", "Arranjo", "Permutação", "Regra de três"],
+      "correctIndex": 0,
+      "explanation": "Na combinação, selecionamos elementos sem considerar posição. Trocar a ordem não gera novo resultado, então a técnica correta é combinação."
+    },
+    {
+      "id": 4,
+      "prompt": "A notação P(A|B) representa:",
+      "options": [
+        "Probabilidade de B dado A",
+        "Probabilidade conjunta de A e B",
+        "Probabilidade de A dado B",
+        "Probabilidade total de A e B"
+      ],
+      "correctIndex": 2,
+      "explanation": "A barra vertical significa 'dado que'. Logo P(A|B) é a probabilidade de A ocorrer sob a condição de B ter ocorrido."
+    },
+    {
+      "id": 5,
+      "prompt": "Qual expressão representa a Regra do Produto (forma geral)?",
+      "options": [
+        "P(A ∩ B) = P(A) + P(B)",
+        "P(A ∩ B) = P(A) · P(B|A)",
+        "P(A|B) = P(A) · P(B)",
+        "P(A) = P(B) / P(A ∩ B)"
+      ],
+      "correctIndex": 1,
+      "explanation": "A regra do produto calcula evento conjunto. Primeiro ocorre A, depois B condicionado a A, resultando em P(A ∩ B) = P(A) · P(B|A)."
+    },
+    {
+      "id": 6,
+      "prompt": "Se A e B são independentes, então:",
+      "options": [
+        "P(A ∩ B) = P(A) + P(B)",
+        "P(A|B) = P(B|A)",
+        "P(A ∩ B) = P(A) · P(B)",
+        "P(A) = 1 - P(B)"
+      ],
+      "correctIndex": 2,
+      "explanation": "Em independência, a ocorrência de um evento não altera a chance do outro. Por isso o conjunto é o produto direto das probabilidades marginais."
+    },
+    {
+      "id": 7,
+      "prompt": "Na probabilidade condicional, é obrigatório que:",
+      "options": ["P(B) < 0", "P(B) = 0", "P(B) > 0", "P(B) = 1 sempre"],
+      "correctIndex": 2,
+      "explanation": "A fórmula condicional divide por P(B). Para a divisão existir no modelo, P(B) precisa ser maior que zero."
+    },
+    {
+      "id": 8,
+      "prompt": "Qual é um erro comum em análise combinatória?",
+      "options": [
+        "Usar combinação quando a ordem importa",
+        "Usar frações em probabilidades",
+        "Contar casos favoráveis",
+        "Separar evento e espaço amostral"
+      ],
+      "correctIndex": 0,
+      "explanation": "Se a ordem importa, a técnica não é combinação. Esse erro muda a contagem e compromete o resultado da probabilidade."
+    },
+    {
+      "id": 9,
+      "prompt": "Se uma urna tem 3 azuis e 2 vermelhas, sem reposição, a chance de azul e depois azul é:",
+      "options": ["3/5 · 2/4", "3/5 + 2/4", "2/5 · 1/4", "1/5 · 1/4"],
+      "correctIndex": 0,
+      "explanation": "Sem reposição, o segundo sorteio depende do primeiro. Após sair uma azul, restam 2 azuis em 4 bolas, então a chance conjunta é 3/5 · 2/4."
+    },
+    {
+      "id": 10,
+      "prompt": "Ao escolher 3 pessoas para um comitê entre 10, a técnica adequada é:",
+      "options": ["Arranjo", "Permutação", "Combinação", "Condicional"],
+      "correctIndex": 2,
+      "explanation": "Em comitê, a ordem de escolha não altera o grupo final. Por isso a técnica correta é combinação."
+    }
+  ]
+}
