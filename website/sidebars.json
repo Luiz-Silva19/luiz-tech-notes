@@ -33,6 +33,9 @@
       "statistics/probabilidade/probabilidade-classica",
       "statistics/probabilidade/probabilidade-condicional",
       "statistics/probabilidade/regra-do-produto",
+      "statistics/probabilidade/particao-espaco-amostral",
+      "statistics/probabilidade/probabilidade-total",
+      "statistics/probabilidade/teorema-de-bayes",
       "statistics/probabilidade/teste-fixacao-probabilidade"
     ],
     "Amostragem": [
