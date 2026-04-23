@@ -6,6 +6,10 @@ sidebar_label: Teorema de Bayes
 
 ## O que é
 
+Se a [Probabilidade Total](probabilidade-total) soma os caminhos para chegar em um evento, o Teorema de Bayes faz o caminho inverso:
+
+> 👉 você observa o resultado e quer descobrir de onde ele veio.
+
 O **Teorema de Bayes** inverte uma probabilidade condicional: dado que o evento $A$ ocorreu, qual é a probabilidade de ter sido o grupo $B_k$ o responsável?
 
 $$
