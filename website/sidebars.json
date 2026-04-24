@@ -36,6 +36,8 @@
       "statistics/probabilidade/particao-espaco-amostral",
       "statistics/probabilidade/probabilidade-total",
       "statistics/probabilidade/teorema-de-bayes",
+      "statistics/probabilidade/variavel-aleatoria-discreta",
+      "statistics/probabilidade/funcao-discreta-probabilidade",
       "statistics/probabilidade/teste-fixacao-probabilidade"
     ],
     "Amostragem": [
