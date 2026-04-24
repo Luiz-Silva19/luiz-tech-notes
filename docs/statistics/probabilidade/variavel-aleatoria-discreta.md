@@ -39,7 +39,7 @@ Exemplo estrutural:
 - Definição: $X =$ número de caras.
 - Valores possíveis: $X \in \{0,1,2,3\}$.
 
-## Analogia Intuitiva (OBRIGATÓRIA)
+## Analogia Intuitiva
 
 Pense em um aeroporto com vários voos chegando. O evento completo é complexo (horário, companhia, portão, origem), mas você decide observar apenas **quantos voos atrasaram** no período.
 
@@ -51,12 +51,12 @@ Uma central de suporte mede a quantidade de chamados críticos por dia.
 
 Defina $X =$ número de chamados críticos em um dia. Em uma amostra histórica, foi observado:
 
-| Valor de $X$ | Significado                      |
-| ------------ | -------------------------------- |
-| 0            | nenhum chamado crítico no dia    |
-| 1            | um chamado crítico               |
-| 2            | dois chamados críticos           |
-| 3            | três chamados críticos ou mais   |
+| Valor de $X$ | Significado                    |
+| ------------ | ------------------------------ |
+| 0            | nenhum chamado crítico no dia  |
+| 1            | um chamado crítico             |
+| 2            | dois chamados críticos         |
+| 3            | três chamados críticos ou mais |
 
 Código Python para representar os possíveis valores:
 
@@ -77,7 +77,7 @@ print("Valores possiveis de X:", valores_x)
 
 ## Referências para Aprofundamento
 
-- Morettin, P. A.; Bussab, W. O. — *Estatística Básica*.
-- DeGroot, M. H.; Schervish, M. J. — *Probability and Statistics*.
-- Ross, S. — *A First Course in Probability*.
+- Morettin, P. A.; Bussab, W. O. — _Estatística Básica_.
+- DeGroot, M. H.; Schervish, M. J. — _Probability and Statistics_.
+- Ross, S. — _A First Course in Probability_.
 - MIT OpenCourseWare — Probability and Random Variables: <a href="https://ocw.mit.edu" target="_blank" rel="noopener noreferrer">ocw.mit.edu</a>

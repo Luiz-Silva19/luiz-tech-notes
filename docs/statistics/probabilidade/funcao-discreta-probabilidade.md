@@ -47,7 +47,7 @@ $$
 P(1 \le X \le 2) = P(X=1) + P(X=2)
 $$
 
-## Analogia Intuitiva (OBRIGATÓRIA)
+## Analogia Intuitiva
 
 Imagine uma portaria que registra quantos visitantes chegam por hora e mantém um painel com as chances históricas:
 
