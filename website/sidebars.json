@@ -38,6 +38,9 @@
       "statistics/probabilidade/teorema-de-bayes",
       "statistics/probabilidade/variavel-aleatoria-discreta",
       "statistics/probabilidade/funcao-discreta-probabilidade",
+      "statistics/probabilidade/distribuicao-bernoulli",
+      "statistics/probabilidade/distribuicao-binomial",
+      "statistics/probabilidade/esperanca-variavel-aleatoria",
       "statistics/probabilidade/teste-fixacao-probabilidade"
     ],
     "Amostragem": [
