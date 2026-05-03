@@ -58,16 +58,16 @@ Imagine uma portaria de prédio: no total entram moradores e visitantes. Se o re
 
 Em uma turma com 30 alunos:
 
-- 18 estudam Python ($B$)
-- 12 estudam Python e Estatística ($A \cap B$)
+- 18 gostam de futebol ($B$)
+- 12 gostam de futebol e vôlei ($A \cap B$)
 
-Qual a chance de um aluno estudar Estatística sabendo que ele estuda Python?
+Qual a chance de um aluno gostar de vôlei sabendo que ele gosta de futebol?
 
 $$
 P(A \mid B) = \frac{12/30}{18/30} = \frac{12}{18} = \frac{2}{3}
 $$
 
-Interpretação: entre quem estuda Python, 66,7% também estuda Estatística.
+Interpretação: entre quem gosta de futebol, 66,7% também gosta de vôlei.
 
 ## Pontos de Atenção
 

@@ -41,27 +41,27 @@ Exemplo estrutural:
 
 ## Analogia Intuitiva
 
-Pense em um aeroporto com vários voos chegando. O evento completo é complexo (horário, companhia, portão, origem), mas você decide observar apenas **quantos voos atrasaram** no período.
+Pense em uma caixa com três moedas sendo lançadas ao mesmo tempo. O resultado completo pode ser algo como cara-cara-coroa ou coroa-cara-coroa, mas você decide observar apenas **quantas caras apareceram**.
 
 A variável aleatória discreta faz esse papel: ela pega um cenário cheio de detalhes e converte em um número objetivo para análise.
 
-## Exemplo Prático Real
+## Exemplo Prático
 
-Uma central de suporte mede a quantidade de chamados críticos por dia.
+Considere o experimento de lançar 3 moedas.
 
-Defina $X =$ número de chamados críticos em um dia. Em uma amostra histórica, foi observado:
+Defina $X =$ número de caras obtidas. Os valores possíveis são:
 
-| Valor de $X$ | Significado                    |
-| ------------ | ------------------------------ |
-| 0            | nenhum chamado crítico no dia  |
-| 1            | um chamado crítico             |
-| 2            | dois chamados críticos         |
-| 3            | três chamados críticos ou mais |
+| Valor de $X$ | Significado  |
+| ------------ | ------------ |
+| 0            | nenhuma cara |
+| 1            | uma cara     |
+| 2            | duas caras   |
+| 3            | três caras   |
 
 Código Python para representar os possíveis valores:
 
 ```python
-# Valores possíveis para X = numero de chamados criticos por dia
+# Valores possiveis para X = numero de caras em 3 lancamentos
 valores_x = [0, 1, 2, 3]
 
 # Exibe os valores discretos possiveis da variavel aleatoria

@@ -61,30 +61,30 @@ $$
 
 ## Analogia Intuitiva
 
-Imagine uma linha com 10 vagas de inspeção em um aeroporto. Cada passageiro pode ou não ser direcionado para revista extra. A distribuição de Bernoulli descreve cada passageiro isoladamente; a distribuição binomial responde quantos passageiros, no total, foram selecionados entre os 10.
+Imagine 10 arremessos de uma moeda. Cada lançamento individual é um caso de Bernoulli: cara ou coroa. A distribuição binomial entra quando você quer saber quantas caras apareceram ao final dos 10 lançamentos.
 
 ## Exemplo Prático Real
 
 ### Exemplo real
 
-Uma equipe de produto sabe que a taxa média de conversão de um botão é 8%. Em um grupo de 20 visitantes independentes, qual a probabilidade de exatamente 3 clicarem no botão?
+Um aluno chuta 5 questões de verdadeiro ou falso. Como cada questão tem 50% de chance de acerto, qual a probabilidade de ele acertar exatamente 3 questões?
 
 Defina:
 
-- $n = 20$;
+- $n = 5$;
 - $k = 3$;
-- $p = 0{,}08$.
+- $p = 0{,}5$.
 
 Aplicando a fórmula:
 
 $$
-P(X = 3) = \binom{20}{3}(0{,}08)^3(0{,}92)^{17}
+P(X = 3) = \binom{5}{3}(0{,}5)^3(0{,}5)^2
 $$
 
 Valor aproximado:
 
 $$
-P(X = 3) \approx 0{,}205
+P(X = 3) = 10 \cdot 0{,}03125 = 0{,}3125
 $$
 
 Código Python:
@@ -92,10 +92,10 @@ Código Python:
 ```python
 from math import comb
 
-# X representa o numero de cliques entre 20 visitantes
-n = 20
+# X representa o numero de acertos em 5 questoes
+n = 5
 k = 3
-p = 0.08
+p = 0.5
 
 probabilidade = comb(n, k) * (p ** k) * ((1 - p) ** (n - k))
 print(f"P(X=3) = {probabilidade:.4f}")

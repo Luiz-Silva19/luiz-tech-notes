@@ -49,20 +49,22 @@ $$
 
 Pense em dois postos de fiscalização em uma estrada. Para um carro passar pelos dois, ele precisa passar no primeiro posto e, depois disso, passar no segundo. A chance final é o produto dessas etapas.
 
-## Exemplo Prático Real
+## Exemplo Prático
 
-Em um pipeline de deploy:
+Em uma turma com 9 alunos, sendo 5 meninas e 4 meninos, dois alunos são sorteados em sequência, sem reposição.
 
-- Chance de build passar: $P(B) = 0{,}9$
-- Chance de testes passarem dado que o build passou: $P(T \mid B) = 0{,}8$
+Seja:
 
-Chance de build e testes passarem no mesmo ciclo:
+- $M_1$: a primeira pessoa sorteada é menina
+- $M_2$: a segunda pessoa sorteada é menina, dado que a primeira também foi menina
+
+Então:
 
 $$
-P(B \cap T) = 0{,}9 \cdot 0{,}8 = 0{,}72
+P(M_1 \cap M_2) = \frac{5}{9} \cdot \frac{4}{8} = \frac{20}{72} = \frac{5}{18}
 $$
 
-Ou seja, 72% de chance de sucesso conjunto.
+Ou seja, a chance de as duas pessoas sorteadas serem meninas é $\frac{5}{18}$.
 
 ## Pontos de Atenção
 

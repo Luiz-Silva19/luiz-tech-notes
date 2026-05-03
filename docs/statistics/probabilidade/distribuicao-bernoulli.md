@@ -53,17 +53,17 @@ Passos práticos:
 
 Exemplo de interpretação:
 
-- $X = 1$: o pagamento foi aprovado.
-- $X = 0$: o pagamento foi recusado.
+- $X = 1$: o aluno acertou a questão.
+- $X = 0$: o aluno errou a questão.
 
-Se a taxa histórica de aprovação é 92%, então:
-
-$$
-P(X=1) = 0{,}92
-$$
+Se a chance de acerto é 70%, então:
 
 $$
-P(X=0) = 0{,}08
+P(X=1) = 0{,}70
+$$
+
+$$
+P(X=0) = 0{,}30
 $$
 
 ## Analogia Intuitiva
@@ -74,25 +74,25 @@ Pense em uma catraca de metrô: a pessoa aproxima o cartão e o sistema só tem 
 
 ### Exemplo real
 
-Em uma plataforma de e-commerce, cada tentativa de pagamento pode ser tratada como:
+Em uma questão de verdadeiro ou falso, cada resposta pode ser tratada como:
 
-- sucesso: pagamento aprovado ($X=1$);
-- fracasso: pagamento recusado ($X=0$).
+- sucesso: acertar a questão ($X=1$);
+- fracasso: errar a questão ($X=0$).
 
-Se a taxa histórica de aprovação é 0,92, então a variável $X$ segue uma Bernoulli com parâmetro $p=0{,}92$.
+Se um aluno tem 70% de chance de acertar, então a variável $X$ segue uma Bernoulli com parâmetro $p=0{,}70$.
 
 Código Python:
 
 ```python
-# X representa o resultado de uma tentativa de pagamento
-# 1 = aprovado, 0 = recusado
-p = 0.92
+# X representa o resultado de uma resposta
+# 1 = acerto, 0 = erro
+p = 0.70
 
-prob_aprovado = p
-prob_recusado = 1 - p
+prob_acerto = p
+prob_erro = 1 - p
 
-print(f"P(X=1) = {prob_aprovado:.2f}")
-print(f"P(X=0) = {prob_recusado:.2f}")
+print(f"P(X=1) = {prob_acerto:.2f}")
+print(f"P(X=0) = {prob_erro:.2f}")
 ```
 
 ### Exemplo simples

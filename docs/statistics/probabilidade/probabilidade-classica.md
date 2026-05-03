@@ -51,9 +51,9 @@ Pense em uma roleta de estacionamento com vagas idênticas e sorteadas de forma 
 
 ## Exemplo Prático Real
 
-Imagine um sistema de testes que escolhe aleatoriamente 1 entre 8 cenários de carga, todos com a mesma probabilidade.
+Imagine uma caixa com 8 fichas numeradas de 1 a 8. Uma ficha é sorteada ao acaso, e todas têm a mesma chance de sair.
 
-Se você quer saber a chance de executar um cenário específico em uma rodada:
+Se você quer saber a chance de sair uma ficha específica no sorteio:
 
 $$
 P = \frac{1}{8}
@@ -62,7 +62,7 @@ $$
 Em Python:
 
 ```python
-# Probabilidade clássica equiprovável
+# Probabilidade classica equiprovavel
 casos_possiveis = 8
 casos_favoraveis = 1
 

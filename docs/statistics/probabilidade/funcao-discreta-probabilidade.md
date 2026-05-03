@@ -60,32 +60,32 @@ Esse painel é exatamente a função discreta de probabilidade: um mapa de proba
 
 ## Exemplo Prático Real
 
-Considere $X =$ número de falhas críticas por dia em um serviço.
+Considere $X =$ número de caras ao lançar 3 moedas.
 
 | $x$ | $p(x)=P(X=x)$ |
 | --- | ------------- |
-| 0   | 0,50          |
-| 1   | 0,30          |
-| 2   | 0,15          |
-| 3   | 0,05          |
+| 0   | 0,125         |
+| 1   | 0,375         |
+| 2   | 0,375         |
+| 3   | 0,125         |
 
 Validação:
 
 $$
-0{,}50 + 0{,}30 + 0{,}15 + 0{,}05 = 1
+0{,}125 + 0{,}375 + 0{,}375 + 0{,}125 = 1
 $$
 
-Probabilidade de ocorrer pelo menos uma falha:
+Probabilidade de ocorrer pelo menos uma cara:
 
 $$
-P(X \ge 1) = 1 - P(X=0) = 1 - 0{,}50 = 0{,}50
+P(X \ge 1) = 1 - P(X=0) = 1 - 0{,}125 = 0{,}875
 $$
 
 Código Python:
 
 ```python
-# PMF de X = numero de falhas criticas por dia
-pmf = {0: 0.50, 1: 0.30, 2: 0.15, 3: 0.05}
+# PMF de X = numero de caras em 3 lancamentos de moeda
+pmf = {0: 0.125, 1: 0.375, 2: 0.375, 3: 0.125}
 
 # Verifica se a soma das probabilidades eh 1
 soma = sum(pmf.values())

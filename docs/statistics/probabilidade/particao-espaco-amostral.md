@@ -36,18 +36,18 @@ Isso é exatamente o que uma partição faz com o espaço amostral.
 
 ## Exemplo concreto
 
-Uma fábrica classifica seus produtos em três categorias mutuamente exclusivas e exaustivas:
+No lançamento de um dado justo, podemos dividir os resultados em três grupos mutuamente exclusivos e exaustivos:
 
-| Categoria | Descrição              | P(categoria) |
-|-----------|------------------------|--------------|
-| $B_1$     | Produto perfeito       | 0,70         |
-| $B_2$     | Defeito leve           | 0,20         |
-| $B_3$     | Defeito grave          | 0,10         |
+| Categoria | Descrição   | P(categoria) |
+| --------- | ----------- | ------------ |
+| $B_1$     | sair 1 ou 2 | 2/6          |
+| $B_2$     | sair 3 ou 4 | 2/6          |
+| $B_3$     | sair 5 ou 6 | 2/6          |
 
 $B_1$, $B_2$ e $B_3$ formam uma partição de $\Omega$ porque:
 
-- são mutuamente exclusivos: um produto não pode ser perfeito e defeituoso ao mesmo tempo
-- são exaustivos: $P(B_1) + P(B_2) + P(B_3) = 0{,}70 + 0{,}20 + 0{,}10 = 1$
+- são mutuamente exclusivos: um mesmo resultado do dado não pode pertencer a dois grupos ao mesmo tempo
+- são exaustivos: $P(B_1) + P(B_2) + P(B_3) = 2/6 + 2/6 + 2/6 = 1$
 
 ## Por que isso importa
 
@@ -55,6 +55,6 @@ A partição é a base para a **Probabilidade Total** e o **Teorema de Bayes**. 
 
 ## Referências para Aprofundamento
 
-- Morettin, P. A.; Bussab, W. O. — *Estatística Básica*, cap. 5
-- DeGroot, M. H.; Schervish, M. J. — *Probability and Statistics*, cap. 2
+- Morettin, P. A.; Bussab, W. O. — _Estatística Básica_, cap. 5
+- DeGroot, M. H.; Schervish, M. J. — _Probability and Statistics_, cap. 2
 - Khan Academy — Partição e probabilidade total (em inglês): [khanacademy.org](https://www.khanacademy.org)

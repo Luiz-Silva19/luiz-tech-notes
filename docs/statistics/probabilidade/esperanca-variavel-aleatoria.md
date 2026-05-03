@@ -55,28 +55,28 @@ Pense em um pedágio com várias faixas e tempos diferentes de atendimento. Algu
 
 ### Exemplo real
 
-Uma equipe de SRE estima o número de incidentes críticos por plantão com a seguinte distribuição:
+Ao lançar 3 moedas, seja $X$ o número de caras obtidas. A distribuição de $X$ é:
 
 | $x$ | $P(X=x)$ |
 | --- | -------- |
-| 0   | 0,50     |
-| 1   | 0,30     |
-| 2   | 0,15     |
-| 3   | 0,05     |
+| 0   | 0,125    |
+| 1   | 0,375    |
+| 2   | 0,375    |
+| 3   | 0,125    |
 
 A esperança é:
 
 $$
-E(X) = 0 \cdot 0{,}50 + 1 \cdot 0{,}30 + 2 \cdot 0{,}15 + 3 \cdot 0{,}05 = 0{,}75
+E(X) = 0 \cdot 0{,}125 + 1 \cdot 0{,}375 + 2 \cdot 0{,}375 + 3 \cdot 0{,}125 = 1{,}5
 $$
 
-Interpretação: no longo prazo, espera-se em média 0,75 incidente crítico por plantão.
+Interpretação: no longo prazo, espera-se em média 1,5 cara a cada conjunto de 3 lançamentos.
 
 Código Python:
 
 ```python
-# PMF de X = numero de incidentes criticos por plantao
-pmf = {0: 0.50, 1: 0.30, 2: 0.15, 3: 0.05}
+# PMF de X = numero de caras em 3 lancamentos de moeda
+pmf = {0: 0.125, 1: 0.375, 2: 0.375, 3: 0.125}
 
 # Calcula E(X) como media ponderada
 esperanca = sum(valor * probabilidade for valor, probabilidade in pmf.items())

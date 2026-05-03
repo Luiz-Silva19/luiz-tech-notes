@@ -18,21 +18,21 @@ Cada parcela $P(A \mid B_i) \cdot P(B_i)$ representa a contribuição que o grup
 
 ## Analogia
 
-Imagine que você quer saber a probabilidade de um produto chegar com defeito na loja. Existem três fornecedores (A, B, C), cada um com uma taxa de defeito diferente. Você não vê qual fornecedor enviou — mas conhece a fatia de mercado de cada um e a taxa de defeito de cada um.
+Imagine uma escola com três turmas. Cada turma tem um tamanho diferente e uma taxa diferente de alunos que usam óculos. Se você sorteia um aluno sem saber de qual turma ele veio, a probabilidade total de ele usar óculos é a média ponderada dessas taxas.
 
-A probabilidade total de defeito é a **média ponderada** das taxas, usando as fatias de mercado como peso.
+A probabilidade total é a **média ponderada** das taxas, usando o tamanho relativo de cada turma como peso.
 
 ## Exemplo concreto
 
-Uma fábrica tem três linhas de produção que formam uma partição:
+Uma escola tem três turmas que formam uma partição:
 
-| Linha | Participação na produção | Taxa de defeito |
-| ----- | ------------------------ | --------------- |
-| $B_1$ | 50 %                     | 2 %             |
-| $B_2$ | 30 %                     | 5 %             |
-| $B_3$ | 20 %                     | 10 %            |
+| Turma | Participação no total de alunos | Taxa de alunos com óculos |
+| ----- | ------------------------------- | ------------------------- |
+| $B_1$ | 50 %                            | 2 %                       |
+| $B_2$ | 30 %                            | 5 %                       |
+| $B_3$ | 20 %                            | 10 %                      |
 
-Qual a probabilidade de um produto sorteado aleatoriamente ter defeito?
+Qual a probabilidade de um aluno sorteado aleatoriamente usar óculos?
 
 $$
 P(A) = P(A \mid B_1) \cdot P(B_1) + P(A \mid B_2) \cdot P(B_2) + P(A \mid B_3) \cdot P(B_3)
@@ -46,7 +46,7 @@ $$
 P(A) = 0{,}010 + 0{,}015 + 0{,}020 = 0{,}045
 $$
 
-Há **4,5 % de chance** de o produto ter defeito.
+Há **4,5 % de chance** de o aluno usar óculos.
 
 ## Passo a passo
 
@@ -59,8 +59,8 @@ Há **4,5 % de chance** de o produto ter defeito.
 
 ```python
 # Probabilidade Total
-p_b = [0.50, 0.30, 0.20]          # participação de cada linha
-p_a_dado_b = [0.02, 0.05, 0.10]   # taxa de defeito em cada linha
+p_b = [0.50, 0.30, 0.20]          # participacao de cada turma
+p_a_dado_b = [0.02, 0.05, 0.10]   # taxa de alunos com oculos em cada turma
 
 p_a = sum(pa * pb for pa, pb in zip(p_a_dado_b, p_b))
 print(f"P(A) = {p_a:.4f}")  # 0.0450

@@ -39,7 +39,7 @@ $$
 
 ## Analogia
 
-Você chega ao trabalho e descobre que o sistema está fora do ar. Existem três causas possíveis: problema no servidor, falha de rede ou erro de deploy. Você já sabe qual é a frequência histórica de cada causa (prior). Depois de checar os logs, você vê um determinado padrão de erro (evidência $A$). O Teorema de Bayes atualiza sua crença sobre qual causa é a mais provável agora que você viu esse padrão.
+Imagine uma escola com três turmas. Você sabe o tamanho relativo de cada turma e também a proporção de alunos com óculos em cada uma. Depois de sortear um aluno e perceber que ele usa óculos, o Teorema de Bayes permite atualizar a chance de ele pertencer a cada turma.
 
 Bayes é, em essência, **aprender com evidências**: você parte de uma crença inicial (prior), observa algo (evidência), e chega a uma crença atualizada (posterior).
 
@@ -47,25 +47,25 @@ Bayes é, em essência, **aprender com evidências**: você parte de uma crença
 
 Usando o mesmo exemplo da [Probabilidade Total](probabilidade-total):
 
-| Linha | $P(B_i)$ | $P(\text{defeito} \mid B_i)$ |
-| ----- | -------- | ---------------------------- |
-| $B_1$ | 0,50     | 0,02                         |
-| $B_2$ | 0,30     | 0,05                         |
-| $B_3$ | 0,20     | 0,10                         |
+| Turma | $P(B_i)$ | $P(\text{óculos} \mid B_i)$ |
+| ----- | -------- | --------------------------- |
+| $B_1$ | 0,50     | 0,02                        |
+| $B_2$ | 0,30     | 0,05                        |
+| $B_3$ | 0,20     | 0,10                        |
 
-Já calculamos $P(\text{defeito}) = 0{,}045$.
+Já calculamos $P(\text{óculos}) = 0{,}045$.
 
-**Pergunta:** um produto defeituoso foi encontrado. Qual a probabilidade de ter vindo da linha $B_3$?
-
-$$
-P(B_3 \mid \text{defeito}) = \frac{P(\text{defeito} \mid B_3) \cdot P(B_3)}{P(\text{defeito})}
-$$
+**Pergunta:** um aluno sorteado usa óculos. Qual a probabilidade de ele ser da turma $B_3$?
 
 $$
-P(B_3 \mid \text{defeito}) = \frac{0{,}10 \times 0{,}20}{0{,}045} = \frac{0{,}020}{0{,}045} \approx 0{,}444
+P(B_3 \mid \text{óculos}) = \frac{P(\text{óculos} \mid B_3) \cdot P(B_3)}{P(\text{óculos})}
 $$
 
-Embora a linha $B_3$ produza apenas 20 % dos itens, ela responde por **44,4 % dos defeitos**.
+$$
+P(B_3 \mid \text{óculos}) = \frac{0{,}10 \times 0{,}20}{0{,}045} = \frac{0{,}020}{0{,}045} \approx 0{,}444
+$$
+
+Embora a turma $B_3$ represente apenas 20 % dos alunos, ela responde por **44,4 % dos casos de alunos com óculos**.
 
 ## Verificação: a soma dos posteriors deve ser 1
 
@@ -92,10 +92,10 @@ p_a = sum(pa * pb for pa, pb in zip(p_a_dado_b, p_b))
 
 for i, (pa, pb) in enumerate(zip(p_a_dado_b, p_b), start=1):
     posterior = (pa * pb) / p_a
-    print(f"P(B{i} | defeito) = {posterior:.4f}")
-# P(B1 | defeito) = 0.2222
-# P(B2 | defeito) = 0.3333
-# P(B3 | defeito) = 0.4444
+    print(f"P(B{i} | oculos) = {posterior:.4f}")
+# P(B1 | oculos) = 0.2222
+# P(B2 | oculos) = 0.3333
+# P(B3 | oculos) = 0.4444
 ```
 
 ## Passo a passo
