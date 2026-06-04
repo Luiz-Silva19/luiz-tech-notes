@@ -45,6 +45,38 @@ Nesse cenário, média e mediana ajudam a entender a experiência real do usuár
 - Correlação não implica causalidade.
 - Sempre valide a qualidade dos dados antes de tirar conclusões.
 
+## Subáreas disponíveis
+
+### 🎲 Probabilidade
+
+Fundamentos do cálculo de probabilidades — probabilidade clássica, condicional, distribuições discretas e teorema de Bayes.
+
+[→ Acessar Probabilidade](./probabilidade/probabilidade-classica.md)
+
+---
+
+### 📊 Amostragem
+
+Técnicas de seleção de amostras representativas — tipos de amostragem, tamanho de amostra e vieses.
+
+[→ Acessar Amostragem](./amostragem/amostragem-intro.md)
+
+---
+
+### 📈 Correlação e Regressão
+
+Estudo de associação entre variáveis, correlação de Pearson e Spearman, inferência e relação com regressão linear.
+
+[→ Acessar Correlação e Regressão](./correlacao-regressao-linear/modulo-1-fundamentos-correlacao.md)
+
+---
+
+### 📐 Inferência Estatística
+
+Estimação, intervalos de confiança e testes de hipótese — _(em desenvolvimento)_
+
+---
+
 ## Referências para Aprofundamento
 
 - OpenIntro Statistics: <a href="https://www.openintro.org/book/os/" target="_blank" rel="noopener noreferrer">texto introdutório aberto e bem estruturado</a>

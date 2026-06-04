@@ -1,6 +1,7 @@
 {
   "docs": {
-    "Introdução": [
+    "Tecnologia": [
+      "intro/tecnologia-intro",
       "intro/welcome",
       "intro/diagramas",
       "intro/estrutura-docs"
@@ -45,6 +46,18 @@
     ],
     "Amostragem": [
       "statistics/amostragem/amostragem-intro"
+    ],
+    "Correlacao e Regressao": [
+      "statistics/correlacao-regressao-linear/modulo-1-fundamentos-correlacao",
+      "statistics/correlacao-regressao-linear/modulo-2-analise-grafica-scatterplot",
+      "statistics/correlacao-regressao-linear/modulo-3-correlacao-pearson",
+      "statistics/correlacao-regressao-linear/modulo-4-formas-calculo-pearson",
+      "statistics/correlacao-regressao-linear/modulo-5-relacao-com-regressao",
+      "statistics/correlacao-regressao-linear/modulo-6-inferencia-correlacao-populacional",
+      "statistics/correlacao-regressao-linear/modulo-7-transformacao-fisher",
+      "statistics/correlacao-regressao-linear/modulo-8-intervalos-confianca-correlacao",
+      "statistics/correlacao-regressao-linear/modulo-9-correlacao-spearman",
+      "statistics/correlacao-regressao-linear/modulo-10-inferencia-spearman"
     ]
   },
   "aws-sidebar": {

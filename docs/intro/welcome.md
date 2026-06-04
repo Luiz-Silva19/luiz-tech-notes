@@ -1,52 +1,29 @@
 ---
 id: welcome
-title: Bem-vindo ao Luiz Tech Notes
+title: Knowledge Notes
 sidebar_label: Início
 ---
 
-Este é meu espaço pessoal de documentação técnica, onde organizo conhecimentos, anotações e referências sobre tecnologia, arquitetura de software e infraestrutura.
+**Knowledge Notes** é uma base de conhecimento técnico pessoal — um espaço para organizar estudos, documentar conceitos com rigor e criar referências prontas para consulta.
 
-## 🎯 Objetivo
+O conteúdo cobre dois domínios principais:
 
-Este site funciona como:
+## 🖥️ Tecnologia
 
-- **Base de conhecimento pessoal**: Documentação viva dos meus estudos
-- **Material de consulta**: Referência rápida sobre conceitos e tecnologias
-- **Portfólio de aprendizado**: Registro da minha evolução técnica
+Arquitetura de software, infraestrutura e desenvolvimento backend — padrões, ferramentas e decisões de design para quem constrói sistemas.
 
-## 📚 O que você vai encontrar aqui
-
-### ☁️ Cloud Computing
-
-Anotações sobre provedores de nuvem (AWS, Azure, GCP), serviços e boas práticas.
-
-### 🏗️ Arquitetura de Software
-
-Conceitos sobre microsserviços, monolitos, arquitetura orientada a eventos e padrões de design.
-
-### ⚙️ DevOps & Infraestrutura
-
-Docker, Kubernetes, CI/CD, observabilidade e automação.
-
-### 💻 Backend & Integrações
-
-APIs REST, mensageria, bancos de dados e padrões de integração.
-
-## 🗺️ Como navegar
-
-Use a barra lateral à esquerda para explorar os tópicos. Cada seção contém:
-
-- **Introdução**: Visão geral do tema
-- **Quando usar**: Cenários de aplicação
-- **Conceitos-chave**: Fundamentos importantes
-- **Exemplos**: Casos práticos
-
-## 📝 Sobre o conteúdo
-
-- **Didático**: Explicações claras com analogias quando possível
-- **Técnico**: Rigor nos conceitos fundamentais
-- **Em evolução**: Conteúdo sempre sendo expandido e atualizado
+[→ Explorar Tecnologia](./tecnologia-intro.md)
 
 ---
 
-**Dica**: Use a busca (Ctrl+K) para encontrar tópicos específicos rapidamente!
+## 📊 Estatística
+
+Conceitos e técnicas estatísticas aplicadas à tecnologia — probabilidade, amostragem e inferência para quem trabalha com dados.
+
+[→ Explorar Estatística](/luiz-tech-notes/docs/statistics/statistics-intro)
+
+---
+
+## Como navegar
+
+Use a barra lateral para explorar os tópicos. Cada documento segue uma estrutura consistente: definição, casos de uso, funcionamento, analogia, exemplo prático e referências.
