@@ -58,6 +58,25 @@
       "statistics/correlacao-regressao-linear/modulo-8-intervalos-confianca-correlacao",
       "statistics/correlacao-regressao-linear/modulo-9-correlacao-spearman",
       "statistics/correlacao-regressao-linear/modulo-10-inferencia-spearman"
+    ],
+    "Regressão Linear": [
+      "statistics/regressao-linear/modulo-0-fundamentos-conceituais",
+      "statistics/regressao-linear/modulo-1-regressao-linear-simples",
+      "statistics/regressao-linear/modulo-2-metodo-minimos-quadrados",
+      "statistics/regressao-linear/modulo-3-estimadores-parametros",
+      "statistics/regressao-linear/modulo-4-estatisticas-fundamentais",
+      "statistics/regressao-linear/modulo-5-erro-padrao-estimativa",
+      "statistics/regressao-linear/modulo-6-notacao-matricial",
+      "statistics/regressao-linear/modulo-7-otimizacao",
+      "statistics/regressao-linear/modulo-8-gradiente-descendente",
+      "statistics/regressao-linear/modulo-9-construcao-manual",
+      "statistics/regressao-linear/modulo-10-inferencia-estatistica",
+      "statistics/regressao-linear/modulo-11-gauss-markov",
+      "statistics/regressao-linear/modulo-12-pressupostos-modelo",
+      "statistics/regressao-linear/modulo-13-diagnostico-residuos",
+      "statistics/regressao-linear/modulo-14-qualidade-ajuste",
+      "statistics/regressao-linear/modulo-15-regressao-financas",
+      "statistics/regressao-linear/modulo-16-regressao-multipla"
     ]
   },
   "aws-sidebar": {
